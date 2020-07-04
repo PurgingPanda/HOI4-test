@@ -1,0 +1,233 @@
+scripted_gui = {
+
+	topbar_war_exhaustion = {
+		window_name = "topbar_war_exhaustion_container"
+	}
+	
+	diplomacy_action_peace = {
+		window_name = "LDN_diplomacy_action_peace"
+		context_type = diplomatic_action
+		
+		dynamic_lists = {
+			peace_state_grid = {
+				array = ROOT.peace_control_state
+				change_scope = yes
+				entry_container = scripted_gui_peace_state_entry
+			}
+			peace_state_resource_grid = {
+				array = ROOT.peace_control_state_resource
+				change_scope = yes
+				entry_container = scripted_gui_peace_resource_entry
+			}
+			peace_opinion_country_grid = {
+				array = ROOT.LDN_peace_opinion_array
+				change_scope = yes
+				entry_container = peace_opinion_country_entry
+			}
+		}
+		triggers = {
+			acceptance_visible = {
+				always = no
+			}
+			political_power_peace_down_click_enabled = {
+				NOT = { check_variable = { ROOT.demand_pol_power_var = 0 } }
+			}
+			offer_not_owner_flag_visible = {
+				var:ROOT.eval_state = {
+					NOT = { is_owned_by = FROM }
+				}
+			}
+			offer_state_checkbox_visible = {
+				var:ROOT.eval_state = {
+					is_owned_by = FROM
+				}
+			}
+			offer_state_checkbox_active_visible = {
+				var:ROOT.eval_state = {
+					is_owned_by = FROM
+				}
+				has_state_flag = state_offered_by_ROOT
+			}
+			offer_state_resource_checkbox_visible = {
+				var:ROOT.eval_state = {
+					is_owned_by = FROM
+				}
+				NOT = { has_state_flag = state_offered_by_ROOT }
+			}
+			offer_state_resource_checkbox_active_visible = {
+				var:ROOT.eval_state = {
+					is_owned_by = FROM
+				}
+				has_state_flag = state_resource_offered_by_ROOT
+				NOT = { has_state_flag = state_offered_by_ROOT }
+			}
+			offer_state_resource_already_checkbox_visible = {
+				var:ROOT.eval_state = {
+					is_owned_by = FROM
+				}
+				has_state_flag = state_offered_by_ROOT
+			}
+			SP_white_peace_click_enabled = {
+				always = no
+			}
+			SP_vassal_peace_click_enabled = {
+				always = no
+			}
+			SP_white_peace_visible = {
+				NOT = { check_variable = { sp_white_peace_var = 1 } }
+			}
+			SP_white_peace_active_visible = {
+				NOT = { check_variable = { sp_white_peace_var = 0 } }
+			}
+			SP_vassal_peace_visible = {
+				NOT = { check_variable = { sp_vassal_peace_var = 1 } }
+			}
+			SP_vassal_peace_active_visible = {
+				NOT = { check_variable = { sp_vassal_peace_var = 0 } }
+			}
+		}
+		effects = {
+			SP_white_peace_click = {
+				set_variable = { sp_white_peace_var = 1 }
+			}
+			SP_white_peace_active_click = {
+				set_variable = { sp_white_peace_var = 0 }
+			}
+			SP_vassal_peace_click = {
+				set_variable = { sp_vassal_peace_var = 1 }
+			}
+			SP_vassal_peace_active_click = {
+				set_variable = { sp_vassal_peace_var = 0 }
+			}
+			peace_opinion_country_flag_click = {
+				capital_scope = {
+					ROOT = {
+						goto_state = PREV
+					}
+				}
+			}
+			political_power_peace_up_click = {
+				add_to_variable = { ROOT.demand_pol_power_var = 1 }
+			}
+			political_power_peace_up_shift_click = {
+				add_to_variable = { ROOT.demand_pol_power_var = 10 }
+			}
+			political_power_peace_up_control_click = {
+				add_to_variable = { ROOT.demand_pol_power_var = 100 }
+			}
+			political_power_peace_down_click = {
+				subtract_from_variable = { ROOT.demand_pol_power_var = 1 }
+				clamp_variable = { var = ROOT.demand_pol_power_var min = 0 }
+			}
+			political_power_peace_down_shift_click = {
+				subtract_from_variable = { ROOT.demand_pol_power_var = 10 }
+				clamp_variable = { var = ROOT.demand_pol_power_var min = 0 }
+			}
+			political_power_peace_down_control_click = {
+				subtract_from_variable = { ROOT.demand_pol_power_var = 100 }
+				clamp_variable = { var = ROOT.demand_pol_power_var min = 0 }
+			}
+			cancel_button_click = {
+				clr_global_flag = diplo_peace_active
+			}
+			offer_state_checkbox_click = {
+				PREV = {
+					controller = {
+						add_to_variable = { demand_state_cost_var = prev.state_cost_var }
+					}
+					owner = {
+						add_to_variable = { var_demand_state = 1 }
+					}
+					all_neighbor_state = {
+						owner = {
+							add_to_array = { global.opinion_country_array = this.id }
+						}
+					}
+					if = {
+						limit = {
+							NOT = {
+								has_state_flag = state_offered_by_ROOT
+							}
+						}
+						set_state_flag = state_offered_by_ROOT
+					}
+				}
+			}
+			offer_state_checkbox_active_click = {
+				PREV = {
+					controller = {
+						subtract_from_variable = { demand_state_cost_var = prev.state_cost_var }
+					}
+					owner = {
+						subtract_from_variable = { var_demand_state = 1 }
+					}
+					if = {
+						limit = {
+							has_state_flag = state_offered_by_ROOT
+						}
+						clr_state_flag = state_offered_by_ROOT
+					}
+				}
+			}
+			offer_state_resource_checkbox_click = {
+				PREV = {
+					controller = {
+						add_to_variable = { demand_state_cost_var = prev.state_cost_resource_var }
+					}
+					owner = {
+						add_to_variable = { var_demand_resource_state = 1 }
+					}
+					if = {
+						limit = {
+							NOT = {
+								has_state_flag = state_resource_offered_by_ROOT
+								is_in_array = { ROOT.offered_state_resource = this.id }
+							}
+						}
+						set_state_flag = state_resource_offered_by_ROOT
+						add_to_array =  { ROOT.offered_state_resource = this.id }
+					}
+				}
+			}
+			offer_state_resource_checkbox_active_click = {
+				PREV = {
+					controller = {
+						subtract_from_variable = { demand_state_cost_var = prev.state_cost_resource_var }
+					}
+					owner = {
+						subtract_from_variable = { var_demand_resource_state = 1 }
+					}
+					if = {
+						limit = {
+							has_state_flag = state_resource_offered_by_ROOT
+							is_in_array = { ROOT.offered_state_resource = this.id }
+						}
+						clr_state_flag = state_resource_offered_by_ROOT
+						remove_from_array = { ROOT.offered_state_resource = this.id }
+					}
+				}
+			}
+		}
+		properties = {
+           war_exhaustion_progress = {
+                frame = peace_frame_var
+			}
+           ROOT_flag= {
+                image = "[ROOT.GetFlag]"
+			}
+           FROM_flag= {
+                image = "[FROM.GetFlag]"
+			}
+           offer_not_owner_flag= {
+                image = "[This.Owner.GetFlag]"
+			}
+           offer_state_resource_already_checkbox= {
+                image = "[ROOT.GetFlag]"
+			}
+            peace_opinion_country_flag = {
+                image = "[This.GetFlag]"
+            }
+		}
+	}
+}
+

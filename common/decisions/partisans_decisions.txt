@@ -1,0 +1,39 @@
+war_measures = {
+
+	continuous_boost_partisan = {
+
+		icon = generic_prepare_civil_war
+
+		available = {
+			has_capitulated = yes
+		}
+
+		visible = {
+			surrender_progress > 0
+		}
+
+		fire_only_once = no
+
+		days_remove = 30
+		days_re_enable = 60
+
+		cost = 30
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				has_political_power > 150
+				add = 1
+			}
+		}
+
+		modifier = {
+			resistance_tick_in_states_controlled_by_enemy = 0.01
+		}
+
+		complete_effect = {
+
+		}
+	}
+	
+}

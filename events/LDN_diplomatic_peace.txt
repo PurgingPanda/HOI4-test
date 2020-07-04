@@ -1,0 +1,46 @@
+﻿###########################
+# LDN_diplomatic_peace Events
+###########################
+
+add_namespace = LDN_diplomatic_peace
+country_event = {
+	id = LDN_diplomatic_peace.1
+	title = LDN_diplomatic_peace.1.t
+	desc = LDN_diplomatic_peace.1.d
+	
+	hidden = no
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = LDN_diplomatic_peace.1.a
+		for_loop_effect = {
+			end = ROOT.offered_state_resource^num
+			value = v
+			
+			meta_effect = {
+				text = {
+					if = {
+						limit = {
+							[STATEID] = {
+								has_state_flag = state_resource_offered_by_ROOT	
+							}
+						}
+						event_target:peace_diplo_receiver_country = {
+							give_resource_rights = {
+								receiver = ROOT
+								state = [STATEID]
+							}
+						}
+						[STATEID] = {
+							clr_state_flag = state_resource_offered_by_ROOT
+							remove_from_array = { ROOT.peace_control_state_resource = THIS.id }
+							remove_from_array = { ROOT.offered_state_resource = THIS.id }
+						}
+					}
+				}
+				STATEID = "[?var:ROOT.offered_state_resource^v.GetID]"
+			}
+		}
+	}
+}

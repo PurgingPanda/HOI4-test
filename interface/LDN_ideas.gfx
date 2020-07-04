@@ -1,0 +1,249 @@
+spriteTypes = {
+
+	spriteType = {
+		name = "GFX_button_123x34_special_peace"
+		texturefile = "gfx//interface//button_123x34 _special_peace.dds"
+		noOfFrames = 2
+	}
+
+	spriteType = {
+		name = "GFX_LDN_peace_progress_bg"
+		texturefile = "gfx//interface//LDN_peace_progress_bg.dds"
+		noOfFrames = 21
+	}
+	
+	maskedShieldType = {
+		name = "GFX_shield_peace"
+		textureFile1 = "gfx/interface/LDN_peace_overlay.dds"
+		textureFile2 = "gfx/interface/LDN_peace_mask.tga"
+		effectFile = "gfx/FX/maskedflag.lua"
+	}
+
+	spriteType = {
+		name = "GFX_button_peace_up"
+		texturefile = "gfx/interface/button_peace_up.dds"
+	}
+
+	spriteType = {
+		name = "GFX_button_peace_down"
+		texturefile = "gfx/interface/button_peace_down.dds"
+	}
+
+	spriteType = {
+		name = "GFX_oil_texticon"
+		texturefile = "gfx/interface/oil_texticon.dds"
+		legacy_lazy_load = no
+	}
+
+	spriteType = {
+		name = "GFX_aluminium_texticon"
+		texturefile = "gfx/interface/aluminium_texticon.dds"
+		legacy_lazy_load = no
+	}
+
+	spriteType = {
+		name = "GFX_rubber_texticon"
+		texturefile = "gfx/interface/rubber_texticon.dds"
+		legacy_lazy_load = no
+	}
+
+	spriteType = {
+		name = "GFX_tungsten_texticon"
+		texturefile = "gfx/interface/tungsten_texticon.dds"
+		legacy_lazy_load = no
+	}
+
+	spriteType = {
+		name = "GFX_steel_texticon"
+		texturefile = "gfx/interface/steel_texticon.dds"
+		legacy_lazy_load = no
+	}
+
+	spriteType = {
+		name = "GFX_chromium_texticon"
+		texturefile = "gfx/interface/chromium_texticon.dds"
+		legacy_lazy_load = no
+	}
+
+	spriteType = {
+		name = "GFX_LDN_peace_bg"
+		texturefile = "gfx/interface/LDN_peace_bg.dds"
+	}
+
+	spriteType = {
+		name = "GFX_Estatesgeneral"
+		texturefile = "gfx/interface/Estatesgeneral.dds"
+	}
+
+	spriteType = {
+		name = "GFX_LDN_state_controller_king"
+		texturefile = "gfx/interface/LDN_state_controller_king.dds"
+	}
+
+	spriteType = {
+		name = "GFX_LDN_money_icon"
+		texturefile = "gfx/interface/LDN_money_icon.dds"
+	}
+
+	spriteType = {
+		name = "GFX_LDN_money_income_icon"
+		texturefile = "gfx/interface/LDN_money_income_icon.dds"
+	}
+
+	spriteType = {
+		name = "GFX_LDN_money_expense_icon"
+		texturefile = "gfx/interface/LDN_money_expense_icon.dds"
+	}
+
+	spriteType = {
+		name = "GFX_LDN_money_debt_icon"
+		texturefile = "gfx/interface/LDN_money_debt_icon.dds"
+	}
+
+	spriteType = {
+		name = "GFX_pol_tabs_selected"
+		texturefile = "gfx/interface/pol_tabs_selected.dds"
+	}
+
+	spriteType = {
+		name = "GFX_pol_tabs"
+		texturefile = "gfx/interface/pol_tabs.dds"
+	}
+
+	spriteType = {
+		name = "GFX_diplo_peace_selected"
+		texturefile = "gfx/interface/diplo_peace_selected.dds"
+	}
+
+	spriteType = {
+		name = "GFX_diplo_peace"
+		texturefile = "gfx/interface/diplo_peace.dds"
+	}
+
+	spriteType = {
+		name = "GFX_topbar_subcategory_bg"
+		texturefile = "gfx/interface/LDN_topbar_subcategory_bg.dds"
+	}
+
+	spriteType = {
+		name = "GFX_scripted_diplo_white_peace"
+		texturefile = "gfx/interface/scripted_diplo_white_peace.dds"
+	}
+
+	spriteType = {
+		name = "GFX_HRE_mapmode_icon_emperor"
+		texturefile = "gfx/interface/HRE_mapmode_icon_emperor.dds"
+		legacy_lazy_load = no
+	}
+
+	spriteType = {
+		name = "GFX_HRE_mapmode_icon_erector"
+		texturefile = "gfx/interface/HRE_mapmode_icon_erector.dds"
+		legacy_lazy_load = no
+	}
+
+	spriteType = {
+		name = "GFX_HRE_mapmode_icon_free_city"
+		texturefile = "gfx/interface/HRE_mapmode_icon_free_city.dds"
+		legacy_lazy_load = no
+	}
+
+	spriteType = {
+		name = "GFX_HRE_mapmode_icon_member"
+		texturefile = "gfx/interface/HRE_mapmode_icon_member.dds"
+		legacy_lazy_load = no
+	}
+
+	spriteType = {
+		name = "GFX_HRE_mapmode_icon_not_member"
+		texturefile = "gfx/interface/HRE_mapmode_icon_not_member.dds"
+		legacy_lazy_load = no
+	}
+
+	spriteType = {
+		name = "GFX_mapmode_buttons_deselected_hre"
+		texturefile = "gfx/interface/mapmode_buttons_deselected_hre.dds"
+	}
+
+	spriteType = {
+		name = "GFX_mapmode_buttons_selected_hre"
+		texturefile = "gfx/interface/mapmode_buttons_selected_hre.dds"
+	}
+
+	spriteType = {
+		name = "GFX_ldn_hre_member"
+		texturefile = "gfx/interface/ideas/ldn_hre_member.dds"
+	}
+
+	spriteType = {
+		name = "GFX_HRE_free_city_icon"
+		texturefile = "gfx/interface/HRE_free_city_icon.dds"
+	}
+
+	spriteType = {
+		name = "GFX_HRE_elector_icon"
+		texturefile = "gfx/interface/HRE_elector_icon.dds"
+	}
+
+	spriteType = {
+		name = "GFX_hre_emp_icon"
+		texturefile = "gfx/interface/hre_emp_icon.dds"
+	}
+	spriteType = {
+		name = "GFX_goal_support_democracy"
+		texturefile = "gfx/interface/ideas/GFX_goal_support_democracy.dds"
+	}
+	spriteType = {
+		name = "GFX_idea_generic_coins"
+		texturefile = "gfx/interface/ideas/idea_generic_coins.dds"
+	}
+	spriteType = {
+		name = "GFX_idea_generic_coins2"
+		texturefile = "gfx/interface/ideas/idea_generic_coins2.dds"
+	}
+	spriteType = {
+		name = "GFX_idea_generic_coins3"
+		texturefile = "gfx/interface/ideas/idea_generic_coins3.dds"
+	}
+	spriteType = {
+		name = "GFX_dissatisfaction_icon"
+		texturefile = "gfx/interface/dissatisfaction_icon.dds"
+	}
+	spriteType = {
+		name = "GFX_idea_great_depression"
+		texturefile = "gfx/interface/ideas/great_depression.dds"
+	}
+	spriteType = {
+		name = "GFX_idea_banco_giorgio"
+		texturefile = "gfx/interface/ideas/banco_giorgio.dds"
+	}
+	spriteType = {
+		name = "GFX_idea_sakoku"
+		texturefile = "gfx/interface/ideas/sakoku.dds"
+	}
+	spriteType = {
+		name = "GFX_idea_wahhabism"
+		texturefile = "gfx/interface/ideas/wahhabism.dds"
+	}
+	spriteType = {
+		name = "GFX_idea_wahhabism2"
+		texturefile = "gfx/interface/ideas/wahhabism2.dds"
+	}
+	spriteType = {
+		name = "GFX_idea_hre"
+		texturefile = "gfx/interface/ideas/hre.dds"
+	}
+	spriteType = {
+		name = "GFX_idea_hre_kaiser"
+		texturefile = "gfx/interface/ideas/hre_kaiser.dds"
+	}
+
+	corneredTileSpriteType = {
+		name = "GFX_tiled_plain_bg"
+		size= { x=192 y=192 }
+		textureFile = "gfx//interface//tiled_plain_bg.dds"
+		borderSize = { x=64 y=64 }
+		tilingCenter = yes
+		#effectFile = "gfx/FX/buttonstate_nodowneffect.lua"
+	}		
+}

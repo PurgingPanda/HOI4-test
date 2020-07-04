@@ -1,0 +1,102 @@
+spriteTypes = {	
+
+	SpriteType = {
+		name = "GFX_tech_sniper4_medium"
+		texturefile = "gfx/interface/technologies/sniper4.dds"
+	}
+	
+	SpriteType = {
+		name = "GFX_tech_sniper3_medium"
+		texturefile = "gfx/interface/technologies/sniper3.dds"
+	}	
+	
+	SpriteType = {
+		name = "GFX_tech_sniper2_medium"
+		texturefile = "gfx/interface/technologies/sniper2.dds"
+	}	
+	
+	SpriteType = {
+		name = "GFX_tech_sniper_medium"
+		texturefile = "gfx/interface/technologies/sniper.dds"
+	}	
+
+	SpriteType = {
+		name = "GFX_tech_flamethrower_sppt4_medium"
+		texturefile = "gfx/interface/technologies/flamethrower_sppt4.dds"
+	}
+	
+	SpriteType = {
+		name = "GFX_tech_flamethrower_sppt3_medium"
+		texturefile = "gfx/interface/technologies/flamethrower_sppt3.dds"
+	}	
+	
+	SpriteType = {
+		name = "GFX_tech_flamethrower_sppt2_medium"
+		texturefile = "gfx/interface/technologies/flamethrower_sppt2.dds"
+	}	
+	
+	SpriteType = {
+		name = "GFX_tech_flamethrower_sppt_medium"
+		texturefile = "gfx/interface/technologies/flamethrower_sppt.dds"
+	}	
+
+	SpriteType = {
+		name = "GFX_tech_mortar4_medium"
+		texturefile = "gfx/interface/technologies/mortar4.dds"
+	}
+	
+	SpriteType = {
+		name = "GFX_tech_mortar3_medium"
+		texturefile = "gfx/interface/technologies/mortar3.dds"
+	}	
+	
+	SpriteType = {
+		name = "GFX_tech_mortar2_medium"
+		texturefile = "gfx/interface/technologies/mortar2.dds"
+	}	
+	
+	SpriteType = {
+		name = "GFX_tech_mortar_medium"
+		texturefile = "gfx/interface/technologies/mortar.dds"
+	}	
+
+	SpriteType = {
+		name = "GFX_tech_wardog4_medium"
+		texturefile = "gfx/interface/technologies/wardog4.dds"
+	}
+	
+	SpriteType = {
+		name = "GFX_tech_wardog3_medium"
+		texturefile = "gfx/interface/technologies/wardog3.dds"
+	}	
+	
+	SpriteType = {
+		name = "GFX_tech_wardog2_medium"
+		texturefile = "gfx/interface/technologies/wardog2.dds"
+	}	
+	
+	SpriteType = {
+		name = "GFX_tech_wardog_medium"
+		texturefile = "gfx/interface/technologies/wardog.dds"
+	}	
+
+	SpriteType = {
+		name = "GFX_tech_command4_medium"
+		texturefile = "gfx/interface/technologies/command4.dds"
+	}
+	
+	SpriteType = {
+		name = "GFX_tech_command3_medium"
+		texturefile = "gfx/interface/technologies/command3.dds"
+	}	
+	
+	SpriteType = {
+		name = "GFX_tech_command2_medium"
+		texturefile = "gfx/interface/technologies/command2.dds"
+	}	
+	
+	SpriteType = {
+		name = "GFX_tech_command_medium"
+		texturefile = "gfx/interface/technologies/command.dds"
+	}
+}

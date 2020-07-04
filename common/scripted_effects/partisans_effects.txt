@@ -1,0 +1,13 @@
+create_partisan_units = {
+	if = {
+		limit = {
+			NOT = { check_variable = { loop_resistance < global.UPRISE_RESISTANCE?0.5 } }
+		}
+		create_unit = {
+			division = "name = \"Partisan\" division_template = \"Partisan\" start_experience_factor = 0.0" 
+			owner = ROOT
+		}
+		subtract_from_temp_variable = { loop_resistance = 0.1 }
+		create_partisan_units = yes
+	}
+}

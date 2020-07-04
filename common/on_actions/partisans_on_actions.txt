@@ -1,0 +1,132 @@
+on_actions = {
+
+	on_startup = {
+		effect = {
+			set_variable = { global.UPRISE_RESISTANCE = 0.5 }
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = partisan_can_uprise_score
+						option = MORE_THAN_20
+					}
+				}
+				set_variable = { global.UPRISE_RESISTANCE = 0.2 }
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = partisan_can_uprise_score
+						option = MORE_THAN_80
+					}
+				}
+				set_variable = { global.UPRISE_RESISTANCE = 0.8 }
+			}
+			set_variable = { global.UPRISE_DAYS = 30 }
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = partisan_days_to_uprise_again
+						option = A_WEEK
+					}
+				}
+				set_variable = { global.UPRISE_DAYS  = 7 }
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = partisan_days_to_uprise_again
+						option = HALF_A_MONTH
+					}
+				}
+				set_variable = { global.UPRISE_DAYS = 15 }
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = partisan_days_to_uprise_again
+						option = TWO_MONTH
+					}
+				}
+				set_variable = { global.UPRISE_DAYS = 60 }
+			}
+			every_country = {
+				set_variable = { AI_CHARACTER = 0 }
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = partisan_ai_character
+						option = POSITIVE
+					}
+				}
+				every_country = {
+					set_variable = { AI_CHARACTER = 1 }
+				}
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = partisan_ai_character
+						option = CAREFULLY
+					}
+				}
+				every_country = {
+					set_variable = { AI_CHARACTER = 2 }
+				}
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = partisan_ai_character
+						option = WHIMSICAL
+					}
+				}
+				every_country = {
+					set_variable = { AI_CHARACTER = 3 }
+				}
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = partisan_ai_character
+						option = RANDOM_CHARACTER
+					}
+				}
+				every_country = {
+					random_list = {
+						40 = { }
+						25 = { set_variable = { AI_CHARACTER = 1 } }
+						10 = { set_variable = { AI_CHARACTER = 2 } }
+						25 = { set_variable = { AI_CHARACTER = 3 } }
+					}
+				}
+			}
+		}
+	}
+
+	on_daily = {
+		effect = {
+			every_owned_state = {
+				limit = {
+					check_variable = { risedup_day > 0 }
+				}
+				subtract_from_variable = { risedup_day = 1 }
+			}
+			
+			if = {
+				limit = {
+					has_template = "Partisan"
+					has_war = no
+					NOT = {
+						has_game_rule = {
+							rule = partisan_template_is_locked
+							option = NOT_LOCKED
+						}
+					}
+				}
+				delete_unit_template_and_units = { division_template = Partisan }
+			}
+		}
+	}
+	
+}

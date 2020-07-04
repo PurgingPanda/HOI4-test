@@ -1,0 +1,670 @@
+# Allows you to create your own dynamic keys
+# to be called in localization.
+# defined_text -> this is it, we're defining the text
+# text -> a discrete entry that can be picked to display in loc.
+# trigger -> determines if a text entry will be picked or not.
+# (The triggers need to be valid for the scope the key is called in
+# (eg Root or From.From).)
+# localization_key -> points to the localization key
+# that'll be used if trigger passes
+
+defined_text = { # Country
+	name = Get_peace_socre_value
+	text = {
+		trigger = {
+			LDN_peace_score_triggers = yes
+		}
+		localization_key = Get_peace_socre_value_Desc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = Get_peace_accept_desc
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = allow_war_exhaustion_view
+				option = ACCEPT
+			}
+		}
+		localization_key = Get_peace_accept_desc_Desc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = Get_peace_accept_tt
+	text = {
+		trigger = {
+			LDN_diplo_peace_accept = yes
+		}
+		localization_key = Get_peace_accept_tt_Desc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = Get_peace_accept_value
+	text = {
+		trigger = {
+			LDN_diplo_peace_accept = yes
+		}
+		localization_key = Get_peace_accept_value_Desc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = Peace_accept_base
+	text = {
+		trigger = {
+			NOT = { check_variable = { accept_base = 0 } }
+		}
+		localization_key = Peace_accept_base_Desc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = Peace_accept_base_modifier
+	text = {
+		trigger = {
+			NOT = { check_variable = { accept_base_modifier = 0 } }
+		}
+		localization_key = Peace_accept_base_modifier_Desc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = Sender_is_major
+	text = {
+		trigger = {
+			NOT = { check_variable = { accept_modifiers^0 = 0 } }
+		}
+		localization_key = Sender_is_major_Desc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = Receiver_is_major
+	text = {
+		trigger = {
+			NOT = { check_variable = { accept_modifiers^1 = 0 } }
+		}
+		localization_key = Receiver_is_major_Desc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = Receiver_alliance
+	text = {
+		trigger = {
+			NOT = { check_variable = { accept_modifiers^2 = 0 } }
+		}
+		localization_key = Receiver_alliance_Desc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = Receiver_war_support
+	text = {
+		trigger = {
+			NOT = { check_variable = { accept_modifiers^3 = 0 } }
+		}
+		localization_key = Receiver_war_support_Desc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = Receiver_demand_state
+	text = {
+		trigger = {
+			NOT = { check_variable = { accept_modifiers^4 = 0 } }
+		}
+		localization_key = Receiver_demand_state_Desc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = Receiver_demand_state_resource
+	text = {
+		trigger = {
+			NOT = { check_variable = { accept_modifiers^5 = 0 } }
+		}
+		localization_key = Receiver_demand_state_resource_Desc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = Receiver_demand_pol_power
+	text = {
+		trigger = {
+			NOT = { check_variable = { accept_modifiers^6 = 0 } }
+		}
+		localization_key = Receiver_demand_pol_power_Desc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = Receiver_casualities_by
+	text = {
+		trigger = {
+			NOT = { check_variable = { accept_modifiers^7 = 0 } }
+		}
+		localization_key = Receiver_casualities_by_Desc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = Receiver_offer_cost_compare
+	text = {
+		trigger = {
+			check_variable = { accept_modifiers^8 > 0 }
+		}
+		localization_key = Receiver_offer_cost_compare_less_Desc
+	}
+	text = {
+		trigger = {
+			check_variable = { accept_modifiers^8 < 0 }
+		}
+		localization_key = Receiver_offer_cost_compare_greater_Desc
+	}
+	text = {
+		trigger = {
+			check_variable = { accept_modifiers^8 = 0 }
+		}
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = get_war_exhaustion_desc
+	text = {
+		trigger = {
+			LDN_war_exhaustion = yes
+			LDN_diplo_peace_accept = yes
+		}
+		localization_key = get_war_exhaustion_desc_Desc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = we_limit_2
+	text = {
+		trigger = {
+			NOT = { check_variable = { war_exhaustion_limit^2 = 0 } }
+		}
+		localization_key = we_limit_2_Desc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = we_limit_1
+	text = {
+		trigger = {
+			NOT = { check_variable = { war_exhaustion_limit^1 = 0 } }
+		}
+		localization_key = we_limit_1_Desc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = we_limit_0
+	text = {
+		trigger = {
+			NOT = { check_variable = { war_exhaustion_limit^0 = 0 } }
+		}
+		localization_key = we_limit_0_Desc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = GetRootWarExhaustion
+	text = {
+		trigger = {
+			LDN_ROOT_war_exhaustion = yes
+		}
+		localization_key = ROOT_WarExhaustionDesc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = GetFromWarExhaustion
+	text = {
+		trigger = {
+			LDN_FROM_war_exhaustion = yes
+		}
+		localization_key = FROM_WarExhaustionDesc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = war_exhaustion_point
+	text = {
+		trigger = {
+			LDN_war_exhaustion = yes
+		}
+		localization_key = war_exhaustion_point_Desc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = war_exhaustion_tooltips
+	text = {
+		trigger = {
+			LDN_war_exhaustion = yes
+		}
+		localization_key = war_exhaustion_tooltips_Desc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = we_base
+	text = {
+		trigger = {
+			NOT = { check_variable = { war_exhaustion_base_modifier = 0 } }
+		}
+		localization_key = we_base_Desc
+	}
+	text = {
+		localization_key = "we_base_0_Desc"
+	}
+}
+
+defined_text = { # Country
+	name = we_0
+	text = {
+		trigger = {
+			NOT = { check_variable = { war_exhaustion^0 = 0 } }
+		}
+		localization_key = we_0_Desc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = we_1
+	text = {
+		trigger = {
+			NOT = { check_variable = { war_exhaustion^1 = 0 } }
+		}
+		localization_key = we_1_Desc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = we_2
+	text = {
+		trigger = {
+			NOT = { check_variable = { war_exhaustion^2 = 0 } }
+		}
+		localization_key = we_2_Desc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = we_3
+	text = {
+		trigger = {
+			NOT = { check_variable = { war_exhaustion^3 = 0 } }
+		}
+		localization_key = we_3_Desc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = we_4
+	text = {
+		trigger = {
+			NOT = { check_variable = { war_exhaustion^4 = 0 } }
+		}
+		localization_key = we_4_Desc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = we_5
+	text = {
+		trigger = {
+			NOT = { check_variable = { war_exhaustion^5 = 0 } }
+		}
+		localization_key = we_5_Desc
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = diplo_peace_resource_oil
+	text = {
+		trigger = {
+			THIS = {
+				is_in_array = { ROOT.peace_control_state_resource = THIS.id }
+				has_state_flag = diplo_peace_state_oil
+			}
+		}
+		localization_key = LDN_peace_resource_oil
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = diplo_peace_resource_aluminium
+	text = {
+		trigger = {
+			THIS = {
+				is_in_array = { ROOT.peace_control_state_resource = THIS.id }
+				has_state_flag = diplo_peace_state_aluminium
+			}
+		}
+		localization_key = LDN_peace_resource_aluminium
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = diplo_peace_resource_rubber
+	text = {
+		trigger = {
+			THIS = {
+				is_in_array = { ROOT.peace_control_state_resource = THIS.id }
+				has_state_flag = diplo_peace_state_rubber
+			}
+		}
+		localization_key = LDN_peace_resource_rubber
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = diplo_peace_resource_tungsten
+	text = {
+		trigger = {
+			THIS = {
+				is_in_array = { ROOT.peace_control_state_resource = THIS.id }
+				has_state_flag = diplo_peace_state_tungsten
+			}
+		}
+		localization_key = LDN_peace_resource_tungsten
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = diplo_peace_resource_steel
+	text = {
+		trigger = {
+			THIS = {
+				is_in_array = { ROOT.peace_control_state_resource = THIS.id }
+				has_state_flag = diplo_peace_state_steel
+			}
+		}
+		localization_key = LDN_peace_resource_steel
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = diplo_peace_resource_chromium
+	text = {
+		trigger = {
+			THIS = {
+				is_in_array = { ROOT.peace_control_state_resource = THIS.id }
+				has_state_flag = diplo_peace_state_chromium
+			}
+		}
+		localization_key = LDN_peace_resource_chromium
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = diplo_peace_resource_chromium
+	text = {
+		trigger = {
+			THIS = {
+				is_in_array = { ROOT.peace_control_state_resource = THIS.id }
+				has_state_flag = diplo_peace_state_chromium
+			}
+		}
+		localization_key = LDN_peace_resource_chromium
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = diplo_peace_state_category
+	text = {
+		trigger = {
+			THIS = {
+				is_in_array = { ROOT.peace_control_state = THIS.id }
+				has_state_category = megalopolis
+			}
+		}
+		localization_key = LDN_peace_state_category_megalopolis
+	}
+	text = {
+		trigger = {
+			THIS = {
+				is_in_array = { ROOT.peace_control_state = THIS.id }
+				has_state_category = metropolis
+			}
+		}
+		localization_key = LDN_peace_state_category_metropolis
+	}
+	text = {
+		trigger = {
+			THIS = {
+				is_in_array = { ROOT.peace_control_state = THIS.id }
+				has_state_category = large_city
+			}
+		}
+		localization_key = LDN_peace_state_category_large_city
+	}
+	text = {
+		trigger = {
+			THIS = {
+				is_in_array = { ROOT.peace_control_state = THIS.id }
+				has_state_category = city
+			}
+		}
+		localization_key = LDN_peace_state_category_city
+	}
+	text = {
+		trigger = {
+			THIS = {
+				is_in_array = { ROOT.peace_control_state = THIS.id }
+				has_state_category = large_town
+			}
+		}
+		localization_key = LDN_peace_state_category_large_town
+	}
+	text = {
+		trigger = {
+			THIS = {
+				is_in_array = { ROOT.peace_control_state = THIS.id }
+				has_state_category = town
+			}
+		}
+		localization_key = LDN_peace_state_category_town
+	}
+	text = {
+		trigger = {
+			THIS = {
+				is_in_array = { ROOT.peace_control_state = THIS.id }
+				has_state_category = rural
+			}
+		}
+		localization_key = LDN_peace_state_category_rural
+	}
+	text = {
+		trigger = {
+			THIS = {
+				is_in_array = { ROOT.peace_control_state = THIS.id }
+				has_state_category = pastoral
+			}
+		}
+		localization_key = LDN_peace_state_category_pastoral
+	}
+	text = {
+		localization_key = LDN_peace_state_category_others
+	}
+}
+
+defined_text = { # Country
+	name = offer_state_checkbox_resource
+	text = {
+		trigger = {
+			THIS = {
+				OR = {
+					has_resources_amount = { resource = oil amount > 0 }
+					has_resources_amount = { resource = aluminium amount > 0 }
+					has_resources_amount = { resource = rubber amount > 0 }
+					has_resources_amount = { resource = tungsten amount > 0 }
+					has_resources_amount = { resource = steel amount > 0 }
+					has_resources_amount = { resource = chromium amount > 0 }
+				}
+			}
+		}
+		localization_key = LDN_offer_state_checkbox_resource
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = offer_state_checkbox_core_state
+	text = {
+		trigger = {
+			THIS = {
+				has_state_flag = offer_state_is_core_of_FROM
+			}
+		}
+		localization_key = LDN_offer_state_checkbox_core_state
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = offer_state_checkbox_core_of
+	text = {
+		trigger = {
+			THIS = {
+				has_state_flag = offer_state_is_core_of_ROOT
+			}
+		}
+		localization_key = LDN_offer_state_checkbox_core_of
+	}
+	text = {
+		localization_key = ""
+	}
+}
+
+defined_text = { # Country
+	name = offer_state_checkbox_claimed_by
+	text = {
+		trigger = {
+			THIS = {
+				has_state_flag = offer_state_is_claimed_by_ROOT
+			}
+		}
+		localization_key = LDN_offer_state_checkbox_claimed_by
+	}
+	text = {
+		localization_key = ""
+	}
+}

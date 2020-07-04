@@ -1,0 +1,481 @@
+guiTypes = {
+	containerWindowType = {
+		name = "LDN_diplomacy_action_peace"
+		position = { x = 0 y = 0 }	
+		size = { width = 100% height = 100% }
+
+		containerWindowType = {
+			name = "peace_gui_container"
+			position = { x = 0 y = 0}	
+			size = { width = 100% height = 100% }
+			moveable = yes
+			click_to_front = yes
+			orientation= center
+		
+			instantTextBoxType = {
+				name = "acceptance_header"
+				position = { x = 24 y = 44 }
+				textureFile = ""
+				font = "hoi_18mbs"
+				borderSize = {x = 0 y = 0}
+				text = "AI_ACCEPT_NAME"	
+				maxWidth = 110
+				maxHeight = 30
+				format = center
+			}
+		
+			instantTextBoxType = {
+				name = "LDN_peace_score_header"
+				position = { x = 160 y = 44 }
+				textureFile = ""
+				font = "hoi_18mbs"
+				borderSize = {x = 0 y = 0}
+				text = "LDN_PEACE_SCORE_VALUE_DESC"
+				#text = "[?ROOT.demand_state_cost_var|0]/[?LDN_peace_score|0H]"	
+				maxWidth = 180
+				maxHeight = 110
+				format = center
+				pdx_tooltip = "LDN_PEACE_SCORE_TOOLTIP"	
+				pdx_tooltip_delayed = "LDN_PEACE_SCORE_DELAYED_TOOLTIP"
+			}
+		
+			instantTextBoxType = {
+				name = "LDN_peace_accept_value"
+				position = { x = 333 y = 44 }
+				textureFile = ""
+				font = "hoi_18mbs"
+				borderSize = {x = 0 y = 0}
+				text = "LDN_PEACE_ACCEPT_VALUE_DESC"	
+				maxWidth = 80
+				maxHeight = 120
+				format = center
+				pdx_tooltip = "LDN_PEACE_ACCEPT_TOOLTIP"	
+			}
+			
+			containerWindowType = {
+				name = "war_exhaustion_container"
+				position = { x = 10 y = 65 }	
+				size = { width = 138 height = 85 }			
+		
+				background = {
+					name = "Background"	
+					quadTextureSprite ="GFX_tiled_plain_bg"
+				}
+			
+				containerWindowType = {
+					name = "war_exhaustion_view"
+					position = { x = 7 y = 16 }	
+		
+					instantTextBoxType = {
+						name = "war_exhaustion_header"
+						position = { x = 7 y = -7 }
+						textureFile = ""
+						font = "hoi_16mbs"
+						borderSize = {x = 0 y = 0}
+						text = "PEACE_EXHAUSTION_HEADER"	
+						maxWidth = 100
+						maxHeight = 200
+						format = left
+					}
+			
+					iconType = {
+						name ="war_exhaustion_progress"
+						quadTextureSprite = "GFX_LDN_peace_progress_bg"
+						position = { x= 24 y = 37 }
+					}
+			
+					buttonType = {
+						name = "ROOT_flag"
+						quadTextureSprite ="GFX_shield_peace"
+						position = { x= 3 y = 13 }
+					}
+		
+					instantTextBoxType = {
+						name = "ROOT_war_exhaustion_value"
+						position = { x = -37 y = 38 }
+						textureFile = ""
+						font = "garamond_14"
+						borderSize = {x = 0 y = 0}
+						text = "ROOT_WAR_EXHAUSTION_VALUE"	
+						maxWidth = 100
+						maxHeight = 200
+						format = center
+					}
+			
+					buttonType = {
+						name = "FROM_flag"
+						quadTextureSprite ="GFX_shield_peace"
+						position = { x= 97 y = 13 }
+					}
+		
+					instantTextBoxType = {
+						name = "FROM_war_exhaustion_value"
+						position = { x = 59 y = 38 }
+						textureFile = ""
+						font = "garamond_14"
+						borderSize = {x = 0 y = 0}
+						text = "FROM_WAR_EXHAUSTION_VALUE"	
+						maxWidth = 100
+						maxHeight = 200
+						format = center
+					}
+				}
+			}
+		
+			instantTextBoxType = {
+				name = "special_peace_name"
+				position = { x = 24 y = 400 }
+				textureFile = ""
+				font = "hoi_18mbs"
+				borderSize = {x = 0 y = 0}
+				text = "SPECIAL_PEACE"	
+				maxWidth = 110
+				maxHeight = 420
+				format = center
+			}
+		
+			buttonType = {
+				name = "SP_white_peace"
+				position = { x= 20 y = 431 }
+				quadTextureSprite ="GFX_button_123x34"
+				buttonText = "SP_WHITE_PEACE_DESC"
+				buttonFont = "hoi_18mbs"
+				clicksound = click_ok
+				pdx_tooltip = "SP_WHITE_PEACE_TT"	
+			}
+		
+			buttonType = {
+				name = "SP_white_peace_active"
+				position = { x= 20 y = 431 }
+				quadTextureSprite ="GFX_button_reset_123x34"
+				buttonText = "SP_WHITE_PEACE_DESC"
+				buttonFont = "hoi_18mbs"
+				clicksound = click_ok
+				pdx_tooltip = "SP_WHITE_PEACE_ACTIVE_TT"	
+			}
+		
+			buttonType = {
+				name = "SP_vassal_peace"
+				position = { x= 20 y = 467 }
+				quadTextureSprite ="GFX_button_123x34"
+				buttonText = "SP_VASSAL_PEACE_DESC"
+				buttonFont = "hoi_18mbs"
+				clicksound = click_ok
+				pdx_tooltip = "SP_VASSAL_PEACE_TT"	
+			}
+		
+			buttonType = {
+				name = "SP_vassal_peace_active"
+				position = { x=20 y = 467 }
+				quadTextureSprite ="GFX_button_reset_123x34"
+				buttonText = "SP_VASSAL_PEACE_DESC"
+				buttonFont = "hoi_18mbs"
+				clicksound = click_ok
+				pdx_tooltip = "SP_VASSAL_PEACE_ACTIVE_TT"
+			}
+		
+			iconType ={
+				name ="political_power_peace_bg"
+				spriteType = "GFX_generic_box_96"
+				position = { x = 240 y = 102 }
+				Orientation = "UPPER_LEFT"
+			}
+		
+			instantTextBoxType = {
+				name = "political_power_peace_header"
+				position = { x = 208 y = 72 }
+				textureFile = ""
+				font = "hoi_18mbs"
+				borderSize = {x = 0 y = 0}
+				text = "POLITICAL_POWER_PEACE"	
+				maxWidth = 160
+				maxHeight = 420
+				format = center
+			}
+			
+			buttonType = {
+				name = "political_power_peace_up"
+				position = { x = 340 y = 102 }
+				quadTextureSprite ="GFX_button_peace_up"
+				clicksound = click_checkbox
+				Orientation = "LEFT"
+				pdx_tooltip = "POLITICAL_POWER_PEACE_UP_TT"				
+			}
+			
+			buttonType = {
+				name = "political_power_peace_down"
+				position = { x = 205 y = 102 }
+				quadTextureSprite ="GFX_button_peace_down"
+				clicksound = click_checkbox
+				Orientation = "LEFT"
+				pdx_tooltip = "POLITICAL_POWER_PEACE_DOWN_TT"				
+			}
+
+			iconType ={
+				name ="political_power_peace_icon"
+				spriteType = "GFX_pol_power_icon"
+				position = { x = 241 y = 101 }
+				Orientation = "UPPER_LEFT"
+			}
+
+			instantTextBoxType = {
+				name ="political_power_peace_p"
+				position = { x = 269 y = 106 }
+				font = "hoi_18mbs"
+				text = "[?ROOT.demand_pol_power_var|0]"
+				format = right
+				maxWidth = 57
+				maxHeight = 24
+				fixedsize = yes
+			}
+		
+			instantTextBoxType = {
+				name = "war_exhaustion_desc"
+				position = { x = 18 y = 158 }
+				textureFile = ""
+				font = "hoi_16mbs"
+				borderSize = {x = 0 y = 0}
+				text = "WAR_EXHAUSTION_DESC"	
+				maxWidth = 110
+				maxHeight = 230
+				format = left
+				scrollbartype = "standardtext_slider"	
+			}
+		
+			instantTextBoxType = {
+				name = "diplo_peace_states"
+				position = { x = 228 y = 142 }
+				textureFile = ""
+				font = "hoi_18mbs"
+				borderSize = {x = 0 y = 0}
+				text = "DIPLO_PEACE_STATES"	
+				maxWidth = 110
+				maxHeight = 420
+				format = center
+			}
+		
+			instantTextBoxType = {
+				name = "opinion_neighbor_country_name"
+				position = { x = 24 y = 610 }
+				textureFile = ""
+				font = "hoi_18mbs"
+				borderSize = {x = 0 y = 0}
+				text = "OPINION_NEIGHBOR_NAME"	
+				maxWidth = 110
+				maxHeight = 420
+				format = center
+			}
+			
+			containerWindowType = {
+				name = "controlled_state"
+				position = { x = 146 y = 159 }	
+				size = { width = 279 height = 236 }
+				verticalScrollbar = "right_vertical_slider"	
+				margin = {top=12 left=0 bottom=12 right=0}
+		
+				background = {
+					name = "Background"
+					#spriteType ="GFX_tiled_window_transparent"
+					spriteType ="GFX_tiled_window_1b_border"
+				}
+				
+				gridboxtype = {
+					name = "peace_state_grid"
+					position = { x = 5 y = 1 }
+					size = { width = 100%% height = 100%% }
+					slotsize = { width = 200 height = 30 }
+					max_slots_horizontal = 1
+					format = "UPPER_LEFT"
+				}
+			}
+		
+			instantTextBoxType = {
+				name = "diplo_peace_states_resource"
+				position = { x = 228 y = 397 }
+				textureFile = ""
+				font = "hoi_18mbs"
+				borderSize = {x = 0 y = 0}
+				text = "DIPLO_PEACE_STATES_RESOURCE"	
+				maxWidth = 110
+				maxHeight = 420
+				format = center
+			}
+			
+			containerWindowType = {
+				name = "controlled_resource_state"
+				position = { x = 146 y = 416 }	
+				size = { width = 279 height = 236 }
+				verticalScrollbar = "right_vertical_slider"	
+				margin = {top=12 left=0 bottom=12 right=0}
+		
+				background = {
+					name = "Background"
+					#spriteType ="GFX_tiled_window_transparent"
+					spriteType ="GFX_tiled_window_1b_border"
+				}
+				
+				gridboxtype = {
+					name = "peace_state_resource_grid"
+					position = { x = 5 y = 1 }
+					size = { width = 100%% height = 100%% }
+					slotsize = { width = 200 height = 30 }
+					max_slots_horizontal = 1
+					format = "UPPER_LEFT"
+				}
+			}
+			
+			containerWindowType = {
+				name = "peace_opinion_country"
+				position = { x = 8 y = 646 }	
+				size = { width = 417 height = 100 }
+				verticalScrollbar = "right_vertical_slider"	
+				horizontalScrollbar = "bottom_horizontal_slider"
+				margin = { top = 13 left = 13 bottom = 24 right = 25 }
+		
+				background = {
+					name = "Background"
+					#spriteType ="GFX_tiled_window_transparent"
+					spriteType ="GFX_tiled_window2_2b_border"
+				}
+				
+				gridboxtype = {
+					name = "peace_opinion_country_grid"
+					position = { x = 5 y = 1 }
+					size = { width = 100%% height = 100%% }
+					slotsize = { width = 40 height = 30 }
+					max_slots_horizontal = 10
+					format = "UPPER_LEFT"
+				}
+			}
+		}
+	}
+	containerWindowType = {
+		name = "scripted_gui_peace_state_entry"
+		position = { x = 10 y = 0}	
+		size = { width = 259 height = 40 }
+			
+		buttonType = {
+			name = "offer_state_checkbox"
+			position = { x = 0 y = 7 }
+			quadTextureSprite ="GFX_generic_checkbox2"
+			clicksound = click_checkbox
+			frame = 1
+			Orientation = "LEFT"
+			pdx_tooltip = "OFFER_STATE_CHECKBOX_TT"				
+		}
+			
+		buttonType = {
+			name = "offer_state_checkbox_active"
+			position = { x = 0 y = 7 }
+			quadTextureSprite ="GFX_generic_checkbox2"
+			clicksound = click_checkbox
+			frame = 2
+			Orientation = "LEFT"	
+			pdx_tooltip = "OFFER_STATE_CHECKBOX_ACTIVE_TT"			
+		}
+		
+		buttonType = {
+			name = "offer_not_owner_flag"
+			quadTextureSprite = "GFX_flag_small"
+			position = { x= 5 y = 12 }
+			pdx_tooltip = "OFFER_NOT_OWNER_TT"
+		}
+			
+		instantTextboxType = {
+			name = "name"
+			position = { x = 40 y = 12 }
+			font = "hoi_18mbs"
+			text = "[this.GetName]"
+			maxWidth = 200
+			maxHeight = 20
+			format = left
+			Orientation = "LEFT"
+		}
+			
+		instantTextboxType = {
+			name = "state_cost"
+			position = { x = 14 y = 12 }
+			font = "hoi_18mbs"
+			text = "[?this.state_cost_var|0H]"
+			maxWidth = 200
+			maxHeight = 20
+			format = right
+			Orientation = "right"
+		}
+	}
+	containerWindowType = {
+		name = "scripted_gui_peace_resource_entry"
+		position = { x = 10 y = 0}	
+		size = { width = 259 height = 40 }
+
+		iconType = {
+			name = "offer_state_resource_already_checkbox"
+			quadTextureSprite ="GFX_flag_small"
+			position = { x = 5 y = 12 }
+			Orientation = "LEFT"		
+			pdx_tooltip = "OFFER_STATE_RESOURCE_CHECKBOX_ALREADY_TT"
+		}
+			
+		buttonType = {
+			name = "offer_state_resource_checkbox"
+			position = { x = 0 y = 7 }
+			quadTextureSprite ="GFX_generic_checkbox2"
+			clicksound = click_checkbox
+			frame = 1
+			Orientation = "LEFT"
+			pdx_tooltip = "OFFER_STATE_RESOURCE_CHECKBOX_TT"				
+		}
+			
+		buttonType = {
+			name = "offer_state_resource_checkbox_active"
+			position = { x = 0 y = 7 }
+			quadTextureSprite ="GFX_generic_checkbox2"
+			clicksound = click_checkbox
+			frame = 2
+			Orientation = "LEFT"	
+			pdx_tooltip = "OFFER_STATE_RESOURCE_CHECKBOX_ACTIVE_TT"			
+		}
+		
+		buttonType = {
+			name = "offer_not_owner_flag"
+			quadTextureSprite = "GFX_flag_small"
+			position = { x= 5 y = 12 }
+			pdx_tooltip = "OFFER_NOT_OWNER_RESOURCE_TT"
+		}
+			
+		instantTextboxType = {
+			name = "name"
+			position = { x = 40 y = 12 }
+			font = "hoi_18mbs"
+			text = "DIPLO_PEACE_RESOURCE_DESC"
+			maxWidth = 200
+			maxHeight = 20
+			format = left
+			Orientation = "LEFT"
+		}
+			
+		instantTextboxType = {
+			name = "state_cost_resource"
+			position = { x = 14 y = 12 }
+			font = "hoi_18mbs"
+			text = "[?this.state_cost_resource_var|0H]"
+			maxWidth = 200
+			maxHeight = 20
+			format = right
+			Orientation = "right"
+		}
+	}
+	containerWindowType = {
+		name = "peace_opinion_country_entry"
+		position = { x = 0 y = 0}	
+		size = { width = 40 height = 40 }
+		
+		buttonType = {
+			name = "peace_opinion_country_flag"
+			quadTextureSprite = "GFX_shield_small"
+			position = { x = 0 y = 0 }
+			Orientation = "UPPER_LEFT"
+			pdx_tooltip = "PEACE_OPINION_COUNTRY_TT"	
+		}
+	}
+}

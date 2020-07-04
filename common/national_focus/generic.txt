@@ -1,0 +1,5006 @@
+focus_tree = {
+	id = generic_focus
+	
+	country = {
+		factor = 1
+	}
+	
+	default = yes
+	reset_on_civilwar = no
+
+###########################################
+########START OF ECONOMY TREE##############
+###########################################
+
+focus = { #Economy Start
+	id = GEN_economy_start
+	icon = GFX_goal_generic_consumer_goods
+	x = 9
+	y = 0
+	cost = 4
+	
+	ai_will_do = {
+		factor = 20
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		    add_tech_bonus = {
+				bonus = 0.33
+				ahead_reduction = 0.5
+				uses = 1
+				category = mot_rockets
+			}	
+			add_ideas = factory_reorganization_p0
+			add_ideas = civilian_economy
+			add_political_power = -200			
+	}
+}
+
+
+focus = { #Economy Roads 1
+	id = GEN_economy_roads_1
+	icon = GFX_goal_generic_construct_infrastructure
+	prerequisite = { focus = GEN_economy_start }
+	x = 8
+	y = 1
+	cost = 5
+	
+	ai_will_do = {
+		factor = 20
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+		add_manpower = 1100			
+		random_owned_state = {
+            add_extra_state_shared_building_slots = 1		
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		
+	
+		
+	}
+	
+}
+
+focus = { #Economy Roads 2
+	id = GEN_economy_roads_2
+	icon = GFX_goal_generic_construct_infrastructure
+	prerequisite = { focus = GEN_economy_roads_1 }
+	x = 8
+	y = 3
+	cost = 10
+	
+	ai_will_do = {
+		factor = 20
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+		add_manpower = 2200		    
+		random_owned_state = {
+            add_extra_state_shared_building_slots = 2		
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+			
+
+	}
+}
+
+focus = { #Economy Civilian Factories 1
+	id = GEN_economy_civ_fact_1
+	icon = GFX_goal_generic_trade
+	prerequisite = { focus = GEN_economy_start }
+	mutually_exclusive = { focus = GEN_economy_mil_fact_1 }		
+	x = 10
+	y = 1
+	cost = 10
+	
+	ai_will_do = {
+		factor = 20
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+			swap_ideas = {
+				remove_idea = factory_reorganization_p0
+				add_idea = factory_reorganization_p1
+			}
+		add_manpower = 1500				
+		random_owned_state = {
+            add_extra_state_shared_building_slots = 1 				
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+focus = { #Economy Civilian Factories 2
+	id = GEN_economy_civ_fact_2
+	icon = GFX_goal_generic_positive_trade_relations
+	prerequisite = { focus = GEN_economy_civ_fact_1 }
+	x = 10
+	y = 2
+	cost = 10
+	
+	ai_will_do = {
+		factor = 20
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+			swap_ideas = {
+				remove_idea = factory_reorganization_p1
+				add_idea = factory_reorganization_p2
+			}
+		add_manpower = 5000			
+		random_owned_state = {
+            add_extra_state_shared_building_slots = 1 				
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	
+	}
+}
+
+focus = { #Economy Civilian Factories 3
+	id = GEN_economy_civ_fact_3
+	icon = GFX_goal_generic_intelligence_exchange
+	prerequisite = { focus = GEN_economy_civ_fact_2 }
+	x = 10
+	y = 3
+	cost = 10
+	
+	ai_will_do = {
+		factor = 20
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+			swap_ideas = {
+				remove_idea = factory_reorganization_p2
+				add_idea = factory_reorganization_p3
+			}
+		add_manpower = 9000			
+		random_owned_state = {
+            add_extra_state_shared_building_slots = 1 				
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}		
+		
+		#add_ideas = factory_reorganization
+	}
+}
+
+focus = { #Economy Military Factories 1
+	id = GEN_economy_mil_fact_1
+		available = {
+			
+			#NOT = { has_war_together_with = ENG }
+			#NOT = { is_in_faction_with = NZL }
+			NOT = { has_government = democratic }
+		}	
+	icon = GFX_goal_generic_forceful_treaty
+	prerequisite = { focus = GEN_economy_start }
+	mutually_exclusive = { focus = GEN_economy_civ_fact_1 }	
+	x = 14
+	y = 1
+	cost = 10
+	
+	ai_will_do = {
+		factor = 8
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		random_owned_state = {
+            add_extra_state_shared_building_slots = 1 				
+		}		    
+			add_manpower = 2000			
+			swap_ideas = {
+				remove_idea = factory_reorganization_p0
+				add_idea = factory_reorganization_p1
+			}			
+			add_stability = -0.10           
+			add_offsite_building = { type = industrial_complex level = 2 }
+	}
+}
+
+focus = { #Economy Military Factories 2
+	id = GEN_economy_mil_fact_2
+	icon = GFX_focus_generic_support_the_left_right
+	prerequisite = { focus = GEN_economy_mil_fact_1 }
+	x = 14
+	y = 2
+	cost = 10
+	
+	ai_will_do = {
+		factor = 16
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+			swap_ideas = {
+				remove_idea = factory_reorganization_p1
+				add_idea = factory_reorganization_p2
+			}
+		    add_manpower = 7500				
+			add_stability = -0.08            
+			add_offsite_building = { type = industrial_complex level = 2 }
+	}
+}
+
+focus = { #Economy Military Factories 3
+	id = GEN_economy_mil_fact_3
+	icon = GFX_goal_generic_major_alliance
+	prerequisite = { focus = GEN_economy_mil_fact_2 }
+	x = 14
+	y = 3
+	cost = 10
+	
+	ai_will_do = {
+		factor = 19
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+			swap_ideas = {
+				remove_idea = factory_reorganization_p2
+				add_idea = factory_reorganization_p3
+			}			
+		    add_manpower = 13000				
+			add_stability = -0.06            
+			add_offsite_building = { type = industrial_complex level = 2 }
+	}
+}
+
+
+focus = { #Eco Expansion Mining 1
+	id = GEN_eco_expansion__mining10
+	icon = GFX_goal_generic_construction2
+	prerequisite = { focus = GEN_economy_start }
+	x = 4
+	y = 1
+	cost = 10
+	
+	ai_will_do = {
+		factor = 15
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+		add_ideas = gen_mining_co
+		add_manpower = 600
+	}
+}
+
+focus = { #Eco Expansion Mining 1 Steel
+	id = GEN_eco_expansion__mining1_steel
+	icon = GFX_focus_generic_steel
+	prerequisite = { focus = GEN_eco_expansion__mining10 }
+	mutually_exclusive = { focus = GEN_eco_expansion__mining1_special }
+	mutually_exclusive = { focus = GEN_eco_expansion__mining1_oil }
+	x = 2
+	y = 2
+	cost = 10
+	
+	ai_will_do = {
+		factor = 15
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+		add_manpower = 500	    
+		random_owned_state = {
+		add_resource = {
+			type = steel
+			amount = 7
+		            }
+               }		
+	}
+}
+
+focus = { #Eco Expansion Mining 2 Steel
+	id = GEN_eco_expansion__mining2_steel
+	icon = GFX_focus_generic_steel
+	prerequisite = { focus = GEN_eco_expansion__mining1_steel }
+	available =
+	{
+
+	}
+	x = 2
+	y = 3
+	cost = 10
+	
+	ai_will_do = {
+		factor = 15
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_manpower = 500		
+	    random_owned_state = {
+		add_resource = {
+			type = steel
+			amount = 11
+		            }
+               }
+	}
+}
+
+focus = { #Eco Expansion Mining 3 Steel
+	id = GEN_eco_expansion__mining3_steel
+	icon = GFX_focus_generic_steel
+	prerequisite = { focus = GEN_eco_expansion__mining2_steel }
+	available =
+	{
+
+	}
+	x = 2
+	y = 4
+	cost = 10
+	
+	ai_will_do = {
+		factor = 15
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+		add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = excavation_tech
+			}		
+		add_political_power = 5
+		add_stability = 0.05
+		add_manpower = 8000		
+	    random_owned_state = {
+		add_resource = {
+			type = steel
+			amount = 14
+		            }
+               }
+	}
+}
+
+focus = { #Eco Expansion Mining 1 special
+	id = GEN_eco_expansion__mining1_special
+	icon = GFX_focus_generic_aluminum
+	prerequisite = { focus = GEN_eco_expansion__mining10 }
+	mutually_exclusive = { focus = GEN_eco_expansion__mining1_oil }
+	mutually_exclusive = { focus = GEN_eco_expansion__mining1_steel }
+	x = 4
+	y = 2
+	cost = 10
+	
+	ai_will_do = {
+		factor = 15
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+		add_manpower = 1300	
+	    random_owned_state = {
+		add_resource = {
+			type = tungsten
+			amount = 3
+		            }
+               }
+	    random_owned_state = {
+		add_resource = {
+			type = aluminium
+			amount = 3
+		            }
+               }
+	    random_owned_state = {
+		add_resource = {
+			type = chromium
+			amount = 3
+		            }
+               }			   
+	}
+}
+
+focus = { #Eco Expansion Mining 2 special
+	id = GEN_eco_expansion__mining2_special
+	icon = GFX_focus_generic_aluminum
+	prerequisite = { focus = GEN_eco_expansion__mining1_special }
+	available =
+	{
+
+
+	}
+	x = 4
+	y = 3
+	cost = 10
+	
+	ai_will_do = {
+		factor = 15
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+		add_tech_bonus = {
+				bonus = 0.75
+				uses = 1
+				category = excavation_tech
+			}
+		add_manpower = 7000			
+	    random_owned_state = {
+		add_resource = {
+			type = tungsten
+			amount = 5
+		            }
+               }
+	    random_owned_state = {
+		add_resource = {
+			type = aluminium
+			amount = 5
+		            }
+               }
+	    random_owned_state = {
+		add_resource = {
+			type = chromium
+			amount = 5
+		            }
+               }			   
+	}
+}
+
+focus = { #
+	id = GEN_eco_expansion__advanced_evacuation
+	icon = GFX_goal_generic_construction2
+	prerequisite = { focus = GEN_eco_expansion__mining2_special focus = GEN_eco_expansion__mining2_rubber focus = GEN_eco_expansion__mining3_steel}
+	available =
+	{
+
+
+	}
+	x = 4
+	y = 5
+	cost = 10
+	
+	ai_will_do = {
+		factor = 15
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+		add_manpower = 3600	
+		army_experience = 25		
+		add_tech_bonus = {
+				bonus = 0.80
+				uses = 1
+				category = excavation_tech
+			}			
+			swap_ideas = {
+				remove_idea = gen_mining_co
+				add_idea = gen_mining_co_p1
+			}				   
+	}
+}
+
+focus = { #Eco Expansion Mining 1 Oil
+	id = GEN_eco_expansion__mining1_oil
+	icon = GFX_goal_generic_oil_refinery
+	prerequisite = { focus = GEN_eco_expansion__mining10 }
+	mutually_exclusive = { focus = GEN_eco_expansion__mining1_special }
+	mutually_exclusive = { focus = GEN_eco_expansion__mining1_steel }
+	x = 6
+	y = 2
+	cost = 10
+	
+	ai_will_do = {
+		factor = 15
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+		add_manpower = 500
+	    random_owned_state = {
+		add_resource = {
+			type = oil
+			amount = 14
+		            }
+               }		   
+	        }		
+}
+
+focus = { #Eco Expansion Mining 2 Oil
+	id = GEN_eco_expansion__mining2_oil
+	icon = GFX_goal_generic_oil_refinery
+	prerequisite = { focus = GEN_eco_expansion__mining1_oil }
+	x = 6
+	y = 3
+	cost = 10
+	
+	ai_will_do = {
+		factor = 15
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+		add_manpower = 500			
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = synthetic_refinery
+				level = 1
+				instant_build = yes
+			}
+		}
+		add_tech_bonus = {
+			name = refinery_bonus
+			bonus = 0.5
+			uses = 2
+			category = synth_resources
+		}
+	}
+}
+
+focus = { #Eco Expansion Mining 2 rubber
+	id = GEN_eco_expansion__mining2_rubber
+	icon = GFX_focus_generic_rubber
+	prerequisite = { focus = GEN_eco_expansion__mining2_oil }
+	x = 6
+	y = 4
+	cost = 10
+	
+	ai_will_do = {
+		factor = 15
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+		add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = excavation_tech
+			}
+		add_manpower = 9200			
+	    random_owned_state = {
+		add_resource = {
+			type = rubber
+			amount = 14
+		            }
+               }
+	    random_owned_state = {
+		add_resource = {
+			type = oil
+			amount = 7
+		            }
+               }			   
+	}
+}
+
+####################################################################################################################################################################################################
+####################################################################################################################################################################################################
+####################################################################################################################################################################################################
+####################################################################################################################################################################################################
+
+focus = { #Economy Complete 
+	id = GEN_economy_complete
+	icon = GFX_focus_mex_privatisation
+
+	prerequisite = { focus = GEN_economy_roads_2 }
+	prerequisite = { focus = GEN_economy_civ_fact_3 focus = GEN_economy_mil_fact_3 }
+
+	x = 11
+	y = 4
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+		    add_manpower = 1000
+			navy_experience = 15
+			army_experience = 15			
+			add_political_power = 75			
+			swap_ideas = {
+				remove_idea = factory_reorganization_p3
+				add_idea = factory_reorganization_p4				
+			}	
+		add_timed_idea = { idea = gen_economic_stability days = 900 }
+	}
+}
+focus = { #Economy Complete ##################################################################################################
+	id = GEN_economy_strong
+	icon = GFX_focus_rom_parties_end
+
+
+	prerequisite = { focus = GEN_infrastructure_massadv1} 
+	prerequisite = 	{focus = GEN_infrastructure_massadv2} 
+	prerequisite = 	{focus = GEN_eco_expansion__advanced_evacuation} 
+	prerequisite = 	{focus = GEN_millls_cdcompleted3}
+
+	x = 8
+	y = 11
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+		add_political_power = 150		
+		add_manpower = 10000					
+		add_timed_idea = { idea = gen_strong_eeconomy days = 730 }
+		navy_experience = 15
+		army_experience = 15		
+	}
+}
+
+focus = { #
+	id = GEN_infrastructure_ca
+	icon = GFX_goal_generic_air_fighter
+
+	
+	prerequisite = { focus = GEN_economy_complete }
+
+
+	x = 8
+	y = 5
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+				random_owned_state = {
+					limit = {
+						free_building_slots = {
+							building = air_base
+							size > 1
+						}
+					}
+					add_building_construction = {
+						type = air_base
+						level = 2
+						instant_build = yes
+					}				
+				}
+			set_technology = { early_fighter = 1 }				
+			#add_ideas = gen_mass_infrastructure
+		    add_manpower = 1000
+
+	}
+}
+
+focus = { #
+	id = GEN_infrastructure_ca1
+	icon = GFX_goal_generic_air_fighter
+
+	
+	prerequisite = { focus = GEN_infrastructure_ca }
+
+
+	x = 8
+	y = 6
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+				random_owned_state = {
+					limit = {
+						free_building_slots = {
+							building = air_base
+							size > 1
+						}
+					}
+					add_building_construction = {
+						type = air_base
+						level = 2
+						instant_build = yes
+					}				
+				}
+		    add_manpower = 1600			
+			#swap_ideas = {
+			#	remove_idea = gen_mass_infrastructure
+			#	add_idea = gen_mass_infrastructure_p1				
+			#}	
+
+	}
+}
+
+focus = { #
+	id = GEN_infrastructure_ca2
+	icon = GFX_goal_generic_air_fighter
+
+	
+	prerequisite = { focus = GEN_infrastructure_ca1 }
+
+
+	x = 8
+	y = 7
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+				random_owned_state = {
+					limit = {
+						free_building_slots = {
+							building = air_base
+							size > 1
+						}
+					}
+					add_building_construction = {
+						type = air_base
+						level = 2
+						instant_build = yes
+					}				
+				}
+			#swap_ideas = {
+			#	remove_idea = gen_mass_infrastructure_p1
+			#	add_idea = gen_mass_infrastructure_p2				
+			#}	
+		add_manpower = 2500
+	}
+}
+focus = { #
+	id = GEN_infrastructure_ch
+	icon = GFX_focus_generic_coastal_fort
+
+	prerequisite = { focus = GEN_economy_complete }
+
+		available = {
+			any_state = {
+				is_coastal = yes
+				is_controlled_by = ROOT
+			}
+		}
+	x = 10
+	y = 5
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+			add_equipment_to_stockpile = { type = convoy amount = 50 }	
+			random_owned_controlled_state = {
+					limit = {
+						is_coastal = yes
+						free_building_slots = {
+							building = dockyard
+							size > 2
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = dockyard
+						level = 1
+						instant_build = yes
+					}
+				}	
+			random_owned_state = {
+				limit = {
+						is_coastal = yes
+						
+					}			
+				add_building_construction = {
+					type = naval_base
+					province = {
+						all_provinces = yes
+						limit_to_naval_base = yes
+					}
+					level = 1
+					instant_build = yes
+				}				
+			}	
+			add_manpower = 800		
+			#add_ideas = gen_advanceed_infrastructure
+
+
+	}
+}
+
+focus = { #
+	id = GEN_infrastructure_ch1
+	icon = GFX_focus_generic_coastal_fort
+	prerequisite = { focus = GEN_infrastructure_ch }
+
+		available = {
+			any_state = {
+				is_coastal = yes
+				is_controlled_by = ROOT
+			}
+		}
+		
+	x = 10
+	y = 6
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+			add_equipment_to_stockpile = { type = convoy amount = 100 }	
+			random_owned_state = {
+				limit = {
+						is_coastal = yes
+					}			
+				add_building_construction = {
+				
+					type = naval_base
+					province = {
+						all_provinces = yes
+						limit_to_naval_base = yes
+					}
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+			
+					limit = {
+						is_coastal = yes
+						free_building_slots = {
+							building = dockyard
+							size > 2
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = dockyard
+						level = 1
+						instant_build = yes
+					}
+				}			
+		    add_manpower = 1400		
+			#swap_ideas = {
+			#	remove_idea = gen_advanceed_infrastructure
+			#	add_idea = gen_advanceed_infrastructure_p1				
+			#}	
+
+
+	}
+}
+
+focus = { #
+	id = GEN_infrastructure_ch2
+	icon = GFX_focus_generic_coastal_fort
+	prerequisite = { focus = GEN_infrastructure_ch1 }
+		available = {
+			any_state = {
+				is_coastal = yes
+				is_controlled_by = ROOT
+			}
+		}
+
+	x = 10
+	y = 7
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+			add_equipment_to_stockpile = { type = convoy amount = 200 }		
+			random_owned_state = {
+				limit = {
+						is_coastal = yes
+					}			
+				add_building_construction = {
+					type = naval_base
+					province = {
+						all_provinces = yes
+						limit_to_naval_base = yes
+					}
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+					limit = {
+						is_coastal = yes
+						free_building_slots = {
+							building = dockyard
+							size > 2
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = dockyard
+						level = 1
+						instant_build = yes
+					}
+				}			
+		
+			#swap_ideas = {
+			#	remove_idea = gen_advanceed_infrastructure_p1
+			#	add_idea = gen_advanceed_infrastructure_p2				
+			#}	
+		add_manpower = 1500
+
+	}
+}
+
+
+focus = { #
+	id = GEN_infrastructure_massadv1
+	icon = GFX_goal_generic_production
+	prerequisite = { focus = GEN_infrastructure_ch2  focus = GEN_infrastructure_ca2}
+
+
+	x = 8
+	y = 8
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = infrastructure
+						size > 0
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			
+		add_manpower = 6500			
+			add_political_power = 30	
+			add_ideas = gen_mass_infrastructure	
+		random_owned_state = {
+            add_extra_state_shared_building_slots = 1 				
+		}
+
+	}
+}
+
+focus = { #
+	id = GEN_infrastructure_massadv2
+	icon = GFX_goal_generic_production
+	prerequisite = { focus = GEN_infrastructure_ch2  focus = GEN_infrastructure_ca2}
+
+
+	x = 10
+	y = 8
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = infrastructure
+						size > 0
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			
+		add_manpower = 8500			
+			add_political_power = 30	
+			add_ideas = gen_advanceed_infrastructure			
+		random_owned_state = {
+            add_extra_state_shared_building_slots = 1 				
+		}
+
+	}
+}
+########################################################################################################################################
+
+
+focus = { #
+	id = GEN_millls_concentratedfocus0
+	icon = GFX_goal_generic_construct_civ_factory
+	prerequisite = { focus = GEN_economy_complete }
+	mutually_exclusive = { focus = GEN_millls_dispersedfocus0 }
+
+	x = 13
+	y = 5
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = concentrated_industry_category
+			}			
+			add_ideas = gen_millls_concentratedfocus_p0
+	}
+}
+
+focus = { #
+	id = GEN_millls_concentratedfocus1
+	icon = GFX_goal_generic_construct_civ_factory
+	prerequisite = { focus = GEN_millls_concentratedfocus0 }
+
+
+	x = 13
+	y = 6
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+               
+			   
+			random_owned_state = {
+                    add_extra_state_shared_building_slots = 1		   
+                    add_building_construction = { type = arms_factory level = 1 instant_build = yes }
+               }			
+			
+			
+			swap_ideas = {
+				remove_idea = gen_millls_concentratedfocus_p0
+				add_idea = gen_millls_concentratedfocus_p1			
+			}	
+
+	}
+}
+
+focus = { #
+	id = GEN_millls_concentratedfocus2
+	icon = GFX_goal_generic_construct_civ_factory
+	prerequisite = { focus = GEN_millls_concentratedfocus1 }
+
+
+	x = 13
+	y = 7
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+               
+			   
+			random_owned_state = {
+                    add_extra_state_shared_building_slots = 1		   
+                    add_building_construction = { type = arms_factory level = 1 instant_build = yes }
+               }			
+			
+			
+			swap_ideas = {
+				remove_idea = gen_millls_concentratedfocus_p1
+				add_idea = gen_millls_concentratedfocus_p2			
+			}	
+
+	}
+}
+
+
+focus = { #
+	id = GEN_millls_dispersedfocus0
+	icon = GFX_goal_generic_construct_mil_factory
+	prerequisite = { focus = GEN_economy_complete }
+	mutually_exclusive = { focus = GEN_millls_concentratedfocus0 }
+
+	x = 15
+	y = 5
+	cost = 10
+	
+	ai_will_do = {
+		factor = 24
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = dispersed_industry_category
+			}
+			add_ideas = gen_millls_dispersedfocus_p0		
+
+	}
+}
+
+focus = { #
+	id = GEN_millls_dispersedfocus1
+	icon = GFX_goal_generic_construct_mil_factory
+	prerequisite = { focus = GEN_millls_dispersedfocus0 }
+
+
+	x = 15
+	y = 6
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+
+			random_owned_state = {
+                    add_extra_state_shared_building_slots = 1		   
+                    add_building_construction = { type = arms_factory level = 1 instant_build = yes }
+               }			
+			
+			
+			swap_ideas = {
+				remove_idea = gen_millls_dispersedfocus_p0
+				add_idea = gen_millls_dispersedfocus_p1	
+			}	
+			
+	}
+}
+
+focus = { #
+	id = GEN_millls_dispersedfocus2
+	icon = GFX_goal_generic_construct_mil_factory
+	prerequisite = { focus = GEN_millls_dispersedfocus1}
+
+
+	x = 15
+	y = 7
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+
+			random_owned_state = {
+                    add_extra_state_shared_building_slots = 1		   
+                    add_building_construction = { type = arms_factory level = 1 instant_build = yes }
+               }			
+			
+			
+			swap_ideas = {
+				remove_idea = gen_millls_dispersedfocus_p1
+				add_idea = gen_millls_dispersedfocus_p2
+			}	
+			
+	}
+}
+
+focus = { #
+	id = GEN_millls_cdcompleted1
+	icon = GFX_focus_generic_industry_1
+	prerequisite = { focus = GEN_millls_dispersedfocus2  focus = GEN_millls_concentratedfocus2 }   
+
+
+	x = 14
+	y = 8
+	cost = 10
+	
+	ai_will_do = {
+		factor = 24
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+
+			random_owned_state = {
+                    add_extra_state_shared_building_slots = 1		   
+                    add_building_construction = { type = arms_factory level = 1 instant_build = yes }
+               }			
+
+			random_owned_state = {
+                    add_extra_state_shared_building_slots = 1		   
+                    add_building_construction = { type = arms_factory level = 1 instant_build = yes }
+               }			
+	
+			
+	}
+}
+
+focus = { #
+	id = GEN_millls_cdcompleted2
+	icon = GFX_focus_generic_industry_2
+	prerequisite = { focus = GEN_millls_cdcompleted1}   
+
+
+	x = 12
+	y = 9
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+
+			random_owned_state = {
+                    add_extra_state_shared_building_slots = 1		   
+                    add_building_construction = { type = arms_factory level = 1 instant_build = yes }
+               }			
+
+			random_owned_state = {
+                    add_extra_state_shared_building_slots = 1		   
+                    add_building_construction = { type = arms_factory level = 1 instant_build = yes }
+               }			
+	
+			
+	}
+}
+
+focus = { #
+	id = GEN_millls_cdcompleted3
+	icon = GFX_focus_generic_industry_3
+	prerequisite = { focus = GEN_millls_cdcompleted2}   
+
+
+	x = 10
+	y = 10
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+
+			random_owned_state = {
+                    add_extra_state_shared_building_slots = 1		   
+                    add_building_construction = { type = arms_factory level = 1 instant_build = yes }
+               }			
+
+			random_owned_state = {
+                    add_extra_state_shared_building_slots = 1		   
+                    add_building_construction = { type = arms_factory level = 1 instant_build = yes }
+               }			
+	
+			
+	}
+}
+#######################################################################################################################################################################################
+########START OF Political TREE#########################################################################################################################################################
+#############################################################################################################################################################################################
+
+focus = { #
+	id = GEN_ppolitical_focus00
+	icon = GFX_goal_generic_demand_territory
+        available = {
+            NOT = { is_subject = yes }
+			has_civil_war = no
+		
+			}
+
+
+	x = 28
+	y = 0
+	cost = 10
+	
+	ai_will_do = {
+		factor = 15
+		#
+	}
+
+	available_if_capitulated = yes
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+		
+		
+	completion_reward = {				
+			add_political_power = 150			
+			
+	}
+}
+
+
+focus = { #
+	id = GEN_ppolitical_demo00
+	icon = GFX_goal_support_democracy
+	prerequisite = { focus = GEN_ppolitical_focus00}    
+	mutually_exclusive = { focus = GEN_ppolitical_nationalism00 }	
+	mutually_exclusive = { focus = GEN_ppolitical_fascism00 }	
+	mutually_exclusive = { focus = GEN_ppolitical_communism00 }	
+        available = {
+			has_civil_war = no		
+			}
+
+	x = 20
+	y = 1
+	cost = 10
+	
+	ai_will_do = {
+		factor = 35
+			modifier = {
+				factor = 0
+					AND = {
+						is_historical_focus_on = yes
+						has_government = neutrality
+					}
+			}
+			modifier = {
+				factor = 0
+					AND = {
+						is_historical_focus_on = yes
+						has_government = fascism
+					}
+			}
+			modifier = {
+				factor = 0
+					AND = {
+						is_historical_focus_on = yes
+						has_government = communism
+					}
+			}
+	}
+
+	available_if_capitulated = yes
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	
+	completion_reward = {				
+        add_timed_idea = { idea = democratic_influencezzz  days = 730 }		
+		add_political_power = 25	
+			add_popularity = {	
+						ideology = democratic
+						popularity = 0.05
+					}		
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_demo01
+	icon = GFX_goal_generic_intelligence_exchange
+	prerequisite = { focus = GEN_ppolitical_demo00}    
+
+
+	x = 20
+	y = 2
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+			add_ideas = gen_pppolitical_demo01
+			add_popularity = {	
+						ideology = democratic
+						popularity = 0.15
+					}			
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_demo02
+	icon = GFX_goal_generic_improve_relations
+	prerequisite = { focus = GEN_ppolitical_demo01}    
+
+
+	x = 20
+	y = 3
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+			set_rule = { can_send_volunteers = yes }			
+			add_stability = 0.1
+			add_popularity = {	
+						ideology = democratic
+						popularity = 0.15
+					}
+	
+			set_politics = { 	ruling_party = democratic     elections_allowed = yes }			
+            add_ideas = foreign_expeditions_focus			
+	
+	
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_demo_conscription0
+	icon = GFX_goal_generic_small_arms
+	prerequisite = { focus = GEN_ppolitical_demo02}    
+		available = {
+			threat > 0.5
+		}
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 18
+	y = 4
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+			add_ideas = gen_pppolitical_demo_conscription0
+			
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_demo_conscription1
+	icon = GFX_goal_generic_political_pressure
+	prerequisite = { focus = GEN_ppolitical_demo_conscription0}    
+		available = {
+			threat > 0.99
+		}
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 18
+	y = 5
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+	
+			swap_ideas = {
+				remove_idea = gen_pppolitical_demo_conscription0
+				add_idea = gen_pppolitical_demo_conscription1
+			}				
+			
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_demo_conscription2
+	icon = GFX_focus_generic_self_management
+	prerequisite = { focus = GEN_ppolitical_demo_conscription1}    
+		available = {
+			num_of_factories > 114	
+			democratic > 0.85			
+		}
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 18
+	y = 6
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+	
+			swap_ideas = {
+				remove_idea = gen_pppolitical_demo_conscription1
+				add_idea = gen_pppolitical_demo_conscription2
+			}				
+			
+	}
+}
+
+
+focus = { #
+	id = GEN_ppolitical_demo_conscription3
+	icon = GFX_goal_generic_air_doctrine
+	prerequisite = { focus = GEN_ppolitical_demo_conscription2}    
+		available = {
+			num_of_factories > 250	
+			democratic > 0.95			
+		}
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 18
+	y = 7
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+	
+			swap_ideas = {
+				remove_idea = gen_pppolitical_demo_conscription2
+				add_idea = gen_pppolitical_demo_conscription3
+			}				
+			
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_demo_industry0
+	icon = GFX_focus_generic_the_giant_wakes
+	prerequisite = { focus = GEN_ppolitical_demo02}    
+
+
+	x = 20
+	y = 4
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+		random_owned_state = {
+            add_extra_state_shared_building_slots = 2				
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}		
+		}			
+			add_stability = 0.05						
+			add_manpower = 2000
+		add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = industry
+			}				
+						
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_demo_industry1
+	icon = GFX_focus_research
+	prerequisite = { focus = GEN_ppolitical_demo_industry0}    
+
+
+	x = 20
+	y = 5
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+			add_manpower = 4000
+
+			if = { limit = { amount_research_slots < 5 } add_research_slot = 1 }
+			add_ideas = GEN_pppolitical_scientistheaven 
+			
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_demo_war0
+	icon = GFX_goal_generic_occupy_states_ongoing_war
+	prerequisite = { focus = GEN_ppolitical_demo02}    
+
+	available = {
+			num_of_factories > 30				
+		}
+		
+	x = 23
+	y = 4
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+
+		set_rule = {  
+		
+			can_declare_war_on_same_ideology = yes
+			can_only_justify_war_on_threat_country = no		
+            can_send_volunteers = yes		
+		
+		}
+
+		
+        add_ideas = GEN_pppolitical_demo_war0
+			
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_demo_warjap
+	icon = GFX_focus_attack_japan
+	prerequisite = { focus = GEN_ppolitical_demo_war0}    
+
+
+	x = 22
+	y = 5
+	cost = 2
+	
+	ai_will_do = {
+		factor = 25
+	}
+	
+
+		available = {
+			AND = {
+			    has_government = democratic
+                    JAP = {
+					exists = yes
+					has_offensive_war = yes
+					NOT = { is_subject = yes }
+					NOT = { is_in_faction_with = ROOT }
+					NOT = { has_government = democratic } 
+				}				
+			}
+		}		
+	available_if_capitulated = yes
+
+	completion_reward = {				
+
+			create_wargoal = {
+				type = topple_government
+				target = JAP
+			} 			
+				add_political_power = 20		
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_demo_warsov
+	icon = GFX_focus_attack_soviet
+	prerequisite = { focus = GEN_ppolitical_demo_war0}    
+
+
+	x = 23
+	y = 6
+	cost = 2
+	
+	ai_will_do = {
+		factor = 25
+	}
+		available = {
+			AND = {
+			    has_government = democratic
+                    SOV = {
+					exists = yes
+					has_offensive_war = yes
+					NOT = { is_subject = yes }
+					NOT = { is_in_faction_with = ROOT }
+					NOT = { has_government = democratic } 
+				}				
+			}
+		}		
+	available_if_capitulated = yes
+
+	completion_reward = {				
+
+			create_wargoal = {
+				type = topple_government
+				target = SOV
+			} 			
+				add_political_power = 20		
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_demo_warger
+	icon = GFX_focus_attack_germany
+	prerequisite = { focus = GEN_ppolitical_demo_war0}    
+
+
+	x = 24
+	y = 5
+	cost = 2
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+		available = {
+			AND = {
+			    has_government = democratic	
+                    GER = {
+					exists = yes
+					has_offensive_war = yes
+					NOT = { is_subject = yes }
+					NOT = { is_in_faction_with = ROOT }
+					NOT = { has_government = democratic } 
+				}				
+			}
+		}		
+	available_if_capitulated = yes
+
+	completion_reward = {				
+
+			create_wargoal = {
+				type = topple_government
+				target = GER
+			} 			
+				add_political_power = 20		
+	}
+	
+}
+##################GFX_goal_generic_propaganda
+
+
+focus = { #
+	id = GEN_ppolitical_nationalism00
+	icon = GFX_goal_generic_propaganda
+	prerequisite = { focus = GEN_ppolitical_focus00}    
+
+	mutually_exclusive = { focus = GEN_ppolitical_demo00 }	
+	mutually_exclusive = { focus = GEN_ppolitical_fascism00 }	
+	mutually_exclusive = { focus = GEN_ppolitical_communism00 }	
+
+        available = {
+			has_civil_war = no		
+			}
+			
+	x = 26
+	y = 1
+	cost = 10
+	
+	ai_will_do = {
+		factor = 10
+			modifier = {
+				factor = 0
+					AND = {
+						is_historical_focus_on = yes
+						has_government = democratic
+					}
+			}
+			modifier = {
+				factor = 0
+					AND = {
+						is_historical_focus_on = yes
+						has_government = fascism
+					}
+			}
+			modifier = {
+				factor = 0
+					AND = {
+						is_historical_focus_on = yes
+						has_government = communism
+					}
+			}
+			modifier = {
+				factor = 120
+					AND = {
+						is_historical_focus_on = no
+			            num_of_controlled_states < 3
+					}
+			}			
+	}
+
+	available_if_capitulated = yes
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+		
+	completion_reward = {				
+        add_ideas = neutrality_idea	 		
+        add_timed_idea = { idea = neutrality_influencezzz  days = 730 }	
+			add_popularity = {	
+						ideology = neutrality
+						popularity = 0.05
+					}		
+		add_political_power = 10			
+
+			
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_nationalism01
+	icon = GFX_goal_generic_national_unity
+	prerequisite = { focus = GEN_ppolitical_nationalism00}    
+
+
+	x = 26
+	y = 2
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+			add_political_power = 150
+			add_popularity = {	
+						ideology = neutrality
+						popularity = 0.15
+					}			
+	}
+	
+			
+	
+}
+
+focus = { #
+	id = GEN_ppolitical_nationalism02
+	icon = GFX_goal_molotov_ribbentrop_pact
+	prerequisite = { focus = GEN_ppolitical_nationalism01}    
+
+
+	x = 26
+	y = 3
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+			add_political_power = 150			
+			add_stability = 0.05
+			add_popularity = {	
+						ideology = neutrality
+						popularity = 0.15
+					}
+	
+			set_politics = { 	ruling_party = neutrality    elections_allowed = no }			
+            add_ideas = GEN_pppolitical_nationalism02			
+	}
+	
+			
+	}
+
+focus = { #
+	id = GEN_ppolitical_fascism00
+	icon = GFX_focus_generic_strike_at_democracy1
+	prerequisite = { focus = GEN_ppolitical_focus00}    
+	mutually_exclusive = { focus = GEN_ppolitical_nationalism00 }	
+	mutually_exclusive = { focus = GEN_ppolitical_demo00 }	
+	mutually_exclusive = { focus = GEN_ppolitical_communism00 }	
+     available = {
+			has_civil_war = no		
+			}
+			
+	x = 30
+	y = 1
+	cost = 10
+	
+	ai_will_do = {
+		factor = 35
+			modifier = {
+				factor = 0
+					AND = {
+						is_historical_focus_on = yes
+						has_government = democratic
+					}
+			}
+			modifier = {
+				factor = 0
+					AND = {
+						is_historical_focus_on = yes
+						has_government = communism
+					}
+			}
+			modifier = {
+				factor = 0
+					AND = {
+						is_historical_focus_on = yes
+						has_government = neutrality
+					}
+			}
+	}
+
+	available_if_capitulated = yes
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		
+	completion_reward = {				
+				
+        add_timed_idea = { idea = fascist_influencezzz  days = 730 }
+			add_popularity = {	
+						ideology = fascism
+						popularity = 0.05
+					}		
+		add_political_power = 20			
+
+			
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_fascism01
+	icon = GFX_goal_generic_position_armies
+	prerequisite = { focus = GEN_ppolitical_fascism00}    
+
+
+	x = 30
+	y = 2
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+			add_stability = 0.05	
+			add_political_power = 250
+			add_popularity = {	
+						ideology = fascism
+						popularity = 0.15
+					}			
+	}
+	
+			
+	
+}
+
+
+focus = { #
+	id = GEN_ppolitical_fascism02
+	icon = GFX_goal_support_fascism
+	prerequisite = { focus = GEN_ppolitical_fascism01}    
+
+
+	x = 30
+	y = 3
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+			add_political_power = 250			
+			add_stability = 0.10
+			add_popularity = {	
+						ideology = fascism
+						popularity = 0.15
+					}
+	
+			set_politics = { 	ruling_party = fascism    elections_allowed = no }			
+            add_ideas = GEN_pppolitical_fascism02			
+	}
+	
+			
+	}
+focus = { #
+	id = GEN_ppolitical_nationalismindustry
+	icon = GFX_goal_generic_construction
+	prerequisite = { focus = GEN_ppolitical_nationalism02 focus = GEN_ppolitical_fascism02}    
+
+
+	x = 26
+	y = 4
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+		random_owned_state = {
+            add_extra_state_shared_building_slots = 1				
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}		
+		}			
+		random_owned_state = {
+            add_extra_state_shared_building_slots = 2				
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}		
+		}
+		add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = Industry
+			}			
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_nationalismlaw
+	icon = GFX_goal_generic_propaganda
+	prerequisite = { focus = GEN_ppolitical_nationalism02 focus = GEN_ppolitical_fascism02}   
+
+
+	x = 26
+	y = 5
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+            add_ideas = GEN_pppolitical_nationalismlaw		
+			
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_nationalismlaw1
+	icon = GFX_focus_research2
+	prerequisite = { focus = GEN_ppolitical_nationalism02 focus = GEN_ppolitical_fascism02}      
+
+
+	x = 30
+	y = 5
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+			if = { limit = { amount_research_slots < 5 } add_research_slot = 1 }	
+			
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_nationalismwar
+	icon = GFX_goal_generic_small_arms
+	prerequisite = { focus = GEN_ppolitical_nationalism02 focus = GEN_ppolitical_fascism02}   
+	available = {
+			num_of_factories > 30				
+		}
+		
+
+	x = 30
+	y = 4
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+            add_ideas = GEN_pppolitical_nationalismwar	
+			add_war_support = 0.2	
+			add_manpower = 2000			
+			
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_nationalismterexp1
+	icon = GFX_focus_eng_special_air_service
+	prerequisite = { focus = GEN_ppolitical_nationalism02 focus = GEN_ppolitical_fascism02}   
+		available = {
+			num_of_controlled_states > 20
+		
+		}
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 26
+	y = 6
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+			add_offsite_building = { type = arms_factory level = 4 }
+			add_political_power = 150
+
+			
+	}
+}
+
+
+focus = { #
+	id = GEN_ppolitical_nationalismterexp2
+	icon = GFX_focus_eng_special_air_service
+	prerequisite = { focus = GEN_ppolitical_nationalism02 focus = GEN_ppolitical_fascism02}     
+		available = {
+			num_of_controlled_states > 30
+	
+		}
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 30
+	y = 6
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+			add_offsite_building = { type = arms_factory level = 5 }
+			add_political_power = 250
+
+		
+			
+	}
+}
+
+
+
+##################GFX_goal_generic_propaganda
+
+
+focus = { #
+	id = GEN_ppolitical_communism00
+	icon = GFX_focus_eng_concessions_to_the_trade_unions
+	prerequisite = { focus = GEN_ppolitical_focus00}    
+	mutually_exclusive = { focus = GEN_ppolitical_nationalism00 }	
+	mutually_exclusive = { focus = GEN_ppolitical_demo00 }	
+	mutually_exclusive = { focus = GEN_ppolitical_fascism00 }
+     available = {
+			has_civil_war = no		
+			}
+			
+	x = 34
+	y = 1
+	cost = 10
+	
+	ai_will_do = {
+		factor = 35
+			modifier = {
+				factor = 0
+					AND = {
+						is_historical_focus_on = yes
+						has_government = democratic
+					}
+			}
+			modifier = {
+				factor = 0
+					AND = {
+						is_historical_focus_on = yes
+						has_government = fascism
+					}
+			}
+			modifier = {
+				factor = 0
+					AND = {
+						is_historical_focus_on = yes
+						has_government = neutrality
+					}
+			}
+	}
+
+	available_if_capitulated = yes
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+		
+		
+	completion_reward = {				
+        add_timed_idea = { idea = communist_influencezzz  days = 730 }		
+			add_popularity = {	
+						ideology = communism
+						popularity = 0.05
+					}		
+			
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_communism01
+	icon = GFX_goal_tfv_burn_the_royal_portraits
+	prerequisite = { focus = GEN_ppolitical_communism00}    
+
+
+	x = 34
+	y = 2
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+			add_stability = -0.05			
+			add_political_power = -100
+			add_popularity = {	
+						ideology = communism
+						popularity = 0.15
+					}				
+			
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_communism02
+	icon = GFX_focus_eng_liberate_the_home_of_marx
+	prerequisite = { focus = GEN_ppolitical_communism01}    
+
+
+	x = 34
+	y = 3
+	cost = 10
+	
+	ai_will_do = {
+		factor = 15
+
+			}	
+	
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+				add_stability = -0.20	
+			    add_named_threat = { threat = 2.5 name = "Communist Aggresion" }				
+			add_popularity = {	
+						ideology = communism
+						popularity = 0.15
+					}
+	
+			set_politics = { 	ruling_party = communism    elections_allowed = no }	
+            add_ideas = GEN_pppolitical_communism02	
+	
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_communismconscription
+	icon = GFX_focus_CZE_german_puppet
+	prerequisite = { focus = GEN_ppolitical_communism02}    
+
+
+	x = 32
+	y = 4
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+            add_ideas = GEN_pppolitical_communismconscription
+			add_stability = -0.15
+            add_ideas = extensive_conscription
+			
+			
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_communismindustry
+	icon = GFX_goal_generic_soviet_construction
+	prerequisite = { focus = GEN_ppolitical_communism02}    
+
+
+	x = 34
+	y = 4
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+		random_owned_state = {
+            add_extra_state_shared_building_slots = 2				
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}		
+		}	
+		random_owned_state = {
+            add_extra_state_shared_building_slots = 2				
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}		
+		}
+		add_offsite_building = { type = arms_factory level = 4 }
+		add_stability = -0.15
+	    add_ideas = war_economy	
+		add_tech_bonus = {
+				bonus = 0.8
+				uses = 1
+				category = Industry
+			}		
+		
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_communismsearch
+	icon = GFX_focus_generic_socialist_science
+	prerequisite = { focus = GEN_ppolitical_communism02}    
+
+
+	x = 38
+	y = 4
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+		    add_stability = -0.02
+			if = { limit = { amount_research_slots < 5 } add_research_slot = 1 }		
+		
+		
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_communismfalsepromise
+	icon = GFX_goal_generic_forceful_treaty
+	prerequisite = { focus = GEN_ppolitical_communism02}    
+
+		available = {
+			has_stability < 0.5
+		}
+	x = 40
+	y = 4
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+		add_stability = 0.80
+			swap_ideas = {
+				remove_idea = GEN_pppolitical_communism02
+				add_idea = GEN_pppolitical_communism02_p1
+			}		
+		
+		
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_communismfalsepromise_2
+	icon = GFX_focus_CZE_german_puppet
+	prerequisite = { focus = GEN_ppolitical_communismfalsepromise}    
+		available = {
+			has_stability < 0.5
+		}
+
+	x = 40
+	y = 5
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+		add_stability = 0.60
+			swap_ideas = {
+				remove_idea = GEN_pppolitical_communism02_p1
+				add_idea = GEN_pppolitical_communism02_p2
+			}		
+		
+		
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_communismwar
+	icon = GFX_focus_eng_crush_the_dream
+	prerequisite = { focus = GEN_ppolitical_communism02}    
+	available = {
+			num_of_factories > 30				
+		}
+
+	x = 36
+	y = 4
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {				
+	    add_ideas = GEN_pppolitical_communismwar			
+			
+	}
+}
+
+
+
+focus = { #
+	id = GEN_ppolitical_communismwaruk
+	icon = GFX_focus_attack_britain
+	prerequisite = { focus = GEN_ppolitical_communismwar}    
+
+
+	x = 34
+	y = 5
+	cost = 3
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+		available = {
+			AND = {
+			    has_government = communism	
+                    ENG = {
+					exists = yes
+					NOT = { is_subject = yes }
+					NOT = { is_in_faction_with = ROOT }
+					NOT = { has_government = communism } 
+				}				
+			}
+		}
+		
+	completion_reward = {				
+
+			create_wargoal = {
+				type = liberate_wargoal
+				target = ENG
+			} 			
+				add_political_power = 25
+		       add_stability = 0.05			
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_communismwarger
+	icon = GFX_focus_attack_germany
+	prerequisite = { focus = GEN_ppolitical_communismwar}    
+
+
+	x = 36
+	y = 5
+	cost = 3
+	
+	ai_will_do = {
+		factor = 25
+	}
+		available = {
+			AND = {
+			    has_government = communism	
+                    GER = {
+					exists = yes
+					NOT = { is_subject = yes }
+					NOT = { is_in_faction_with = ROOT }
+					NOT = { has_government = communism } 
+				}				
+			}
+		}
+		
+	available_if_capitulated = yes
+
+	completion_reward = {				
+
+			create_wargoal = {
+				type = liberate_wargoal
+				target = GER
+			} 			
+				add_political_power = 25
+		       add_stability = 0.05					
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_communismwarjap
+	icon = GFX_focus_attack_japan
+	prerequisite = { focus = GEN_ppolitical_communismwar}    
+
+	x = 38
+	y = 5
+	cost = 3
+	
+	ai_will_do = {
+		factor = 25
+	}
+		available = {
+			AND = {
+			    has_government = communism	
+                    JAP = {
+					exists = yes
+					NOT = { is_subject = yes }
+					NOT = { is_in_faction_with = ROOT }
+					NOT = { has_government = communism } 
+				}				
+			}
+		}
+	available_if_capitulated = yes
+
+	completion_reward = {				
+
+			create_wargoal = {
+				type = liberate_wargoal
+				target = JAP
+			} 			
+				add_political_power = 25
+		       add_stability = 0.05					
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_communismwarchi
+	icon = GFX_focus_attack_china
+	prerequisite = { focus = GEN_ppolitical_communismwar}    
+
+
+	x = 32
+	y = 5
+	cost = 3
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+		available = {
+			AND = {
+			    has_government = communism	
+                    CHI = {
+					exists = yes
+					NOT = { is_subject = yes }
+					NOT = { is_in_faction_with = ROOT }
+					NOT = { has_government = communism } 
+				}				
+			}
+		}
+	available_if_capitulated = yes
+
+	completion_reward = {				
+
+			create_wargoal = {
+				type = Annex_everything
+				target = CHI
+			} 		
+				add_political_power = 25
+		       add_stability = 0.05					
+	}
+			
+	}
+	
+	
+focus = { #
+	id = GEN_ppolitical_communismprogress0
+	icon = GFX_goal_support_fourth_int
+	prerequisite = { focus = GEN_ppolitical_communismwarchi  focus = GEN_ppolitical_communismwarjap focus = GEN_ppolitical_communismwarger focus = GEN_ppolitical_communismwaruk   }    
+	prerequisite = { focus = GEN_ppolitical_communismfalsepromise_2}   
+
+	x = 38
+	y = 6
+	cost = 3
+	available = {
+			date > 1943.1.1
+			#num_of_factories > 114			
+		}	
+	ai_will_do = {
+		factor = 25
+	}
+
+		available = {
+			AND = {
+			    has_government = communism	
+                   OR ={ 
+				      JAP = {
+				      exists = yes
+				      has_government = communism 
+				}
+				      GER = {
+				      exists = yes
+				      has_government = communism 
+				}
+				      ITA = {
+				      exists = yes
+				      has_government = communism 
+				}
+				      ENG = {
+				      exists = yes
+				      has_government = communism 
+				}
+				      FRA = {
+				      exists = yes
+				      has_government = communism 
+				}
+				      USA = {
+				      exists = yes
+				      has_government = communism 
+				}				
+              }				
+			}
+		}
+	available_if_capitulated = yes
+
+	completion_reward = {				
+
+			swap_ideas = {
+				remove_idea = GEN_pppolitical_communism02_p2
+				add_idea = GEN_pppolitical_communism02_p3
+			}	
+		
+				add_political_power = 150		
+	}
+			
+	}	
+	
+focus = { #
+	id = GEN_ppolitical_communismprogress1
+	icon = GFX_focus_generic_join_comintern
+	prerequisite = { focus = GEN_ppolitical_communismprogress0}    
+
+
+	x = 38
+	y = 7
+	cost = 3
+	
+	ai_will_do = {
+		factor = 25
+	}
+	available = {
+			date > 1947.1.1
+			num_of_factories > 250			
+		}
+		available = {
+			AND = {
+			    has_government = communism	
+                   AND ={
+                 OR = {				   
+				      JAP = {
+				      exists = yes
+				      has_government = communism 
+				}
+				      GER = {
+				      exists = yes
+				      has_government = communism 
+				}
+				      ITA = {
+				      exists = yes
+				      has_government = communism 
+				}}
+				OR = {
+				      ENG = {
+				      exists = yes
+				      has_government = communism 
+				}
+				      FRA = {
+				      exists = yes
+				      has_government = communism 
+				}
+				      USA = {
+				      exists = yes
+				      has_government = communism 
+				}}				
+              }				
+			}
+		}
+	available_if_capitulated = yes
+
+	completion_reward = {				
+
+			swap_ideas = {
+				remove_idea = GEN_pppolitical_communism02_p3
+				add_idea = GEN_pppolitical_communism02_p4
+			}	
+		
+				add_political_power = 1000		
+	}
+			
+	}	
+	
+#######################################################################################################################################################################################
+#################################################################################################################################################################
+#############################################################################################################################################################################################
+#######################################################################################################################################################################################
+########################################################################################################################################################################################################################################################################################################################################################
+########################################################################################################################################################################################################################################################################################################################################################
+########################################################################################################################################################################################################################################################################################################################################################
+########################################################################################################################################################################################################################################################################################################################################################
+########################################################################################################################################################################################################################################################################################################################################################
+#################################################################################################################################################################	
+	
+	
+
+focus = { #
+	id = GEN_ppolitical_internationalsupport
+	icon = GFX_focus_hol_the_fourth_ally
+	prerequisite = { focus = GEN_ppolitical_demo02 focus = GEN_ppolitical_fascism02  focus = GEN_ppolitical_nationalism02 focus = GEN_ppolitical_communism02  }     
+		available = {
+
+
+
+	
+		}
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 28
+	y = 7
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+			add_political_power = 150
+			set_rule = { can_create_factions = yes }
+			
+	}
+}	
+	
+
+focus = { #
+	id = GEN_ppolitical_internationalsupportusa
+	icon = GFX_focus_chi_mission_to_the_us
+	prerequisite = { focus = GEN_ppolitical_internationalsupport }     
+		available = {
+	USA = {
+		exists = yes
+		NOT = { is_subject = yes }}
+		
+		OR = {	
+			
+			
+			    AND = {
+			        has_government = communism	
+                    USA = {has_government = communism } }
+			    AND = {
+			        has_government = neutrality
+                    USA = {has_government = neutrality } }
+			    AND = {
+			        has_government = democratic
+                    USA = {has_government = democratic } }
+			    AND = {
+			        has_government = fascism
+                    USA = {has_government = fascism } }
+		    }						
+	    }
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 18
+	y = 8
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		USA = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = GEN_mission_to_us
+			}
+			
+			add_ai_strategy = {
+				type = alliance
+				id = "ROOT"
+				value = 100
+			}
+			add_ai_strategy = {
+				type = protect
+				id = "ROOT"
+				value = 100
+			}
+			add_ai_strategy = {
+				type = send_volunteers_desire
+				id = "ROOT"
+				value = 100
+			}
+			add_ai_strategy = {
+				type = support
+				id = "ROOT"
+				value = 100
+			}
+		}
+
+			
+	}
+}	
+
+focus = { #
+	id = GEN_ppolitical_internationalsupportusatech
+	icon = GFX_goal_generic_radar
+	prerequisite = { focus = GEN_ppolitical_internationalsupportusa }     
+		available = {
+	USA = {
+		exists = yes
+		NOT = { is_subject = yes }}
+								
+	    }
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 16
+	y = 9
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+				
+				add_tech_bonus = {
+
+					bonus = 1.0
+					uses = 1
+					ahead_reduction = 1.0				
+					category = radar_tech
+				}
+			
+	}
+}
+
+
+focus = { #
+	id = GEN_ppolitical_internationalsupportusatech1
+	icon = GFX_goal_generic_defence
+	prerequisite = { focus = GEN_ppolitical_internationalsupportusatech }     
+		available = {
+	USA = {
+		exists = yes
+		NOT = { is_subject = yes }}
+								
+	    }
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 15
+	y = 10
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+				
+				add_tech_bonus = {
+
+					bonus = 1.0
+					uses = 1
+					ahead_reduction = 1.0
+					category = encryption_tech
+				}
+			
+	}
+}
+
+
+focus = { #
+	id = GEN_ppolitical_internationalsupportusatech2
+	icon = GFX_goal_generic_production
+	prerequisite = { focus = GEN_ppolitical_internationalsupportusatech1 }     
+		available = {
+	USA = {
+		exists = yes
+		NOT = { is_subject = yes }}
+								
+	    }
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 14
+	y = 11
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+				
+				add_tech_bonus = {
+
+					bonus = 1.0
+					uses = 1
+					ahead_reduction = 1.2
+					category = computing_tech
+				}
+			
+	}
+}
+
+
+focus = { #
+	id = GEN_ppolitical_internationalsupportusaequip
+	icon = GFX_goal_generic_small_arms
+	prerequisite = { focus = GEN_ppolitical_internationalsupportusa }     
+		available = {
+	USA = {
+		exists = yes
+		NOT = { is_subject = yes }}
+								
+	    }
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 18
+	y = 9
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+				
+          add_ideas = GEN_pppolitical_internationalsupportusaequip0
+			add_tech_bonus = {
+
+			bonus = 0.3
+			uses = 1
+			category = support_tech
+		}
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_internationalsupportusaequip1
+	icon = GFX_goal_generic_army_tanks
+	prerequisite = { focus = GEN_ppolitical_internationalsupportusaequip }     
+		available = {
+	USA = {
+		exists = yes
+		NOT = { is_subject = yes }}
+								
+	    }
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 17
+	y = 10
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+				
+			swap_ideas = {
+				remove_idea = GEN_pppolitical_internationalsupportusaequip0
+				add_idea = GEN_pppolitical_internationalsupportusaequip1
+			}	
+			
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_internationalsupportusaequip2
+	icon = GFX_goal_generic_army_artillery
+	prerequisite = { focus = GEN_ppolitical_internationalsupportusaequip1 }     
+		available = {
+	USA = {
+		exists = yes
+		NOT = { is_subject = yes }}
+								
+	    }
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 16
+	y = 11
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+				
+			swap_ideas = {
+				remove_idea = GEN_pppolitical_internationalsupportusaequip1
+				add_idea = GEN_pppolitical_internationalsupportusaequip2
+			}	
+			add_tech_bonus = {
+
+			bonus = 0.3
+			uses = 1
+			category = artillery
+		}
+			
+			
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_internationalsupportusaspplanning
+	icon = GFX_goal_generic_position_armies
+	prerequisite = { focus = GEN_ppolitical_internationalsupportusa }     
+		available = {
+		
+	is_in_faction_with = USA		
+	USA = {
+		exists = yes
+		NOT = { is_subject = yes }}
+
+		
+	    }
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 21
+	y = 9
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+				
+
+				add_ideas = GEN_pppolitical_internationalsupportusaspplanning
+	
+			
+	}
+}
+
+	focus = {
+		id = GUSA_war_plan_gold
+		icon = GFX_focus_attack_france
+		x = 19
+		y = 10
+		prerequisite = { focus = GEN_ppolitical_internationalsupportusaspplanning }
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+             is_in_faction_with = USA
+			 	USA = {
+		exists = yes
+		NOT = { is_subject = yes }
+		has_war_with = FRA
+		       }
+		}
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			unlock_decision_tooltip = { decision = USA_execute_war_plan_gold show_effect_tooltip = yes show_modifiers = yes }
+		}
+	}
+
+	focus = {
+		id = GUSA_war_plan_silver
+		icon = GFX_focus_attack_italy
+		x = 21
+		y = 10
+		prerequisite = { focus = GEN_ppolitical_internationalsupportusaspplanning }
+
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+	
+		available = {
+             is_in_faction_with = USA
+			 	USA = {
+		exists = yes
+		NOT = { is_subject = yes }
+		has_war_with = ITA
+		       }
+		}
+			
+		bypass = {
+	
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			unlock_decision_tooltip = { decision = USA_execute_war_plan_silver show_effect_tooltip = yes show_modifiers = yes }
+		}
+	}
+	
+	focus = {
+		id = GUSA_war_plan_black
+		icon = GFX_focus_attack_germany
+		prerequisite = { focus = GEN_ppolitical_internationalsupportusaspplanning }
+		available = {
+             is_in_faction_with = USA
+			 	USA = {
+		exists = yes
+		NOT = { is_subject = yes }
+		has_war_with = GER
+		       }
+		}
+
+		continue_if_invalid = yes
+		available_if_capitulated = yes
+
+		x = 20
+		y = 11
+
+		cost = 10
+		ai_will_do = {
+			factor = 1
+		}
+		
+		completion_reward = {
+			GER = {
+				add_opinion_modifier = { target = ROOT modifier = war_plan_black }
+			}
+			unlock_decision_tooltip = { decision = USA_execute_war_plan_black show_effect_tooltip = yes show_modifiers = yes }
+		}
+	}	
+
+	focus = {
+		id = GUSA_war_plan_white
+		icon = GFX_focus_attack_soviet
+		prerequisite = { focus = GEN_ppolitical_internationalsupportusaspplanning }
+		available = {
+             is_in_faction_with = USA
+			 	USA = {
+		exists = yes
+		NOT = { is_subject = yes }
+		has_war_with = SOV
+		       }
+		}
+		x = 22
+		y = 11
+
+		cost = 10
+		#ai_will_do = {
+		#	factor = 1
+		#}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			SOV = {
+				add_opinion_modifier = { target = ROOT modifier = war_plan_white }
+			}
+			unlock_decision_tooltip = { decision = USA_execute_war_plan_white show_effect_tooltip = yes show_modifiers = yes }
+		}
+	}
+
+	focus = {
+		id = GUSA_war_plan_red
+		
+		icon = GFX_focus_attack_britain
+		prerequisite = { focus = GEN_ppolitical_internationalsupportusaspplanning }
+		available = {
+             is_in_faction_with = USA
+			 	USA = {
+		exists = yes
+		NOT = { is_subject = yes }
+		has_war_with = ENG
+		       }
+		}
+		x = 23
+		y = 10
+
+		cost = 10
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			ENG = {
+				add_opinion_modifier = { target = ROOT modifier = war_plan_red }
+			}
+			unlock_decision_tooltip = { decision = USA_execute_war_plan_red show_effect_tooltip = yes show_modifiers = yes }
+		}
+	}
+
+	focus = {
+		id = GUSA_war_plan_orange
+		
+		icon = GFX_focus_attack_japan
+		prerequisite = { focus = GEN_ppolitical_internationalsupportusaspplanning }
+		available = {
+             is_in_faction_with = USA
+			 	USA = {
+		exists = yes
+		NOT = { is_subject = yes }
+		has_war_with = JAP
+		       }
+		}
+		continue_if_invalid = yes
+		available_if_capitulated = yes
+
+		x = 18
+		y = 11
+
+
+		cost = 10
+		ai_will_do = {
+			factor = 1
+		}
+
+
+		completion_reward = {
+			JAP = {
+				add_opinion_modifier = { target = ROOT modifier = war_plan_orange }
+			}
+			unlock_decision_tooltip = { decision = USA_execute_war_plan_orange show_effect_tooltip = yes show_modifiers = yes }
+		}
+	}
+	
+
+focus = { #
+	id = GEN_ppolitical_internationalsupportuk
+	icon = GFX_focus_chi_british_cooperation
+	prerequisite = { focus = GEN_ppolitical_internationalsupport }     
+		available = {
+	ENG = {
+		exists = yes
+		NOT = { is_subject = yes }}
+		
+		OR = {	
+			
+			
+			    AND = {
+			        has_government = communism	
+                    ENG = {has_government = communism } }
+			    AND = {
+			        has_government = neutrality
+                    ENG = {has_government = neutrality } }
+			    AND = {
+			        has_government = democratic
+                    ENG = {has_government = democratic } }
+			    AND = {
+			        has_government = fascism
+                    ENG = {has_government = fascism } }
+		    }						
+	    }
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 24
+	y = 8
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		ENG = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = GEN_mission_to_uk
+			}
+			add_ai_strategy = {
+				type = alliance
+				id = "ROOT"
+				value = 100
+			}
+			add_ai_strategy = {
+				type = protect
+				id = "ROOT"
+				value = 100
+			}
+			add_ai_strategy = {
+				type = send_volunteers_desire
+				id = "ROOT"
+				value = 100
+			}
+			add_ai_strategy = {
+				type = support
+				id = "ROOT"
+				value = 100
+			}
+		}
+
+			
+	}
+}	
+	
+
+	focus = {
+		id = Guk_destroyer_focus
+		prerequisite = { focus = GEN_ppolitical_internationalsupportuk focus = GEN_ppolitical_internationalsupportjap }
+		icon = GFX_focus_generic_destroyer
+		x = 24
+		y = 9
+
+		cost = 10
+		ai_will_do = {
+			factor = 10
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			navy_experience = 25			
+			add_tech_bonus = {
+
+				bonus = 1.0
+				uses = 1
+				category = dd_tech
+			}
+		}
+	}	
+	
+	focus = {
+		id = Guk_battleship_focus
+		prerequisite = { focus = Guk_destroyer_focus }
+
+		icon = GFX_goal_generic_navy_battleship
+		x = 24
+		y = 11
+
+		cost = 10
+		ai_will_do = {
+			factor = 10
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			navy_experience = 25
+			add_tech_bonus = {
+
+				bonus = 1.0
+				uses = 1
+				category = bb_tech
+			}
+		}
+	}	
+	
+	focus = {
+		id = Gbomber_command_focus
+		prerequisite = { focus = GEN_ppolitical_internationalsupportuk focus = GEN_ppolitical_internationalsupportjap }
+		icon = GFX_goal_generic_air_bomber
+		x = 26
+		y = 9
+
+		cost = 10
+		ai_will_do = {
+			factor = 10
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			air_experience = 25
+			add_tech_bonus = {
+				name = bomber_command_focus
+				bonus = 1.0
+				uses = 1
+				category = tactical_bomber
+			}
+		}
+	}
+
+
+	focus = {
+		id = Gfighter_command_focus
+		prerequisite = { focus = Gbomber_command_focus }
+		icon = GFX_goal_generic_air_fighter
+		x = 26
+		y = 10
+
+		cost = 10
+		ai_will_do = {
+			factor = 10
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			air_experience = 25
+			add_tech_bonus = {
+				name = fighter_command_focus
+				bonus = 1.0
+				uses = 1
+				category = light_fighter
+				category = cat_heavy_fighter
+			}
+		}
+	}
+
+	focus = { #
+	id = GEN_ppolitical_decryptiontechsup
+	icon = GFX_goal_generic_defence
+	prerequisite = { focus = Gfighter_command_focus }     
+		available = {
+
+	    }
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 26
+	y = 11
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+				
+				add_tech_bonus = {
+
+					bonus = 0.75
+					uses = 1
+					ahead_reduction = 0.5
+					category = decryption_tech
+				}
+			
+	}
+}
+
+
+	focus = {
+		id = Guk_amphibious_focus
+		prerequisite = { focus = GEN_ppolitical_internationalsupportuk focus = GEN_ppolitical_internationalsupportjap }
+		icon = GFX_goal_generic_amphibious_assault
+		x = 28
+		y = 9
+
+		cost = 10
+		ai_will_do = {
+			factor = 10
+		}
+
+		available_if_capitulated = yes	
+
+		completion_reward = {
+			navy_experience = 25			
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = marine_tech
+			}
+			add_tech_bonus = {
+				name = uk_amphibious_focus
+				bonus = 0.5
+				uses = 1
+				category = tp_tech
+			}
+		}
+	}
+
+
+	focus = {
+		id = GENG_advancedlanding
+		prerequisite = { focus = Guk_amphibious_focus }
+		icon = GFX_goal_generic_occupy_states_coastal
+		x = 28
+		y = 10
+
+		cost = 10
+		ai_will_do = {
+			factor = 10
+		}
+
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			navy_experience = 25
+           add_ideas = GGENG_advancedlanding
+
+
+
+		}
+	}
+	
+
+	focus = {
+		id = GENG_navaldoctrine
+		prerequisite = { focus = GENG_advancedlanding }
+		icon = GFX_goal_generic_navy_doctrines_tactics
+		x = 28
+		y = 11
+
+		cost = 10
+		ai_will_do = {
+			factor = 10
+		}
+
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			navy_experience = 25		
+			add_tech_bonus = {
+
+				bonus = 0.8
+				uses = 1
+				category = naval_doctrine
+			}
+
+
+
+		}
+	}
+	
+	
+focus = { #
+	id = GEN_ppolitical_internationalsupportjap
+	icon = GFX_focus_chi_collaboration_with_the_japanese
+	prerequisite = { focus = GEN_ppolitical_internationalsupport }     
+		available = {
+	JAP = {
+		exists = yes
+		NOT = { is_subject = yes }}
+		
+		OR = {	
+			
+			
+			    AND = {
+			        has_government = communism	
+                    JAP = {has_government = communism } }
+			    AND = {
+			        has_government = neutrality
+                    JAP = {has_government = neutrality } }
+			    AND = {
+			        has_government = democratic
+                    JAP = {has_government = democratic } }
+			    AND = {
+			        has_government = fascism
+                    JAP = {has_government = fascism } }
+		    }						
+	    }
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 28
+	y = 8
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		JAP = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = GEN_mission_to_japan
+			}
+			add_ai_strategy = {
+				type = alliance
+				id = "ROOT"
+				value = 100
+			}
+			add_ai_strategy = {
+				type = protect
+				id = "ROOT"
+				value = 100
+			}
+			add_ai_strategy = {
+				type = send_volunteers_desire
+				id = "ROOT"
+				value = 100
+			}
+			add_ai_strategy = {
+				type = support
+				id = "ROOT"
+				value = 100
+			}
+		}
+
+			
+	}
+}		
+	
+focus = { #
+	id = GEN_ppolitical_internationalsupportger
+	icon = GFX_focus_chi_mission_to_germany
+	prerequisite = { focus = GEN_ppolitical_internationalsupport }     
+		available = {
+	GER = {
+		exists = yes
+		NOT = { is_subject = yes }}
+		
+		OR = {	
+			
+			
+			    AND = {
+			        has_government = communism	
+                    GER = {has_government = communism } }
+			    AND = {
+			        has_government = neutrality
+                    GER = {has_government = neutrality } }
+			    AND = {
+			        has_government = democratic
+                    GER = {has_government = democratic } }
+			    AND = {
+			        has_government = fascism
+                    GER = {has_government = fascism } }
+		    }						
+	    }
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 32
+	y = 8
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		GER = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = GEN_mission_to_germany
+			}
+			add_ai_strategy = {
+				type = alliance
+				id = "ROOT"
+				value = 100
+			}
+			add_ai_strategy = {
+				type = protect
+				id = "ROOT"
+				value = 100
+			}
+			add_ai_strategy = {
+				type = send_volunteers_desire
+				id = "ROOT"
+				value = 100
+			}
+			add_ai_strategy = {
+				type = support
+				id = "ROOT"
+				value = 100
+			}
+		}
+		
+			
+	}
+}	
+
+	
+focus = { #
+	id = GEN_ppolitical_internationalsupportgertan
+	
+	icon = GFX_goal_generic_army_tanks
+	prerequisite = { focus = GEN_ppolitical_internationalsupportger }     
+
+		available = {
+               has_manpower > 12001						
+	    }	
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 32
+	y = 9
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+
+				set_technology = { gwtank = 1 }
+				add_equipment_to_stockpile = { type = light_tank_equipment_2 amount = 150 producer = GER }
+		        add_manpower = -1200
+			    GER = { add_manpower = 1200}
+	}
+}
+
+	
+focus = { #
+	id = GEN_ppolitical_internationalsupportgertan1
+	
+	icon = GFX_goal_generic_cavalry
+	prerequisite = { focus = GEN_ppolitical_internationalsupportgertan }     
+
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 32
+	y = 10
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+
+		add_tech_bonus = {
+			bonus = 1.0
+			uses = 1
+			category = armor
+		}
+		
+			
+	}
+}	
+	
+focus = { #
+	id = GEN_ppolitical_internationalsupportgertan2
+	
+	icon = GFX_goal_generic_army_doctrines
+	prerequisite = { focus = GEN_ppolitical_internationalsupportgertan1 }     
+
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 32
+	y = 11
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+
+		add_tech_bonus = {
+
+			bonus = 1.0
+			uses = 1
+			category = cat_mechanized_equipment
+		}
+		
+			
+	}
+}	
+
+focus = { #
+	id = GEN_ppolitical_internationalsupportgerserow
+	
+	icon = GFX_goal_generic_production
+	prerequisite = { focus = GEN_ppolitical_internationalsupportger }     
+
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 30
+	y = 9
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+
+	add_ideas = GEN_pppolitical_internationalsupportgerserow		
+		
+		
+			
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_internationalsupportgerserow_1
+	
+
+	icon = GFX_goal_generic_production2
+	prerequisite = { focus = GEN_ppolitical_internationalsupportgerserow }     
+
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 30
+	y = 11
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+			swap_ideas = {
+				remove_idea = GEN_pppolitical_internationalsupportgerserow
+				add_idea =  GEN_pppolitical_internationalsupportgerserow_1
+			}
+
+		
+		
+			
+	}
+}
+
+focus = { #
+	id = GEN_ppolitical_internationalsupportgerserow2
+	
+	icon = GFX_goal_generic_cavalry
+	prerequisite = { focus = GEN_ppolitical_internationalsupportger }     
+
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 34
+	y = 9
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+
+			add_tech_bonus = {
+
+			bonus = 0.5
+			uses = 3
+			category = cat_mobile_warfare
+		}
+		
+		
+			
+	}
+}
+focus = { #
+	id = GEN_ppolitical_internationalsupportgerserow2_1
+	
+	icon = GFX_goal_generic_army_doctrines
+	prerequisite = { focus = GEN_ppolitical_internationalsupportgerserow2 }     
+
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 34
+	y = 11
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+
+	
+		
+		add_ideas = GEN_pppolitical_internationalsupportgerserow2_1
+			
+	}
+}
+
+	
+	
+focus = { #
+	id = GEN_ppolitical_internationalsupportchi
+	icon = GFX_focus_chi_cooperation_with_the_nationalists
+	prerequisite = { focus = GEN_ppolitical_internationalsupport }     
+		available = {
+	CHI = {
+		exists = yes
+		NOT = { is_subject = yes }}
+		
+		OR = {	
+			
+			
+			    AND = {
+			        has_government = communism	
+                    CHI = {has_government = communism } }
+			    AND = {
+			        has_government = neutrality
+                    CHI = {has_government = neutrality } }
+			    AND = {
+			        has_government = democratic
+                    CHI = {has_government = democratic } }
+			    AND = {
+			        has_government = fascism
+                    CHI = {has_government = fascism } }
+		    }						
+	    }
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 38
+	y = 8
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		CHI = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = GEN_mission_to_chi
+			}
+			add_ai_strategy = {
+				type = alliance
+				id = "ROOT"
+				value = 100
+			}
+			add_ai_strategy = {
+				type = protect
+				id = "ROOT"
+				value = 100
+			}
+			add_ai_strategy = {
+				type = send_volunteers_desire
+				id = "ROOT"
+				value = 100
+			}
+			add_ai_strategy = {
+				type = support
+				id = "ROOT"
+				value = 100
+			}
+		}
+
+			
+	}
+}	
+
+
+
+	
+focus = { #
+	id = GEN_ppolitical_internationalsupportchileft0
+	icon = GFX_focus_secret_rearmament
+	prerequisite = { focus = GEN_ppolitical_internationalsupportchi }     
+		available = {
+	CHI = {
+		exists = yes
+		NOT = { is_subject = yes }}
+		
+						
+	    }
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 36
+	y = 9
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+              army_experience = 20
+              CHI = {army_experience = 20}
+			add_tech_bonus = {
+
+			bonus = 1.0
+			uses = 1
+			category = infantry_weapons
+		}
+			
+	}
+}
+
+	
+focus = { #
+	id = GEN_ppolitical_internationalsupportchileft1
+	icon = GFX_goal_generic_axis_build_infantry
+	prerequisite = { focus = GEN_ppolitical_internationalsupportchileft0 }     
+		available = {
+	CHI = {
+		exists = yes
+		NOT = { is_subject = yes }}
+		surrender_progress < 0.3
+		has_war_support > 0.2					
+	    }
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 36
+	y = 10
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+              army_experience = 20
+              add_ideas = GEN_pppolitical_internationalsupportchileft1
+              CHI = {army_experience = 20}
+			
+	}
+}
+
+	
+focus = { #
+	id = GEN_ppolitical_internationalsupportchileft2
+	icon = GFX_focus_chi_army_reform
+	
+	prerequisite = { focus = GEN_ppolitical_internationalsupportchileft1 }     
+		available = {
+	CHI = {
+		exists = yes
+		NOT = { is_subject = yes }}
+		surrender_progress < 0.3		
+		
+		has_war_support > 0.2					
+	    }
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 36
+	y = 11
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+              army_experience = 20
+              CHI = {army_experience = 20}			  
+			swap_ideas = {
+				remove_idea = GEN_pppolitical_internationalsupportchileft1
+				add_idea = GEN_pppolitical_internationalsupportchileft2
+			}	
+              
+			
+	}
+}
+
+	
+focus = { #
+	id = GEN_ppolitical_internationalsupportchimid0
+	icon = GFX_goal_generic_army_artillery2
+	prerequisite = { focus = GEN_ppolitical_internationalsupportchi }     
+		available = {
+	CHI = {
+		exists = yes
+		NOT = { is_subject = yes }}
+		surrender_progress < 0.3		
+		
+		has_war_support > 0.2	
+						
+	    }
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 38
+	y = 9
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+              army_experience = 20
+              CHI = {army_experience = 20}	              
+			add_tech_bonus = {
+
+			bonus = 1.0
+			uses = 1
+			category = artillery
+		}
+			
+	}
+}
+
+	
+focus = { #
+	id = GEN_ppolitical_internationalsupportchimid1
+	icon = GFX_goal_generic_production
+	prerequisite = { focus = GEN_ppolitical_internationalsupportchimid0 }     
+		available = {
+	CHI = {
+		exists = yes
+		NOT = { is_subject = yes }}
+						
+	    }
+		
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 38
+	y = 10
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+	
+            CHI = {army_experience = 20}	                
+	        army_experience = 20			    
+			add_equipment_to_stockpile = { type = infantry_equipment amount = -1200 }					  
+		    add_manpower = 1997
+            CHI  = {			
+				add_equipment_to_stockpile = { type = infantry_equipment amount = 1200 }
+			    add_manpower = -2000         
+				}
+		}
+			
+	}
+
+focus = { #
+	id = GEN_ppolitical_internationalsupportchimid2
+	icon = GFX_goal_generic_production2
+	prerequisite = { focus = GEN_ppolitical_internationalsupportchimid1 }     
+		available = {
+	CHI = {
+		exists = yes
+		NOT = { is_subject = yes }}
+		surrender_progress < 0.3		
+		
+		has_war_support > 0.2							
+	    }
+				
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 38
+	y = 11
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+              CHI = {army_experience = 20}		             
+				 army_experience = 20
+              add_ideas = GEN_pppolitical_internationalsupportchimid2
+		}
+			
+	}
+
+focus = { #
+	id = GEN_ppolitical_internationalsupportchirig0
+	icon = GFX_goal_generic_army_doctrines
+	prerequisite = { focus = GEN_ppolitical_internationalsupportchi }     
+		available = {
+	CHI = {
+		exists = yes
+		NOT = { is_subject = yes }}
+		
+						
+	    }
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 40
+	y = 9
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+             army_experience = 20
+              CHI = {army_experience = 20}	              
+			add_tech_bonus = {
+
+			bonus = 0.8
+			uses = 1
+			category = land_doctrine
+		}
+			
+	}
+}
+
+
+
+
+
+focus = { #
+	id = GEN_ppolitical_internationalsupportchirig1
+	icon = GFX_focus_usa_tank_destroyer_doctrine
+	prerequisite = { focus = GEN_ppolitical_internationalsupportchirig0 } 
+	prerequisite = { focus = GEN_ppolitical_internationalsupportchimid1 }      
+		available = {
+	CHI = {
+		exists = yes
+		NOT = { is_subject = yes }}
+		surrender_progress < 0.3		
+		
+		has_war_support > 0.2	
+						
+	    }
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 40
+	y = 10
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+             army_experience = 20
+             add_ideas = GEN_pppolitical_internationalsupportchirig1 
+              CHI = {army_experience = 20}	  
+		}
+			
+	}
+
+
+focus = { #
+	id = GEN_ppolitical_internationalsupportchirig2
+	icon = GFX_focus_generic_air_defense
+	prerequisite = { focus = GEN_ppolitical_internationalsupportchirig1 }     
+		available = {
+	CHI = {
+		exists = yes
+		NOT = { is_subject = yes }}
+		surrender_progress < 0.3		
+		
+		has_war_support > 0.2	
+						
+	    }
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 40
+	y = 11
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+             army_experience = 20
+             add_ideas = GEN_pppolitical_internationalsupportchirig2
+              CHI = {army_experience = 20}	  
+		}
+		
+			
+	}
+
+
+
+	
+focus = { #
+	id = GEN_ppolitical_internationalsupportsov
+	icon = GFX_focus_chi_cooperation_with_the_communists
+	prerequisite = { focus = GEN_ppolitical_internationalsupport }     
+		available = {
+	SOV = {
+		exists = yes
+		NOT = { is_subject = yes }}
+		
+		OR = {	
+			
+			
+			    AND = {
+			        has_government = communism	
+                    SOV = {has_government = communism } }
+			    AND = {
+			        has_government = neutrality
+                    SOV = {has_government = neutrality } }
+			    AND = {
+			        has_government = democratic
+                    SOV = {has_government = democratic } }
+			    AND = {
+			        has_government = fascism
+                    SOV = {has_government = fascism } }
+		    }						
+	    }
+			
+		
+		
+		
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 42
+	y = 8
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		SOV = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = GEN_mission_to_sov
+			}
+			add_ai_strategy = {
+				type = alliance
+				id = "ROOT"
+				value = 100
+			}
+			add_ai_strategy = {
+				type = protect
+				id = "ROOT"
+				value = 100
+			}
+			add_ai_strategy = {
+				type = send_volunteers_desire
+				id = "ROOT"
+				value = 100
+			}
+			add_ai_strategy = {
+				type = support
+				id = "ROOT"
+				value = 100
+			}
+		}
+
+			
+	}
+}
+	
+	
+focus = { #
+	id = GEN_ppolitical_internationalsupportsovlef0
+	icon = GFX_goal_generic_soviet_construction
+	prerequisite = { focus = GEN_ppolitical_internationalsupportsov }     
+		available = {
+	SOV = {
+		exists = yes
+		NOT = { is_subject = yes }}
+								
+	    }
+			
+		
+		
+		
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 42
+	y = 9
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+
+     		random_owned_state = {
+            add_extra_state_shared_building_slots = 2				
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}		
+		}	
+		random_owned_state = {
+            add_extra_state_shared_building_slots = 2				
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}		
+		}
+
+
+
+
+
+			
+	}
+}	
+	
+focus = { #
+	id = GEN_ppolitical_internationalsupportsovlef1
+	icon = GFX_goal_generic_small_arms
+	prerequisite = { focus = GEN_ppolitical_internationalsupportsovlef0 }     
+		available = {
+	SOV = {
+		exists = yes
+		NOT = { is_subject = yes }}
+								
+	    }
+			
+		
+		
+		
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 42
+	y = 10
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+
+
+	completion_reward = {
+              
+			add_tech_bonus = {
+
+			bonus = 0.75
+			uses = 3
+			category = cat_mass_assault
+		}			
+	}
+}	
+	
+focus = { #
+	id = GEN_ppolitical_internationalsupportsovlef2
+	icon = GFX_goal_generic_construction2
+	prerequisite = { focus = GEN_ppolitical_internationalsupportsovlef1 }     
+		available = {
+	SOV = {
+		exists = yes
+		NOT = { is_subject = yes }}
+								
+	    }
+			
+		
+		
+		
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 42
+	y = 11
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+
+
+	completion_reward = {
+        random_owned_state = {
+            add_extra_state_shared_building_slots = 2				
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}		
+		}	
+		random_owned_state = {
+            add_extra_state_shared_building_slots = 2				
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}		
+		}   
+
+
+
+			
+	}
+}	
+	
+focus = { #
+	id = GEN_ppolitical_internationaltechshare
+	icon = GFX_goal_generic_scientific_exchange
+	prerequisite = { focus = GEN_ppolitical_internationalsupportusa focus = GEN_ppolitical_internationalsupportuk 
+	                 focus = GEN_ppolitical_internationalsupportjap focus = GEN_ppolitical_internationalsupportger
+					 focus = GEN_ppolitical_internationalsupportchi focus = GEN_ppolitical_internationalsupportsov}     
+		available = {
+
+								
+	    }
+			
+		
+		
+		
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+	x = 28
+	y = 12
+	cost = 10
+	
+	ai_will_do = {
+		factor = 25
+	}
+
+	available_if_capitulated = yes
+
+
+
+	completion_reward = { 
+			if = { limit = { amount_research_slots < 5 } add_research_slot = 1 }
+			
+	}
+}			
+
+
+
+#######################################################################################################################################################################################
+########START OF MILITARY TREE#########################################################################################################################################################
+#############################################################################################################################################################################################
+
+
+
+
+
+
+	
+}

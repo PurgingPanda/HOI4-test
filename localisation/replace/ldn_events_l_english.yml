@@ -1,0 +1,4 @@
+﻿l_english:
+ LDN_diplomatic_peace.1.t: "Natural resource rights"
+ LDN_diplomatic_peace.1.d: "[peace_diplo_receiver_country.GetName] agreed to provide natural resource rights of desired states to us.\nNow, these natural  resources are treated as domestic natural resources."
+ LDN_diplomatic_peace.1.a: "Good."

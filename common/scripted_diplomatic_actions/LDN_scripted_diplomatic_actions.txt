@@ -1,0 +1,210 @@
+scripted_diplomatic_actions = {
+
+	offer_peace_scripted_diplo = {
+	
+		allowed = {
+			always = yes
+		}
+		visible = {
+			has_war = yes
+		}
+		selectable = {
+			has_war = yes
+		}
+
+		requires_acceptance = yes
+
+		#cost_string = loc_key
+		show_acceptance_on_action_button = no
+
+		icon = 1
+		
+		complete_effect = {
+			if = {
+				limit = {
+					NOT = {
+						ROOT = {
+							check_variable = { demand_pol_power_var = 0 }
+						}
+					}
+				}
+				ROOT = {
+					add_political_power = var:demand_pol_power_var
+				}
+				set_temp_variable = { temp_pol_power_value = ROOT.demand_pol_power_var }
+				multiply_temp_variable = { temp_pol_power_value = -1 }
+				FROM = {
+					add_political_power = var:temp_pol_power_value
+				}
+			}
+			clear_variable = demand_pol_power_var
+			clear_variable = ROOT.demand_state_cost_var
+			if = {
+				limit = {
+					FROM = {
+						any_owned_state = {
+							has_state_flag = state_resource_offered_by_ROOT
+						}
+					}
+				}
+				ROOT = { country_event = { id = LDN_diplomatic_peace.1 } }
+			}
+			every_state = {
+				limit = {
+					has_state_flag = state_resource_offered_by_ROOT
+				}
+				clr_state_flag = state_resource_offered_by_ROOT
+				remove_from_array = { ROOT.offered_state_resource = THIS.id }
+			}
+			every_state = {
+				limit = {
+					has_state_flag = state_offered_by_ROOT
+				}
+				clr_state_flag = state_offered_by_ROOT
+				remove_from_array = { ROOT.peace_control_state = THIS.id }
+				ROOT = {
+					transfer_state = PREV
+				}
+			}
+			FROM = {
+				white_peace = {
+					tag = ROOT 
+					message = LDN_scripted_peace_message 
+				} 
+				add_timed_idea = { idea = LDN_scripted_peace_after_idea days = 360 }
+			}
+		}
+		
+		on_sent_effect = {
+			if = {
+				limit = {
+					LDN_diplo_peace_accept = yes
+				}
+				set_temp_variable = { num_accept_var = accept_base_sum }
+				multiply_temp_variable = { num_accept_var = 100 }
+				round_temp_variable = num_accept_var
+				set_temp_variable = { num_refuse_var = 100 }
+				subtract_from_temp_variable = { num_refuse_var = num_accept_var }
+				round_temp_variable = num_refuse_var
+			}
+			meta_effect = {
+				text = {
+					random_list = {
+						[NUMACCEPT] = {
+							set_variable = { acceptance_var = 1 }
+						}
+						[NUMREFUSE] = {
+						}
+					}
+				}
+				NUMACCEPT = "[?num_accept_var|0]"
+				NUMREFUSE = "[?num_refuse_var|0]"
+			}
+		}
+		
+#		reject_effect = {
+#
+#		}
+
+		send_scripted_gui = diplomacy_action_peace
+		
+		reset_send_effect = {
+			LDN_diplo_peace_set_frame_effect = yes
+			LDN_set_peace_score = yes
+			clear_array = ROOT.LDN_peace_opinion_array
+			if = {
+				limit = {
+					NOT = { has_global_flag = diplo_peace_active }
+				}
+				set_global_flag = diplo_peace_active
+			}
+			ROOT = {
+				set_variable = { peace_diplo_sender_country = this.id }
+			}
+			FROM = {
+				save_global_event_target_as = peace_diplo_receiver_country
+				set_variable = { peace_diplo_receiver_country = this.id }
+			}
+			every_country = {
+				limit = {
+					NOT = {
+						OR = {
+							tag = ROOT
+							tag = FROM
+						}
+					}
+					OR = {
+						any_owned_state = {
+							any_neighbor_state = {
+								is_owned_by = ROOT
+								is_in_home_area = yes
+							}
+						}
+						any_owned_state = {
+							any_neighbor_state = {
+								is_owned_by = FROM
+								is_in_home_area = yes
+							}
+						}
+						has_war_together_with = FROM
+					}
+				}
+				add_to_array = { ROOT.LDN_peace_opinion_array = THIS.id }
+			}
+		}
+		
+		can_be_sent = {
+			always = yes
+		}
+		
+		#send_description = loc_key
+
+
+		# RECEIVE POPUP CUSTOMIZATION
+		# use diplomatic_action as context in scripted gui
+		#reset_receive_effect = {
+		#	# clear action
+		#	if = {
+		#		limit = { 
+		#			from = {
+		#				is_ai = yes
+		#			}
+		#		}
+		#	}
+		#}
+		can_be_accepted = {
+			always = yes
+		}
+		request_description = loc_key
+
+		
+		accept_title = peace_accept_title
+		accept_description = peace_accept_desc
+		reject_title = peace_reject_title
+		reject_description = peace_reject_desc
+	
+		ai_acceptance = {
+			condition = {
+				base = -10
+				
+				modifier = {
+					add = 100
+					has_game_rule = {
+						rule = allow_war_exhaustion
+						option = LIMITED
+					}
+				}
+				
+				modifier = {
+					add = 100
+					check_variable = { acceptance_var = 1 }
+				}
+				
+			}
+		}
+
+		ai_desire = {
+			factor = -1
+		}
+	}
+}

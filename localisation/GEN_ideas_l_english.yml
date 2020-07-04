@@ -1,0 +1,87 @@
+﻿l_english:
+
+
+##############################
+outdated_government:0 "Outdated Government"
+outdated_government_desc:0 "The time of Dynasties is over, in this modern world all nations have a functioning system of government. The one we have now can barely get things done. Until we resolve this issue our people won't be happy, and our government will be crippled."agrarian_communities_desc:0 "Our farmers have joined the farms into communes. This will greatly increase our peoples unity and cooperation with the government. It will make for a more effcient community layout."
+gen_mining_co:0 "Basic Evacuation"
+gen_mining_co_p1:0 "Advanced Evacuation"
+
+
+
+factory_reorganization_p0:0 "Factory Re-Organization"
+factory_reorganization_p1:0 "Factory Re-Organization"
+factory_reorganization_p2:0 "Factory Re-Organization"
+factory_reorganization_p3:0 "Factory Re-Organization"
+factory_reorganization_p4:0 "Factory Re-Organization"
+factory_reorganization_desc:0 "Now that our factories are more organized, we can produce supplies more efficiency."
+gen_economic_stability:0 "Economy Stability"
+gen_economic_stability_desc:0 ""
+gen_strong_eeconomy:0 "Strong Economy"
+gen_strong_eeconomy_desc:0 ""
+gen_mass_infrastructure:0 "Mass Infrastructure Construction"
+gen_mass_infrastructure_p1:0 "Mass Infrastructure Construction"
+gen_mass_infrastructure_p2:0 "Mass Infrastructure Construction"
+gen_advanceed_infrastructure:0 "Advanced Infrastructure System"
+gen_advanceed_infrastructure_p1:0 "Advanced Infrastructure System"
+gen_advanceed_infrastructure_p2:0 "Advanced Infrastructure System"
+gen_millls_concentratedfocus_p0:0 "Concentrated Industry"
+gen_millls_concentratedfocus_p1:0 "Concentrated Industry"
+gen_millls_concentratedfocus_p2:0 "Concentrated Industry"
+gen_millls_dispersedfocus_p0:0 "Dispersed Industry"
+gen_millls_dispersedfocus_p1:0 "Dispersed Industry"
+gen_millls_dispersedfocus_p2:0 "Dispersed Industry"
+
+
+
+gen_pppolitical_demo01:0 "Status Quo"
+gen_pppolitical_demo_conscription0:0 "Democratic Conscription"
+gen_pppolitical_demo_conscription1:0 "Democratic Conscription"
+gen_pppolitical_demo_conscription2:0 "Democratic Conscription"
+gen_pppolitical_demo_conscription3:0 "Democratic Conscription"
+
+Gneutrality_influence:0 "Nationalism Influence"
+GGENG_advancedlanding:0 "Advanced Landing"
+GGENG_advancedlanding1:0 "Advanced Landing"
+
+
+GEN_pppolitical_scientistheaven:0 "Scientist Heaven"
+GEN_pppolitical_neutrality:0 "Grand Neutrality"
+
+GEN_pppolitical_demo_war0:0 "Democratic Warsupport"
+GEN_pppolitical_nationalism02:0 "Nationalism"
+GEN_pppolitical_nationalismlaw:0 "National Conscription"
+GEN_pppolitical_nationalismwar:0 "Prepare for War"
+
+GEN_pppolitical_fascism02:0 "Fascism"
+
+GEN_pppolitical_communism02:0 "Devil's Offer"
+GEN_pppolitical_communism02_p1:0 "Devil's Offer"
+GEN_pppolitical_communism02_p2:0 "Devil's Offer"
+GEN_pppolitical_communism02_p3:0 "The Right of People"
+GEN_pppolitical_communism02_p4:0 "Final Destination"
+
+GEN_pppolitical_communismconscription:0 "Everyone Serves"
+
+GEN_pppolitical_communismwar:0 "The Holy War"
+GEN_pppolitical_internationalsupportusaequip0:0 "High Level Equippment"
+GEN_pppolitical_internationalsupportusaequip1:0 "High Level Equippment"
+GEN_pppolitical_internationalsupportusaequip2:0 "High Level Equippment"
+GEN_pppolitical_internationalsupportusaspplanning:0 "Grand Planning"
+
+GEN_pppolitical_internationalsupportgerserow:0 "Tank Upgrade"
+GEN_pppolitical_internationalsupportgerserow_1:0 "Tank Upgrade"
+
+GEN_pppolitical_internationalsupportgerserow2_1:0 "Army Advance"
+
+GEN_pppolitical_internationalsupportchileft1:0 "Army Reform"
+GEN_pppolitical_internationalsupportchileft2:0 "Army Reform"
+
+GEN_pppolitical_internationalsupportchimid2:0 "Cheap Equipment Production"
+GEN_pppolitical_internationalsupportchirig1:0 "Mysterious Chinese Anti-Tank"
+GEN_pppolitical_internationalsupportchirig2:0 "Mysterious Chinese Anti-Air"
+
+fascist_influencezzz:0 "Fascist Influence"
+communist_influencezzz:0 "Communist Influence"
+democratic_influencezzz:0 "Democratic Influence"
+neutrality_influencezzz:0 "Nationalism Influence"

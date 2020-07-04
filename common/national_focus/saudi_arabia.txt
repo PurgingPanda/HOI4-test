@@ -1,0 +1,840 @@
+focus_tree = {
+	id = saudi_focus
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = SAU
+		}
+	}
+
+	shared_focus = ABC_establish_a_general_staff	
+	shared_focus = GEN_Aviation_Effort
+	shared_focus = GEN_Naval_Effort
+
+	default = no
+	focus = {
+		id = SAU_al_hasa_oil_discovery
+		icon = GFX_goal_generic_position_armies
+		cost = 5.00
+		x = 35
+		y = 0
+
+		ai_will_do = {
+			factor = 35
+		}
+
+		completion_reward = {
+			292 = {
+				add_extra_state_shared_building_slots = 3
+			}
+		}
+
+	}
+	focus = {
+		id = SAU_the_unifier
+		icon = GFX_goal_SAU_the_unifier
+		cost = 10.00
+		x = 41
+		y = 0
+		ai_will_do = {
+			factor = 75
+		}
+		completion_reward = {
+			add_political_power = 150
+			add_stability = 0.1
+		}
+
+	}
+	focus = {
+		id = SAU_deal_with_bp
+		icon = GFX_focus_chi_british_cooperation
+		cost = 10.00
+		prerequisite = {
+			focus = SAU_al_hasa_oil_discovery
+		}
+		mutually_exclusive = {
+			focus = SAU_invite_brabag
+			focus = SAU_concessions_to_standard_oil
+		}
+		ai_will_do = {
+			factor = 50
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+					OR = {
+						is_in_home_area = yes
+						NOT = {
+							owner = {
+								any_owned_state = {
+									free_building_slots = {
+										building = industrial_complex
+										size > 0
+										include_locked = yes
+									}
+									is_in_home_area = yes
+								}
+							}
+						}
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_resource = {
+			    type = oil
+			    amount = 10
+			    state = 292
+			}
+			give_resource_rights = { receiver = ENG state = 292 }
+			custom_effect_tooltip = available_designer
+			show_ideas_tooltip = aioc_sau
+			add_resource = {
+			    type = oil
+			    amount = 6
+			    state = 679
+			}
+		}
+		x = 0
+		y = 1
+		relative_position_id = SAU_al_hasa_oil_discovery
+
+	}
+	focus = {
+		id = SAU_expand_the_shura_council
+		icon = GFX_focus_generic_self_management
+		cost = 10.00
+		prerequisite = {
+			focus = SAU_the_unifier
+		}
+		ai_will_do = {
+			factor = 45
+		}
+		completion_reward = {
+			add_ideas = SAU_expand_the_shura_council
+		}
+		x = 1
+		y = 1
+		relative_position_id = SAU_the_unifier
+
+	}
+	focus = {
+		id = SAU_support_from_loyal_tribes
+		icon = GFX_goal_generic_major_alliance
+		cost = 10.00
+		prerequisite = {
+			focus = SAU_the_unifier
+		}
+		ai_will_do = {
+			factor = 45
+		}
+		completion_reward = {
+			add_war_support = 0.1
+			add_ideas = SAU_support_from_loyal_tribes
+		}
+		x = -1
+		y = 1
+		relative_position_id = SAU_the_unifier
+
+	}
+	focus = {
+		id = SAU_move_the_court_to_murabba_palace
+		icon = GFX_focus_generic_home_defense
+		cost = 10.00
+		prerequisite = {
+			focus = SAU_expand_the_shura_council
+		}
+		prerequisite = {
+			focus = SAU_support_from_loyal_tribes
+		}
+		ai_will_do = {
+			factor = 50
+		}
+		completion_reward = {
+			add_political_power = 200
+		}
+		x = 0
+		y = 2
+		relative_position_id = SAU_the_unifier
+
+	}
+	focus = {
+		id = SAU_trans_arabian_pipeline
+		icon = GFX_goal_generic_navy_battleship
+		cost = 10.00
+		prerequisite = {
+			focus = SAU_deal_with_bp
+		}
+		ai_will_do = {
+			factor = 40
+		}
+		completion_reward = {
+			add_offsite_building = { type = industrial_complex level = 1 }
+			add_offsite_building = { type = dockyard level = 1 }
+		}
+		x = 0
+		y = 3
+		relative_position_id = SAU_al_hasa_oil_discovery
+
+	}
+	focus = {
+		id = SAU_invite_brabag
+		icon = GFX_focus_chi_mission_to_germany
+		cost = 10.00
+		prerequisite = {
+			focus = SAU_al_hasa_oil_discovery
+		}
+		mutually_exclusive = {
+			focus = SAU_deal_with_bp
+			focus = SAU_concessions_to_standard_oil
+		}
+		ai_will_do = {
+			factor = 50
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+					OR = {
+						is_in_home_area = yes
+						NOT = {
+							owner = {
+								any_owned_state = {
+									free_building_slots = {
+										building = industrial_complex
+										size > 0
+										include_locked = yes
+									}
+									is_in_home_area = yes
+								}
+							}
+						}
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_resource = {
+			    type = oil
+			    amount = 10
+			    state = 292
+			}
+			give_resource_rights = { receiver = GER state = 292 }
+			custom_effect_tooltip = available_designer
+			show_ideas_tooltip = brabag_sau
+			add_resource = {
+			    type = oil
+			    amount = 6
+			    state = 679
+			}
+		}
+		x = 2
+		y = 1
+		relative_position_id = SAU_al_hasa_oil_discovery
+
+	}
+	focus = {
+		id = SAU_concessions_to_standard_oil
+		icon = GFX_focus_chi_mission_to_the_us
+		cost = 10.00
+		prerequisite = {
+			focus = SAU_al_hasa_oil_discovery
+		}
+		mutually_exclusive = {
+			focus = SAU_invite_brabag
+			focus = SAU_deal_with_bp
+		}
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+					OR = {
+						is_in_home_area = yes
+						NOT = {
+							owner = {
+								any_owned_state = {
+									free_building_slots = {
+										building = industrial_complex
+										size > 0
+										include_locked = yes
+									}
+									is_in_home_area = yes
+								}
+							}
+						}
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_resource = {
+			    type = oil
+			    amount = 10
+			    state = 292
+			}
+			give_resource_rights = { receiver = USA state = 292 }
+			custom_effect_tooltip = available_designer
+			show_ideas_tooltip = standard_oil_california_sau
+			add_resource = {
+			    type = oil
+			    amount = 6
+			    state = 679
+			}
+		}
+		x = -2
+		y = 1
+		relative_position_id = SAU_al_hasa_oil_discovery
+
+	}
+	focus = {
+		id = SAU_persian_gulf_to_riyadh_railway
+		icon = GFX_goal_generic_construct_infrastructure
+		cost = 10.00
+		prerequisite = {
+			focus = SAU_invite_brabag
+			focus = SAU_deal_with_bp
+			focus = SAU_concessions_to_standard_oil
+		}
+		ai_will_do = {
+			factor = 45
+		}
+		completion_reward = {
+			random_owned_controlled_state = {
+				prioritize = { 292 }
+				limit = {
+					free_building_slots = {
+						building = infrastructure
+						size > 1
+					}
+					OR = {
+						is_in_home_area = yes
+						NOT = {
+							owner = {
+								any_owned_state = {
+									free_building_slots = {
+										building = infrastructure
+										size > 1
+									}
+									is_in_home_area = yes
+								}
+							}
+						}
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				prioritize = { 678 }
+				limit = {
+					free_building_slots = {
+						building = infrastructure
+						size > 1
+					}
+					OR = {
+						is_in_home_area = yes
+						NOT = {
+							owner = {
+								any_owned_state = {
+									free_building_slots = {
+										building = infrastructure
+										size > 1
+									}
+									is_in_home_area = yes
+								}
+							}
+						}
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		x = 1
+		y = 2
+		relative_position_id = SAU_al_hasa_oil_discovery
+
+	}
+	focus = {
+		id = SAU_force_tribes_to_settle
+		icon = GFX_goal_generic_demand_territory
+		cost = 10.00
+		prerequisite = {
+			focus = SAU_expand_the_shura_council
+		}
+		ai_will_do = {
+			factor = 41
+		}
+		completion_reward = {
+			add_ideas = SAU_force_tribes_to_settle
+		}
+		x = 2
+		y = 2
+		relative_position_id = SAU_the_unifier
+
+	}
+	focus = {
+		id = SAU_western_alignment
+		icon = GFX_focus_attack_germany
+		cost = 10.00
+		prerequisite = {
+			focus = SAU_force_tribes_to_settle
+		}
+		prerequisite = {
+			focus = SAU_move_the_court_to_murabba_palace
+		}
+		mutually_exclusive = {
+			focus = SAU_move_toward_german_alignment
+			focus = SAU_maintain_international_neutrality
+		}
+		available = {
+			is_in_faction = no
+			is_puppet = no
+			ENG = {
+				is_faction_leader = yes
+				exists = yes
+				NOT = {
+					has_government = communism
+					has_war_with = ROOT
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 50
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+			modifier = {
+				factor = 0
+				date < 1939.01.01
+			}
+		}
+		completion_reward = {
+			ENG = {
+				country_event = generic.2
+			}
+		}
+		x = 2
+		y = 3
+		relative_position_id = SAU_the_unifier
+
+	}
+	focus = {
+		id = SAU_aramco_underwater_pipeline
+		icon = GFX_focus_generic_the_giant_wakes
+		cost = 10.00
+		prerequisite = {
+			focus = SAU_concessions_to_standard_oil
+		}
+		ai_will_do = {
+			factor = 30
+		}
+		completion_reward = {
+			add_offsite_building = { type = industrial_complex level = 2 }
+		}
+		x = -2
+		y = 3
+		relative_position_id = SAU_al_hasa_oil_discovery
+
+	}
+	focus = {
+		id = SAU_request_german_reinforcements
+		icon = GFX_focus_generic_military_mission
+		cost = 10.00
+		prerequisite = {
+			focus = SAU_invite_brabag
+		}
+		ai_will_do = {
+			factor = 35
+		}
+		completion_reward = {
+			add_offsite_building = { type = arms_factory level = 1 }
+			GER = {
+				country_event = saudi.1
+			}
+		}
+		x = 2
+		y = 3
+		relative_position_id = SAU_al_hasa_oil_discovery
+
+	}
+	focus = {
+		id = SAU_diversify_the_economy
+		icon = GFX_goal_generic_construct_civ_factory
+		cost = 10.00
+		prerequisite = {
+			focus = SAU_aramco_underwater_pipeline
+			focus = SAU_trans_arabian_pipeline
+			focus = SAU_request_german_reinforcements
+		}
+		mutually_exclusive = {
+			focus = SAU_renegociate_profit_sharing_agreements
+		}
+		ai_will_do = {
+			factor = 32
+		}
+		completion_reward = {
+			random_owned_controlled_state = {
+							limit = {
+									free_building_slots = {
+											building = industrial_complex
+											size > 1
+											include_locked = yes
+										}
+								}
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+									type = industrial_complex
+									level = 1
+									instant_build = yes
+								}
+						}
+			random_owned_controlled_state = {
+							limit = {
+									free_building_slots = {
+											building = arms_factory
+											size > 1
+											include_locked = yes
+										}
+								}
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+									type = arms_factory
+									level = 1
+									instant_build = yes
+								}
+						}
+		}
+		x = 1
+		y = 4
+		relative_position_id = SAU_al_hasa_oil_discovery
+
+	}
+	focus = {
+		id = SAU_dharan_oil_wells
+		icon = GFX_goal_generic_oil_refinery
+		cost = 10.00
+		prerequisite = {
+			focus = SAU_concessions_to_standard_oil
+			focus = SAU_deal_with_bp
+			focus = SAU_invite_brabag
+		}
+		available = {
+			has_tech = excavation2
+		}
+		ai_will_do = {
+			factor = 40
+		}
+		completion_reward = {
+			add_offsite_building = { type = industrial_complex level = 2 }
+			add_resource = {
+			    type = oil
+			    amount = 8
+			    state = 292
+			}
+			add_resource = {
+			    type = oil
+			    amount = 8
+			    state = 678
+			}
+		}
+		x = -1
+		y = 2
+		relative_position_id = SAU_al_hasa_oil_discovery
+
+	}
+	focus = {
+		id = SAU_renegociate_profit_sharing_agreements
+		icon = GFX_focus_generic_industry_2
+		cost = 10.00
+		prerequisite = {
+			focus = SAU_aramco_underwater_pipeline
+			focus = SAU_trans_arabian_pipeline
+			focus = SAU_request_german_reinforcements
+		}
+		mutually_exclusive = {
+			focus = SAU_diversify_the_economy
+		}
+		ai_will_do = {
+			factor = 40
+		}
+		completion_reward = {
+			add_ideas = SAU_renegociate_profit_sharing_agreements
+		}
+		x = -1
+		y = 4
+		relative_position_id = SAU_al_hasa_oil_discovery
+
+	}
+	focus = {
+		id = SAU_king_saud_university
+		icon = GFX_focus_research2
+		cost = 10.00
+		prerequisite = {
+			focus = SAU_renegociate_profit_sharing_agreements
+			focus = SAU_diversify_the_economy
+		}
+		ai_will_do = {
+			factor = 7
+		}
+		completion_reward = {
+			add_research_slot = 1
+		}
+		x = 0
+		y = 5
+		relative_position_id = SAU_al_hasa_oil_discovery
+
+	}
+	focus = {
+		id = SAU_provide_shelter_for_fritz_gobba
+		icon = GFX_goal_generic_dangerous_deal
+		cost = 10.00
+		prerequisite = {
+			focus = SAU_support_from_loyal_tribes
+		}
+		ai_will_do = {
+			factor = 30
+		}
+		completion_reward = {
+			add_popularity = {
+			    ideology = fascism
+			    popularity = 0.05
+			}
+			add_tech_bonus = {
+				name = SAU_provide_shelter_for_fritz_gobba
+				bonus = 1.0
+				uses = 1
+				category = electronics
+			}
+		}
+		x = -2
+		y = 2
+		relative_position_id = SAU_the_unifier
+
+	}
+	focus = {
+		id = SAU_move_toward_german_alignment
+		icon = GFX_focus_ger_reichskommisariats
+		cost = 10.00
+		prerequisite = {
+			focus = SAU_provide_shelter_for_fritz_gobba
+		}
+		prerequisite = {
+			focus = SAU_move_the_court_to_murabba_palace
+		}
+		mutually_exclusive = {
+			focus = SAU_western_alignment
+			focus = SAU_maintain_international_neutrality
+		}
+		ai_will_do = {
+			factor = 50
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+			modifier = {
+				factor = 0
+				date < 1939.01.01
+			}
+		}
+		available = {
+			is_in_faction = no
+			is_puppet = no
+			GER = {
+				is_faction_leader = yes
+				exists = yes
+				NOT = {
+					has_government = communism
+					has_war_with = ROOT
+				}
+			}
+		}
+		completion_reward = {
+			GER = {
+				country_event = generic.2
+			}
+		}
+		x = -2
+		y = 3
+		relative_position_id = SAU_the_unifier
+
+	}
+	focus = {
+		id = SAU_our_rightful_domain
+		icon = GFX_focus_RAJ_lions_of_the_great_war
+		cost = 10.00
+		prerequisite = {
+			focus = SAU_move_toward_german_alignment
+		}
+		ai_will_do = {
+			factor = 50
+		}
+		completion_reward = {
+			create_wargoal = {
+				type = take_state_focus
+				target = IRQ
+				generator = { 675 291 676 }
+			}
+			create_wargoal = {
+				type = take_state_focus
+				target = ENG
+				generator = { 656 765 658 659 455 454 }
+			}
+		}
+		x = -2
+		y = 5
+		relative_position_id = SAU_the_unifier
+
+	}
+	focus = {
+		id = SAU_request_german_guns
+		icon = GFX_goal_generic_small_arms
+		cost = 10.00
+		prerequisite = {
+			focus = SAU_move_toward_german_alignment
+		}
+		ai_will_do = {
+			factor = 50
+		}
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_0
+				amount = 3000
+				producer = GER
+			}
+		}
+		x = -3
+		y = 4
+		relative_position_id = SAU_the_unifier
+
+	}
+	focus = {
+		id = SAU_increase_oil_exportations_to_the_allies
+		icon = GFX_goal_generic_positive_trade_relations
+		cost = 10.00
+		prerequisite = {
+			focus = SAU_western_alignment
+		}
+		ai_will_do = {
+			factor = 45
+		}
+		completion_reward = {
+			add_ideas = SAU_increase_oil_exportations_to_the_allies
+		}
+		x = 2
+		y = 5
+		relative_position_id = SAU_the_unifier
+
+	}
+	focus = {
+		id = SAU_USS_quincy_meeting
+		icon = GFX_goal_generic_navy_doctrines_tactics
+		cost = 10.00
+		prerequisite = {
+			focus = SAU_western_alignment
+		}
+		available = {
+			is_in_faction_with = USA
+		}
+		ai_will_do = {
+			factor = 45
+		}
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_0
+				amount = 3000
+				producer = USA
+			}
+			custom_effect_tooltip = NIC_dock_access
+			hidden_effect = {
+				USA = {
+					diplomatic_relation = {
+						country = NIC
+						relation = docking_rights
+						active = yes
+					}
+				}
+			}
+		}
+		x = 3
+		y = 4
+		relative_position_id = SAU_the_unifier
+
+	}
+
+	focus = {
+		id = SAU_maintain_international_neutrality
+		icon = GFX_goal_generic_neutrality_focus
+		cost = 10.00
+		prerequisite = {
+			focus = SAU_move_the_court_to_murabba_palace
+		}
+		mutually_exclusive = {
+			focus = SAU_western_alignment
+			focus = SAU_move_toward_german_alignment
+		}
+		ai_will_do = {
+			factor = 65
+			modifier = {
+				factor = 0
+				date < 1939.01.01
+			}
+		}
+		completion_reward = {
+			add_political_power = 150
+			add_stability = 0.1
+			add_ideas = neutrality_idea
+		}
+		x = 0
+		y = 3
+		relative_position_id = SAU_the_unifier
+
+	}
+}

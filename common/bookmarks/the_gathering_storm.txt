@@ -1,0 +1,289 @@
+#####-----> The Gathering Storm (Bookmark) <><> <><> <><> <><> <><>
+
+bookmarks = {
+	bookmark = {
+		name = "GATHERING_STORM_NAME"
+		desc = "GATHERING_STORM_DESC"
+		date = 1936.1.1.12
+		picture = "GFX_select_date_1936"
+		default_country = "GER"
+		default = yes
+		
+		###---> Majors <><> <><> <><>
+		
+		"FRA" = {
+			history = "FRA_GATHERING_STORM_DESC"
+			ideology = democratic
+			ideas = {
+				FRA_victors_of_wwi
+				FRA_disjointed_government
+				FRA_protected_by_the_maginot_line
+			}
+			focuses = {
+				FRA_support_daladier
+				FRA_brumaire_movement
+				FRA_cagoule_coup
+			}
+		}
+		
+		"USA" = { #If using Man the Guns.
+			history = "USA_GATHERING_STORM_DESC"
+			ideology = democratic
+			available = { has_dlc = "Man the Guns" }
+			ideas = {
+				home_of_the_free
+				great_depression
+				undisturbed_isolation
+			}
+			focuses = {
+				USA_union_representation_act
+				USA_honor_the_confederacy
+				USA_war_plan_black
+			}
+		}
+		"USA" = { #If NOT using Man the Guns.
+			history = "USA_GATHERING_STORM_DESC"
+			ideology = democratic
+			available = { NOT = { has_dlc = "Man the Guns" } }
+			ideas = {
+				home_of_the_free
+				great_depression
+				undisturbed_isolation
+			}
+			focuses = {
+				USA_continue_the_new_deal
+				USA_reestablish_the_gold_standard
+				USA_war_plan_black
+			}
+		}
+		
+		"ENG" = { #If using Man the Guns.
+			history = "ENG_GATHERING_STORM_DESC"
+			ideology = democratic
+			available = { has_dlc = "Man the Guns" }
+			ideas = {
+				stiff_upper_lip
+				ENG_the_war_to_end_all_wars
+				george_v
+			}
+			focuses = {
+				ENG_revisit_colonial_policy
+				ENG_imperial_federation
+				ENG_a_change_in_course
+			}
+		}
+		"ENG" = { #If NOT using Man the Guns.
+			history = "ENG_GATHERING_STORM_DESC"
+			ideology = democratic
+			available = { NOT = { has_dlc = "Man the Guns" } }
+			ideas = {
+				stiff_upper_lip
+				ENG_the_war_to_end_all_wars
+				george_v
+			}
+			focuses = {
+				uk_empire_focus
+				ENG_steady_as_she_goes
+				ENG_visit_germany
+			}
+		}
+		
+		"GER" = {
+			history = "GER_GATHERING_STORM_DESC"
+			ideology = fascism
+			ideas = {
+				sour_loser
+				general_staff
+			}
+			focuses = {
+				GER_anschluss
+				GER_danzig_or_war
+				GER_political_sphere
+			}
+		}
+		
+		"ITA" = {
+			history = "ITA_GATHERING_STORM_DESC"
+			ideology = fascism
+			ideas = {
+				ITA_excessive_regia_marina_budget
+				ITA_bloated_military_bureaucracy
+				ITA_lack_of_powered_planes
+			}
+			focuses = {
+				ITA_revive_the_stresa_front
+				ITA_militarize_the_rome_protocols
+				ITA_cooperation_with_germany
+			}
+		}
+		
+		"JAP" = {
+			history = "JAP_GATHERING_STORM_DESC"
+			ideology = fascism
+			ideas = {
+				state_shintoism
+				JAP_zaibatsus
+				JAP_militarism
+			}
+			focuses = {
+				JAP_purge_the_kodoha_faction
+				JAP_intervene_in_china
+				JAP_the_unthinkable_option
+			}
+		}
+		
+		"SOV" = {
+			history = "SOV_GATHERING_STORM_DESC"
+			ideology = communism
+			ideas = {
+				trotskyite_plot
+				SOV_revolutionized_industry_ghost
+				SOV_poor_railnetworks_0
+			}
+			focuses = {
+				SOV_finish_the_five_year_plan
+				SOV_great_purge
+				SOV_stalin_constitution
+			}
+		}
+		
+		###---> Other Countries <><> <><> <><>
+		
+		"---" = {
+			history = "OTHER_GATHERING_STORM_DESC"
+		}
+		
+		###---> Minors <><> <><> <><>
+		
+		"PRC" = {
+			minor = yes
+			history = "PRC_GATHERING_STORM_DESC"
+			ideology = communism
+			ideas = {
+				PRC_guerilla_warfare
+				PRC_defeatism_2
+				PRC_underestimation
+			}
+			focuses = {
+				PRC_recover_from_the_long_march
+				PRC_government_reshuffle
+				PRC_found_our_nation
+			}
+		}
+		
+		"SIA" = {
+			minor = yes
+			history = "SIA_GATHERING_STORM_DESC"
+			ideology = neutrality
+			ideas = {
+				SIA_civilian_wing_opposition
+				SIA_small_depression_effects
+				SIA_fascist_sympathies_in_the_army
+			}
+			focuses = {
+				SIA_the_democratic_cause
+        		SIA_restore_rama_vii
+        		SIA_choosing_a_side
+			}
+		}
+		
+		"GRE" = {
+			minor = yes
+			history = "GRE_GATHERING_STORM_DESC"
+			ideology = democratic
+			ideas = {
+				GRE_depression_1
+				GRE_government_crisis
+				GRE_shadow_of_1921
+			}
+			focuses = {
+				GRE_reinforce_4th_of_august_regime
+				GRE_third_hellenic_civilization
+				GRE_Reinforce_the_hierarchy
+			}
+		}
+		
+		"PER" = {
+			minor = yes
+			history = "PER_GATHERING_STORM_DESC"
+			ideology = neutrality
+			ideas = {
+				PER_anglo_iranian_oil_company
+				PER_corrupted_bureaucracy
+			}
+			focuses = {
+				PER_continue_government_purges
+				PER_appoint_zahedi
+				PER_restore_constitutionalism
+			}
+		}
+		
+		"CHI" = {
+			minor = yes
+			history = "CHI_GATHERING_STORM_DESC"
+			ideology = neutrality
+			ideas = {
+				CHI_communist_uprisings
+				KMT_warlord_cliques_pre_war
+				incompetent_industry_fake
+			}
+			focuses = {
+				KMT_external_defense
+				KMT_unitary_semi_presidential_republic 
+				KMT_democratic_republic
+			}
+		}
+		
+		"SAU" = {
+			minor = yes
+			history = "SAU_GATHERING_STORM_DESC"
+			ideology = neutrality
+			ideas = {
+			}
+			focuses = {
+				SAU_al_hasa_oil_discovery
+        		SAU_concessions_to_standard_oil
+        		SAU_our_rightful_domain
+			}
+		}
+		
+		"POL" = {
+			minor = yes
+			history = "POL_GATHERING_STORM_DESC"
+			ideology = neutrality
+			ideas = {
+				POL_The_Great_Depression
+				POL_Rural_Unemployment
+				POL_Sanacja_Government
+			}
+			focuses = {
+				POL_The_Great_Peasant_Strike
+				POL_The_Cult_Of_The_Marshal
+				POL_Nationalist_Rhetoric
+			}
+		}
+		
+		"HOL" = {
+			minor = yes
+			history = "HOL_GATHERING_STORM_DESC"
+			ideology = democratic
+			ideas = {
+				HOL_reliance_on_the_gold_standard
+				tblra_pillarized_society
+				tblra_recovery_from_the_great_depression1
+			}
+			focuses = {
+				HOL_conservative_government
+				HOL_communist_electoral_success
+				HOL_NSB_electoral_success
+			}
+		}
+		
+		effect = {
+			randomize_weather = 22345 #Obligatory in every bookmark.
+			#123 = { rain_light = yes }
+		}
+	}
+}
+
+#####-----> End of File <><> <><> <><> <><> <><>

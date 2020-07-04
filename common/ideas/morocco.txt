@@ -1,0 +1,63 @@
+ideas = {
+
+
+	industrial_concern = {
+		MOR_societe_cherifienne_des_petroles = {
+
+			picture = generic_electronics_concern_3
+		
+			allowed = {
+				original_tag = MOR
+			}
+			
+			research_bonus = {
+				industry = 0.10
+				refining_tech = 0.25
+			}
+			modifier = {
+				fuel_gain_factor = 0.1
+			}	
+			
+			traits = { refinery_concern }
+			
+			ai_will_do = {
+				factor = 1
+			}
+		}		
+	}
+	political_advisor = {
+
+		MOR_captain_of_industry = {
+
+			picture = generic_political_advisor_arab_2
+
+			allowed = {
+				original_tag = MOR
+			}
+			
+			traits = { captain_of_industry }
+		}
+		
+		MOR_fortification_engineer = {
+
+			allowed = {
+				original_tag = MOR
+			}
+			
+			picture = generic_political_advisor_india_2
+
+			traits = { fortification_engineer }
+		}
+
+		MOR_war_industrialist = {
+
+			picture = generic_political_advisor_arab_1
+
+			allowed = {
+				original_tag = MOR
+			}
+			
+			traits = { war_industrialist }
+		}
+	}
+}

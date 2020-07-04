@@ -1,0 +1,257 @@
+on_actions = {
+
+	on_startup = {
+		effect = {
+		}
+	}
+	
+	on_daily = {
+		effect = {
+			every_country = {
+				limit = {
+					has_war = yes
+					NOT = { has_country_flag = war_exhaustion_active }
+				}
+				set_country_flag = war_exhaustion_active
+			}
+			ROOT = {
+				LDN_war_exhaustion_limit = yes
+				if = {
+					limit = {
+						has_country_flag = war_exhaustion_active
+						LDN_war_exhaustion = yes
+					}
+					add_to_variable = { war_exhaustion = war_exhaustion_base_modifier }
+					clamp_variable = { var = war_exhaustion min = 0 }
+					LDN_war_exhaustion_per = yes
+				}
+			}
+		}
+	}
+	
+	on_peaceconference_ended = {
+		effect = {
+			FROM = {
+				if = {
+					limit = {
+						has_variable = var_demand_state
+						has_variable = num_opinion_demand_state
+					}
+					clear_variable = var_demand_state
+					clear_variable = num_opinion_demand_state
+				}
+			}
+			every_state = {
+				limit = {
+					OR = {
+						is_owned_by = FROM
+						is_owned_by = ROOT
+					}
+					is_in_array = { ROOT.peace_control_state = THIS.id }
+				}
+				remove_from_array = { ROOT.peace_control_state = THIS.id }
+			}
+		}
+	}
+	on_declare_war = {
+		effect = {
+			ROOT = {
+				set_variable = { peace_diplo_attacker_country = this.id }
+				meta_effect = {
+					text = {
+						set_country_flag = start_war_exhaustion_[ATTACKERTAG]
+					}
+					ATTACKERTAG = "[ROOT.GetTag]"
+				}
+			}
+			FROM = {
+				set_variable = { peace_diplo_defender_country = this.id }
+			}
+		}
+	}
+	on_state_control_changed = {
+		effect = {
+			if = {
+				limit = {
+					FROM.FROM = { NOT = { is_owned_by = ROOT } }
+					ROOT = {
+						OR = {
+							has_war_with = FROM
+							any_country = {
+								has_war_with = FROM
+								OR = {
+									is_in_faction_with = ROOT
+									is_subject_of = ROOT								
+								}
+							}
+						}
+					}
+				}
+				FROM.FROM = {	
+					if = {
+						limit = {
+							NOT = {
+								is_in_array = { ROOT.peace_control_state = THIS.id }
+							}
+						}
+						set_temp_variable = { ROOT.eval_state = THIS.id }
+						add_to_array = { ROOT.peace_control_state = THIS.id }
+						set_temp_variable = { state_cost_by = 0 }
+					}	
+					if = {
+						limit = {
+							has_state_category = megalopolis
+						}
+						owner = { add_to_variable = { we_occupied_state = 1.2 } }
+						add_to_temp_variable = { state_cost_by = 12 }
+					}
+					else_if = {
+						limit = {
+							has_state_category = metropolis
+						}
+						owner = { add_to_variable = { we_occupied_state = 1.0 } }
+						add_to_temp_variable = { state_cost_by = 10 }
+					}
+					else_if = {
+						limit = {
+							has_state_category = large_city
+						}
+						owner = { add_to_variable = { we_occupied_state = 0.9 } }
+						add_to_temp_variable = { state_cost_by = 9 }
+					}
+					else_if = {
+						limit = {
+							has_state_category = city
+						}
+						owner = { add_to_variable = { we_occupied_state = 0.8 } }
+						add_to_temp_variable = { state_cost_by = 8 }
+					}
+					else_if = {
+						limit = {
+							has_state_category = large_town
+						}
+						owner = { add_to_variable = { we_occupied_state = 0.7 } }
+						add_to_temp_variable = { state_cost_by = 7 }
+					}
+					else_if = {
+						limit = {
+							has_state_category = town
+						}
+						owner = { add_to_variable = { we_occupied_state = 0.6 } }
+						add_to_temp_variable = { state_cost_by = 6 }
+					}
+					else_if = {
+						limit = {
+							has_state_category = rural
+						}
+						owner = { add_to_variable = { we_occupied_state = 0.4 } }
+						add_to_temp_variable = { state_cost_by = 4 }
+					}
+					else_if = {
+						limit = {
+							has_state_category = pastoral
+						}
+						owner = { add_to_variable = { we_occupied_state = 0.2 } }
+						add_to_temp_variable = { state_cost_by = 2 }
+					}
+					else = {
+						owner = { add_to_variable = { we_occupied_state = 0.1 } }
+						add_to_temp_variable = { state_cost_by = 1 }
+					}
+					if = {
+						limit = {
+							NOT = {
+								is_in_array = { ROOT.peace_control_state_resource = THIS.id }
+							}
+							OR = {
+								has_resources_amount = { resource = oil amount > 0 }
+								has_resources_amount = { resource = aluminium amount > 0 }
+								has_resources_amount = { resource = rubber amount > 0 }
+								has_resources_amount = { resource = tungsten amount > 0 }
+								has_resources_amount = { resource = steel amount > 0 }
+								has_resources_amount = { resource = chromium amount > 0 }
+							}
+						}
+						set_temp_variable = { state_cost_resource_by = 0 }
+						add_to_array = { ROOT.peace_control_state_resource = THIS.id }
+						if = {
+							limit = {
+								has_resources_amount = { resource = oil amount > 0 }
+							}
+							set_state_flag = diplo_peace_state_oil
+							add_to_temp_variable = { state_cost_resource_by = 2 }
+						}
+						if = {
+							limit = {
+								has_resources_amount = { resource = aluminium amount > 0 }
+							}
+							set_state_flag = diplo_peace_state_aluminium
+							add_to_temp_variable = { state_cost_resource_by = 2 }
+						}
+						if = {
+							limit = {
+								has_resources_amount = { resource = rubber amount > 0 }
+							}
+							set_state_flag = diplo_peace_state_rubber
+							add_to_temp_variable = { state_cost_resource_by = 2 }
+						}
+						if = {
+							limit = {
+								has_resources_amount = { resource = tungsten amount > 0 }
+							}
+							set_state_flag = diplo_peace_state_tungsten
+							add_to_temp_variable = { state_cost_resource_by = 2 }
+						}
+						if = {
+							limit = {
+								has_resources_amount = { resource = steel amount > 0 }
+							}
+							set_state_flag = diplo_peace_state_steel
+							add_to_temp_variable = { state_cost_resource_by = 2 }
+						}
+						if = {
+							limit = {
+								has_resources_amount = { resource = chromium amount > 0 }
+							}
+							set_state_flag = diplo_peace_state_chromium
+							add_to_temp_variable = { state_cost_resource_by = 2 }
+						}
+					}
+					set_variable = { state_cost_var = state_cost_by }
+					add_to_variable = { state_cost_var = state_cost_resource_by }
+					set_variable = { state_cost_resource_var = state_cost_resource_by }
+					if = {
+						limit = {
+							is_core_of = FROM
+						}
+						set_state_flag = offer_state_is_core_of_FROM
+						multiply_variable = { state_cost_var = 1.5 }
+						round_variable = state_cost_var
+						multiply_variable = { state_cost_resource_var = 1.5 }
+						round_variable = state_cost_resource_var
+					}
+					if = {
+						limit = {
+							is_core_of = ROOT
+						}
+						set_state_flag = offer_state_is_core_of_ROOT
+						multiply_variable = { state_cost_var = 0.5 }
+						round_variable = state_cost_var
+						multiply_variable = { state_cost_resource_var = 0.5 }
+						round_variable = state_cost_resource_var
+					}
+					if = {
+						limit = {
+							is_claimed_by = ROOT
+						}
+						set_state_flag = offer_state_is_claimed_by_ROOT
+						multiply_variable = { state_cost_var = 0.8 }
+						round_variable = state_cost_var
+						multiply_variable = { state_cost_resource_var = 0.8 }
+						round_variable = state_cost_resource_var
+					}
+				}
+			}
+		}
+	}
+}

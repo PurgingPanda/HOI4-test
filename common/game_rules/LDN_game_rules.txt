@@ -1,0 +1,54 @@
+#
+# List of options showing in the Game Rules screen
+#
+# format is:
+# rule_token = {
+#	name = "TEXT_KEY_FOR_NAME"
+#	required_dlc = "Name of the Required DLC"
+#	desc = "TEXT_KEY_FOR_LONG_DESC"
+#	group = "TEXT_KEY_FOR_GROUP"					# Used for filtering. A single rule can be in multiple groups 
+#	icon = gfx_option_token							# Optional icon
+#	option = {										# Unless other specified, the first option is the default option
+#		name = option_token
+#		text = "TEXT_KEY_FOR_OPTION_NAME"
+#		allow_achievements = no						# Achievements cannot be earned if one or more game rules are set to an option that has this property set to no.
+#													# If not specified, this is set to yes for default options and no for all other options.
+#	}
+#	default = {										# Specify an option with the "default" token to override the behavior of treating the first option as the default.
+#		name = option_token
+#		text = "TEXT_KEY_FOR_OPTION_NAME"
+#		...
+#	}
+# }
+
+allow_war_exhaustion = {
+	name = "RULE_ALLOW_WAR_EXHAUSTION"
+	group = "RULE_GROUP_ALLOW_WAR_EXHAUSTION"
+	icon = "GFX_wargoals"
+	default = {
+		name = "ACCEPT"
+		text = "RULE_WAR_EXHAUSTION_OPTION_ACCEPT"
+		desc = "RULE_WAR_EXHAUSTION_OPTION_ACCEPT_DESC"
+	}
+	option = {
+		name = "LIMITED"
+		text = "RULE_WAR_EXHAUSTION_OPTION_LIMITED"
+		desc = "RULE_WAR_EXHAUSTION_OPTION_LIMITED_DESC"
+	}
+}
+
+allow_war_exhaustion_view = {
+	name = "RULE_ALLOW_WAR_EXHAUSTION_VIEW"
+	group = "RULE_GROUP_ALLOW_WAR_EXHAUSTION"
+	icon = "GFX_wargoals"
+	default = {
+		name = "ACCEPT"
+		text = "RULE_ALLOW_WAR_EXHAUSTION_VIEW_ACCEPT"
+		desc = "RULE_ALLOW_WAR_EXHAUSTION_VIEW_DESC"
+	}
+	option = {
+		name = "LIMITED"
+		text = "RULE_ALLOW_WAR_EXHAUSTION_VIEW_LIMITED"
+		desc = "RULE_ALLOW_WAR_EXHAUSTION_VIEW_LIMITED_DESC"
+	}
+}

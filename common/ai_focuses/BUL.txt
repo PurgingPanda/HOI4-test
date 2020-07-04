@@ -1,0 +1,15 @@
+#####---------------------------------------------------------------------> edited by Greatexperiment
+
+ai_historical_focus_list_BUL = {
+	ai_national_focuses = {
+    BUL_crush_the_military_union
+		BUL_renew_kyoseivanovs_term
+		BUL_approach_italy
+		BUL_consolidate_the_regime
+		BUL_saedinenieto_pravi_silata
+		BUL_tsarist_terror
+		BUL_popovo_maneuvers
+		BUL_allow_rigged_election
+		BUL_royal_militarism
+	}
+}

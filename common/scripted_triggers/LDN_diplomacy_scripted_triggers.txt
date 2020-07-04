@@ -1,0 +1,170 @@
+LDN_peace_score_triggers = {
+	set_temp_variable = { peace_temp_score = FROM.war_exhaustion_per }
+	subtract_from_temp_variable = { peace_temp_score = ROOT.war_exhaustion_per }
+	clamp_temp_variable = { var = peace_temp_score min = 0 }
+	multiply_temp_variable = { peace_temp_score = 100  }
+	round_temp_variable = peace_temp_score
+	set_temp_variable = { LDN_peace_score = peace_temp_score }
+}
+
+LDN_war_exhaustion = {
+	ROOT = {
+		set_temp_variable = { war_exhaustion_base = 0 }
+		resize_temp_array = { war_exhaustion = 6 }
+		set_temp_variable = { war_exhaustion^0 = has_stability }
+		subtract_from_temp_variable = { war_exhaustion^0 = 0.5 }
+		multiply_temp_variable = { war_exhaustion^0 = -1 }
+		set_temp_variable = { war_exhaustion^1 = has_war_support }
+		subtract_from_temp_variable = { war_exhaustion^1 = 0.5 }
+		multiply_temp_variable = { war_exhaustion^1 = -1 }
+		set_temp_variable = { war_exhaustion^2 = enemies_strength_ratio }
+		multiply_temp_variable = { war_exhaustion^2 = 0.1 }
+		set_temp_variable = { war_exhaustion^3 = we_occupied_state }
+		set_temp_variable = { war_exhaustion^4 = surrender_progress }
+		multiply_temp_variable = { war_exhaustion^4 = 10 }
+		set_temp_variable = { war_exhaustion^5 = casualties_k }
+		multiply_temp_variable = { war_exhaustion^5 = 0.01 }
+		all_of = {
+			array = war_exhaustion
+			value = dis_modifier
+			add_to_temp_variable = { war_exhaustion_base = dis_modifier }
+		}
+		if = {
+			limit = {
+				has_country_flag = war_exhaustion_active
+			}
+			set_temp_variable = { war_exhaustion_base_modifier = war_exhaustion_base }
+		}
+		else = {
+			set_temp_variable = { war_exhaustion_base_modifier = 0 }
+		}
+	}
+}
+
+LDN_diplo_peace_accept = {
+	set_temp_variable = {	accept_base = FROM.surrender_progress }
+	if = {
+		limit = {
+			check_variable = { FROM.modifier@surrender_limit < 0 }
+		}
+		set_temp_variable = { accept_base_modifier = FROM.modifier@surrender_limit }
+		multiply_temp_variable = { accept_base_modifier = -0.5 }
+		add_to_temp_variable = { accept_base = accept_base_modifier }
+	}
+	resize_temp_array = { accept_modifiers = 9 }
+	if = {
+		limit = {
+			ROOT = {
+				is_major = yes
+			}
+		}
+		set_temp_variable = { accept_modifiers^0 = 0.05 }
+	}
+	if = {
+		limit = {
+			FROM = {
+				is_major = yes
+			}
+		}
+		set_temp_variable = { accept_modifiers^1 = -0.05 }
+	}
+	if = {
+		limit = {
+			FROM = {
+				any_allied_country = {
+					is_major = yes
+					has_war_with = ROOT
+					has_capitulated = no
+				}
+			}
+		}
+		set_temp_variable = { accept_modifiers^2 = -0.05 }
+	}
+	set_temp_variable = { accept_modifiers^3 = FROM.has_war_support }
+	subtract_from_temp_variable = { accept_modifiers^3 = 0.5 }
+	multiply_temp_variable = { accept_modifiers^3 = -0.1 }
+	set_temp_variable = { accept_modifiers^4 = FROM.var_demand_state }
+	multiply_temp_variable = { accept_modifiers^4 = -0.02 }
+	set_temp_variable = { accept_modifiers^5 = FROM.var_demand_resource_state }
+	multiply_temp_variable = { accept_modifiers^5 = -0.01 }
+	set_temp_variable = { accept_modifiers^6 = ROOT.demand_pol_power_var }
+	multiply_temp_variable = { accept_modifiers^6 = -0.01 }
+	if = {
+		limit = {
+			FROM = {
+				casualties_inflicted_by = {
+					opponent = ROOT
+					thousands > 200
+				}
+			}
+		}
+		set_temp_variable = { accept_modifiers^7 = 0.2 }
+	}
+	else_if = {
+		limit = {
+			FROM = {
+				casualties_inflicted_by = {
+					opponent = ROOT
+					thousands > 150
+				}
+			}
+		}
+		set_temp_variable = { accept_modifiers^7 = 0.15 }
+	}
+	else_if = {
+		limit = {
+			FROM = {
+				casualties_inflicted_by = {
+					opponent = ROOT
+					thousands > 100
+				}
+			}
+		}
+		set_temp_variable = { accept_modifiers^7 = 0.1 }
+	}
+	else_if = {
+		limit = {
+			FROM = {
+				casualties_inflicted_by = {
+					opponent = ROOT
+					thousands > 50
+				}
+			}
+		}
+		set_temp_variable = { accept_modifiers^7 = 0.05 }
+	}
+	else_if = {
+		limit = {
+			FROM = {
+				casualties_inflicted_by = {
+					opponent = ROOT
+					thousands > 0
+				}
+			}
+		}
+		set_temp_variable = { accept_modifiers^7 = 0.01 }
+	}
+	if = {
+		limit = {
+			LDN_peace_score_triggers = yes
+			check_variable = {
+				var = ROOT.demand_state_cost_var
+				value = LDN_peace_score
+				compare = less_than_or_equals
+			}
+		}
+		set_temp_variable = { accept_modifiers^8 = 0.03 }
+	}
+	else = {
+		set_temp_variable = { accept_modifiers^8 = -0.03 }
+	}
+	all_of = {
+		array = accept_modifiers
+		value = accept_modifier
+		add_to_temp_variable = { accept_base = accept_modifier }
+	}
+	set_temp_variable = { accept_base_sum = accept_base }
+	clamp_temp_variable = { var = accept_base_sum max = 1 min = 0 }
+}
+LDN_diplo_peace_opinion = {
+}

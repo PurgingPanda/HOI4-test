@@ -1,0 +1,1 @@
+NDefines.NMilitary.BASE_FORT_PENALTY = -0.075 					-- fort penalty

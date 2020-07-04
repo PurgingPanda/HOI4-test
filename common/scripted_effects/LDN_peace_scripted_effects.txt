@@ -1,0 +1,89 @@
+LDN_set_peace_score = {
+	set_temp_variable = { peace_temp_score = FROM.war_exhaustion_per }
+	subtract_from_temp_variable = { peace_temp_score = ROOT.war_exhaustion_per }
+	clamp_temp_variable = { var = peace_temp_score min = 0 }
+	multiply_temp_variable = { peace_temp_score = 100  }
+	round_temp_variable = peace_temp_score
+	set_variable = { LDN_peace_score = peace_temp_score }
+}
+
+LDN_war_exhaustion_limit = {
+	ROOT = {
+		set_temp_variable = { war_exhaustion_limit_base = 0 }
+		resize_temp_array = { war_exhaustion_limit = 4 }
+		set_temp_variable = { war_exhaustion_limit^0 = num_owned_controlled_states }
+		set_temp_variable = { war_exhaustion_limit^1 = max_available_manpower_k }
+		divide_temp_variable = { war_exhaustion_limit^1 = 10 }
+		set_temp_variable = { war_exhaustion_limit^2 = num_of_factories }
+		set_temp_variable = { temp_not_core_states_var = num_owned_states }
+		subtract_from_temp_variable = { temp_not_core_states_var = num_owned_controlled_states }
+		multiply_temp_variable = { temp_not_core_states_var = 0.85 }
+		round_temp_variable = temp_not_core_states_var
+		set_temp_variable = { war_exhaustion_limit^3 = temp_not_core_states_var }
+		for_each_loop = {
+			array = war_exhaustion_limit
+			add_to_temp_variable = { war_exhaustion_limit_base = v }
+		}
+		if = {
+			limit = {
+				is_major = yes
+			}
+			multiply_temp_variable = { war_exhaustion_limit_base = 1.25 }
+		}
+		if = {
+			limit = {
+				OR = {
+					has_government = fascism
+					has_government = communism
+				}
+				has_offensive_war = yes
+			}
+			multiply_temp_variable = { war_exhaustion_limit_base = 1.15 }
+		}
+		else_if = {
+			limit = {
+				has_defensive_war = yes
+			}
+			multiply_temp_variable = { war_exhaustion_limit_base = 1.15 }
+		}
+		set_variable = { limit_war_exhaustion = war_exhaustion_limit_base }
+		round_variable = limit_war_exhaustion
+	}
+}
+
+LDN_diplo_peace_set_frame_effect = {
+	if = {
+		limit = {
+			LDN_ROOT_war_exhaustion = yes
+			LDN_FROM_war_exhaustion = yes
+		}
+		set_temp_variable = { war_exhaustion_for_frame = ROOT.war_exhaustion_per }
+		subtract_from_temp_variable = { war_exhaustion_for_frame = global_event_target:peace_diplo_receiver_country.war_exhaustion_per }
+		multiply_temp_variable = { war_exhaustion_for_frame = 11 }
+		if = {
+			limit = { check_variable = { war_exhaustion_for_frame < 0 } }
+			set_temp_variable = { LDN_diplo_peace_frame_var = 21 }
+			add_to_temp_variable = { LDN_diplo_peace_frame_var = war_exhaustion_for_frame }
+		}
+		else_if = {
+			limit = { check_variable = { war_exhaustion_for_frame = 0 } }
+			set_temp_variable = { LDN_diplo_peace_frame_var = 11 }
+		}
+		else = {
+			set_temp_variable = { LDN_diplo_peace_frame_var = war_exhaustion_for_frame }		
+		}
+		round_variable = LDN_diplo_peace_frame_var
+		set_variable = { peace_frame_var = LDN_diplo_peace_frame_var }
+	}
+}
+
+LDN_war_exhaustion_per = {
+	set_temp_variable = { war_exhaustion_temp_per = war_exhaustion }
+	divide_temp_variable = { war_exhaustion_temp_per = limit_war_exhaustion }
+	clamp_temp_variable = {
+		var = war_exhaustion_temp_per
+		min = 0
+		max = 1
+	}
+	set_variable = { war_exhaustion_per = war_exhaustion_temp_per }
+}

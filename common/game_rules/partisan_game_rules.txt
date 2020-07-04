@@ -1,0 +1,100 @@
+partisan_template_is_locked = {
+	name = "PARTISAN_TEMPLATE_IS_LOCKED"
+	group = "RULE_GROUP_MOD_OPTION"
+	default = {
+		name = DEFAULT
+		text = "RULE_OPTION_DEFAULT"
+		desc = "RULE_OPTION_DEFAULT_IS_LOCKED_DESC"
+	}
+	option = {
+		name = NOT_LOCKED
+		text = "RULE_OPTION_ALLOWED"
+		desc = "RULE_OPTION_IS_NOT_LOCKED_DESC"
+	}
+}
+
+partisan_ai_character = {
+	name = "PARTISAN_AI_CHARACTER"
+	group = "RULE_GROUP_MOD_OPTION"
+	default = {
+		name = DEFAULT
+		text = "RULE_OPTION_DEFAULT"
+		desc = "RULE_OPTION_DEFAULT_NATURAL_DESC"
+	}
+	option = {
+		name = POSITIVE
+		text = "RULE_OPTION_POSITIVE"
+		desc = "RULE_OPTION_POSITIVE_DESC"
+	}
+	option = {
+		name = CAREFULLY
+		text = "RULE_OPTION_CAREFULLY"
+		desc = "RULE_OPTION_CAREFULLY_DESC"
+	}
+	option = {
+		name = WHIMSICAL
+		text = "RULE_OPTION_WHIMSICAL"
+		desc = "RULE_OPTION_WHIMSICAL_DESC"
+	}
+	option = {
+		name = RANDOM_CHARACTER
+		text = "RULE_OPTION_RANDOM"
+		desc = "RULE_OPTION_RANDOM_CHARACTER_DESC"
+	}
+}
+
+partisan_days_to_uprise_again = {
+	name = "PARTISAN_DAYS_TO_UPRISE_AGAIN"
+	group = "RULE_GROUP_MOD_OPTION"
+	default = {
+		name = DEFAULT
+		text = "RULE_OPTION_DEFAULT"
+		desc = "RULE_OPTION_DEFAULT_A_MONTH_DESC"
+	}
+	option = {
+		name = A_WEEK
+		text = "RULE_OPTION_A_WEEK"
+		desc = "RULE_OPTION_A_WEEK_DESC"
+	}
+	option = {
+		name = HALF_A_MONTH
+		text = "RULE_OPTION_HALF_A_MONTH"
+		desc = "RULE_OPTION_HALF_A_MONTH_DESC"
+	}
+	option = {
+		name = TWO_MONTH
+		text = "RULE_OPTION_TWO_MONTH"
+		desc = "RULE_OPTION_TWO_MONTH_DESC"
+	}
+}
+
+partisan_can_uprise_score = {
+	name = "PARTISAN_CAN_UPRISE_SCORE"
+	group = "RULE_GROUP_MOD_OPTION"
+	default = {
+		name = DEFAULT
+		text = "RULE_OPTION_DEFAULT"
+		desc = "RULE_OPTION_DEFAULT_RESISTANCE_MORE_THAN_50_DESC"
+	}
+#	option = {
+#		name = MORE_THAN_0
+#		text = "RULE_OPTION_MORE_THAN_0"
+#		desc = "RULE_OPTION_MORE_THAN_0_DESC"
+#	}
+	option = {
+		name = MORE_THAN_20
+		text = "RULE_OPTION_MORE_THAN_20"
+		desc = "RULE_OPTION_MORE_THAN_20_DESC"
+	}
+	option = {
+		name = MORE_THAN_80
+		text = "RULE_OPTION_MORE_THAN_80"
+		desc = "RULE_OPTION_MORE_THAN_80_DESC"
+	}
+#	option = {
+#		name = IMPOSSIBLE
+#		text = "RULE_OPTION_IMPOSSIBLE"
+#		desc = "RULE_OPTION_IMPOSSIBLE_DESC"
+#	}
+}
+

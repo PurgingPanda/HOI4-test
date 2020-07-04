@@ -1,0 +1,3387 @@
+on_actions = {	
+	on_annex = {
+		effect = {
+		
+			if = {
+				limit = {
+					OR = {
+						is_independent_warlords = no
+						NOT = {
+							has_country_flag = is_warlords
+						}
+					}
+					FROM = {
+						tag = event_target:KMT_central_gov_tag
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							original_tag = FROM
+						}
+					}
+					clear_global_event_target = KMT_central_gov_tag
+					set_global_flag = KMT_central_government_destroyed
+					every_other_country = {
+						limit = {
+							OR = {
+								is_independent_warlords = yes
+								has_country_flag = is_warlords
+							}
+						}
+						country_event = { id = claim_central.6 }
+					}
+				}
+				if = {
+					limit = {
+						original_tag = FROM
+					}
+					set_country_flag = KMT_central_government_flag
+					save_global_event_target_as = KMT_central_gov_tag
+					capital_scope = {
+						set_state_flag = KMT_central_gov_capital
+					}
+					country_event = { id = claim_central.7 }
+					every_other_country = {
+						limit = {
+							OR = {
+								is_independent_warlords = yes
+								has_country_flag = is_warlords
+							}
+																	
+						}
+						country_event = { id = claim_central.8 }
+					}
+				}
+			}
+		}
+	}
+
+###---> On Capitulation <><> <><> <><>
+	on_capitulation = {
+		effect = {
+			every_state = {
+				limit = {
+					has_state_flag = r56_aluminium_collection
+				}
+				add_resource = {
+					type = aluminium
+					amount = -1
+				}
+				clr_state_flag = r56_aluminium_collection				
+			}
+			if = { #avoid brits in exile in britain
+				limit = {
+					has_dlc = "Man the Guns"
+					original_tag = RAJ
+					is_subject_of = ENG
+					has_government = democratic
+				}
+				drop_cosmetic_tag = yes
+			}
+			if = {
+				limit = {
+					has_dlc = "Man the Guns"
+					original_tag = MAL
+					is_subject_of = ENG
+					has_government = democratic
+				}
+				drop_cosmetic_tag = yes
+			}			
+			if = {
+				limit = {
+					has_dlc = "Man the Guns"
+					original_tag = INS
+					is_subject_of = HOL
+					has_government = democratic
+				}
+				drop_cosmetic_tag = yes
+			}						
+			if = {
+				limit = {
+					original_tag = DEN
+					OR = {
+						ICE = { is_subject_of = DEN }
+						DEN = { owns_state = 100 }
+						ICE = { owns_state = 100 }
+					}
+					NOR = {
+						NOT = {
+							OR = {
+								has_completed_focus = NOR_reclaim_the_islands
+								has_completed_focus = NOR_icelandic-faroese_revolt
+								has_completed_focus = NOR_reclaim_danish
+								has_completed_focus = NOR_unite_the_scandinavian_workers
+							}
+						}
+					}
+				}
+				country_event = { id = wtt_denmark.1 days = 1 }
+			}
+			
+			if = {
+				limit = {
+					original_tag = DEN
+					OR = {
+					GRL = { is_subject_of = DEN }
+					DEN = { owns_state = 101 }
+					GRL = { owns_state = 101 }
+					}
+				}
+				country_event = { id = wtt_denmark.2 days = 2 }
+			}
+			
+			if = {
+				limit = {
+					ROOT = {
+						OR = {
+							tag = SHX
+							tag = GXC
+							tag = XSM
+							tag = YUN
+							tag = SIK
+							tag = CHI
+						}
+						has_country_flag = is_warlords
+						is_in_faction_with = event_target:KMT_central_gov_tag
+						has_idea = KMT_united_front
+					}
+				}
+				event_target:KMT_central_gov_tag = {
+					country_event = { id = kmt.300 }
+				}
+			}
+			
+			if = {
+				limit = {
+					ROOT = {
+						tag = MAN
+						is_puppet_of = JAP
+						has_country_leader = {
+							name = "Aisin Gioro Puyi"
+							ruling_only = yes
+						}
+					}
+					FROM = {
+						OR = {
+							tag = CHI
+							tag = PRC
+							tag = event_target:KMT_central_gov_tag
+						}
+					}
+				}
+				FROM = {
+					country_event = { id = kmt.303 }
+				}
+			}
+			
+			if = {
+				limit = {
+					ROOT = {
+						OR = {
+							tag = PGR
+							has_cosmetic_tag = HCPC
+						}
+						is_puppet_of = CHI
+					}
+				}
+				CHI = {
+					country_event = { id = kmt.300 }
+				}
+				MEN = {
+					transfer_state = 611
+				}
+			}
+			
+			if = {
+				limit = {
+					original_tag = POL
+				}
+				if = { 
+					limit = { has_unit_leader = 3180 }
+					remove_unit_leader = 3180
+				}
+				if = {
+					limit = {
+						AND = {
+							NOT = { has_completed_focus = POL_Draw_Closer_To_The_USSR }
+							NOT = { has_completed_focus = POL_Seek_Autonomy }
+						}
+					}
+					POL = { set_party_name = { ideology = communism long_name = POL_GL_party_long name = POL_GL_party } }
+				}
+				if = {
+					limit = {
+						POL = {
+							is_puppet = no
+						}
+					}
+					POL = { set_party_name = { ideology = fascism long_name = POL_KN_party_long name = POL_KN_party } }
+					POL = { set_party_name = { ideology = neutrality long_name = POL_ZWZ_party_long name = POL_ZWZ_party } }
+					set_cosmetic_tag = POLAK
+				}
+				if = {
+					limit = {
+						POL = {
+							has_government = neutrality
+							has_civil_war = no
+							is_puppet = no
+							is_in_faction = yes
+							NOT = { has_country_flag = POL_Exile_Government_Formed }
+						}
+					}
+					POL = { country_event = poland.196 }
+					set_country_flag = POL_Exile_Government_Formed
+				}
+				if = {
+					limit = {
+						POL = {
+							has_government = democratic
+							has_civil_war = no
+							is_puppet = no
+							is_in_faction = yes
+							NOT = { has_completed_focus = POL_The_Polish_Socialist_Party }
+							NOT = { has_completed_focus = POL_The_Endecja_Movement }
+							NOT = { has_country_flag = POL_Exile_Government_Formed }
+						}
+					}
+					add_offsite_building = { type = arms_factory level = 1 }
+					create_country_leader = {
+						name = "Władysław Sikorski"
+						desc = "POLITICS_WLADYSLAW_SIKORSKI_DESC"
+						picture = "Portrait_Poland_Wladyslaw_Sikorski.dds"
+						expire = "1965.1.1"
+						ideology = liberalism
+						traits = {
+							democratic_reformer
+						}
+					}
+					set_country_flag = POL_Exile_Government_Formed
+				}
+				if = {
+					limit = {
+						POL = {
+							has_government = democratic
+							has_civil_war = no
+							is_puppet = no
+							is_in_faction = yes
+							has_completed_focus = POL_The_Polish_Socialist_Party
+							NOT = { has_country_flag = POL_Exile_Government_Formed }
+						}
+					}
+					POL = { country_event = poland.198 }
+					set_country_flag = POL_Exile_Government_Formed
+				}
+				if = {
+					limit = {
+						POL = {
+							has_government = democratic
+							has_civil_war = no
+							is_puppet = no
+							is_in_faction = yes
+							has_completed_focus = POL_The_Endecja_Movement
+							NOT = { has_country_flag = POL_Exile_Government_Formed }
+						}
+					}
+					set_global_flag = Dmowski_dead
+					create_country_leader = {
+						name = "Tadeusz Bielecki"
+						desc = "POLITICS_Tadeusz_Bielecki_DESC"
+						picture = "r56_portrait_POL_Tadeusz_Bielecki.dds"
+						expire = "1965.1.1"
+						ideology = conservatism
+						traits = {
+							polish_nationalist
+							political_pragmatist
+							dislikes_germany
+						}
+					}
+					POL = { set_party_name = { ideology = democratic long_name = POL_NOW_long name = POL_NOW_party } }
+					set_country_flag = POL_Exile_Government_Formed
+				}
+				94 = { add_core_of = BLR }
+				97 = { add_core_of = BLR }
+				95 = { add_core_of = BLR }
+				96 = { add_core_of = BLR }
+				89 = { add_core_of = UKR }
+				91 = { add_core_of = UKR }
+				93 = { add_core_of = UKR }
+				784 = { add_core_of = LIT }
+			}
+		}
+	}
+	
+###---> On Civil War End <><> <><> <><>
+	on_civil_war_end = {
+		effect = {
+
+			#End of SCW
+			if = {
+				limit = {
+					FROM = {
+						original_tag = GRE
+					}
+					ROOT = {
+						original_tag = GRE
+						has_government = fascism
+					}
+				}
+				country_event = { id = greece.49 }
+			}
+			if = {
+				limit = {
+					FROM = {
+						original_tag = GRE
+					}
+					ROOT = {
+						original_tag = GRE
+						has_government = communism
+					}
+				}
+				country_event = { id = greece.47 }
+			}				
+			#spread revolution siam commies win
+			if = {
+				limit = {
+					FROM = {
+						original_tag = SIA
+					}
+					ROOT = {
+						original_tag = SIA
+						has_government = communism
+					}
+				}
+				set_capital = 289
+			}
+			
+			#spread revolution indo commies win
+			if = {
+				limit = {
+					FROM = {
+						original_tag = INS
+					}
+					ROOT = {
+						original_tag = INS
+						has_government = communism
+					}
+				}
+				set_capital = 335
+			}
+			
+			#spread revolution indian commies win
+			if = {
+				limit = {
+					FROM = {
+						original_tag = RAJ
+					}
+					ROOT = {
+						original_tag = RAJ
+						has_government = communism
+					}
+				}
+				set_capital = 439
+			}
+			
+			#spread revolution malay commies win
+			if = {
+				limit = {
+					FROM = {
+						original_tag = MAL
+					}
+					ROOT = {
+						original_tag = MAL
+						has_government = communism
+					}
+				}
+				set_capital = 336
+			}
+			
+			#Russian empire win
+			if = {
+				limit = {
+					FROM = {
+						original_tag = SOV
+					}
+					ROOT = {
+						original_tag = SOV
+						has_government = fascism
+					}
+				}
+				set_capital = 195
+			}
+			#Fascist Wins Italian Civil War
+			if = {
+				limit = {
+					FROM = {
+						original_tag = ITA
+					}
+					ROOT = {
+						original_tag = ITA
+						has_government = fascism
+					}
+				}
+				delete_unit_template_and_units = {
+					division_template = "Black Shirts"
+				}
+			}
+			#Loyalist Wins Italian Civil War
+			if = {
+				limit = {
+					FROM = {
+						original_tag = ITA
+					}
+					ROOT = {
+						original_tag = ITA
+						has_government = neutrality
+					}
+				}
+				delete_unit_template_and_units = {
+					division_template = "Loyalist Milita"
+				}
+			}
+
+			#drop cosmetic tag
+			if = {
+				limit = {
+					FROM = {
+						original_tag = MAN
+					}
+					ROOT = {
+						original_tag = MAN
+						has_government = neutrality
+					}
+				}
+				drop_cosmetic_tag = yes
+			}
+
+			#drop cosmetic tag
+			if = {
+				limit = {
+					FROM = {
+						original_tag = MAN
+						has_government = neutrality
+					}
+					ROOT = {
+						original_tag = MAN
+						has_government = fascism
+					}
+				}
+				set_country_flag = RFP_wins
+				create_wargoal = {
+					target = SOV
+					type = annex_everything
+				}
+			}
+		}
+	}
+	
+###---> On Declare War <><> <><> <><>
+	on_declare_war = {
+		effect = {
+			#remove Italian control over Albania if they are at war
+			if = {
+				limit = {
+					ROOT = {
+						OR = {
+							original_tag = ALB
+							original_tag = ITA
+						}						
+					}
+					FROM = {
+						OR = {
+							original_tag = ALB
+							original_tag = ITA
+						}
+					}
+				}
+				ITA = {
+					remove_resource_rights = 44
+					remove_resource_rights = 797
+				}
+				ALB = {
+					clr_country_flag = ALB_italian_resource_concessions
+				}						
+			}
+			#Remove Soviet-Japanese oil agreement on North Sakhalin if they are at war.
+			if = {
+				limit = {
+					ROOT = {
+						OR = {
+							original_tag = JAP
+							original_tag = SOV
+						}					
+					}
+					FROM = {
+						OR = {
+							original_tag = JAP
+							original_tag = SOV
+						}
+					}
+				}
+				JAP = {
+					remove_resource_rights = 655
+					remove_opinion_modifier = { target = SOV modifier = JAP_SOV_sakhalin_oil_agreement }
+				}						
+			}
+			#Japanese civil war			
+			if = {
+				limit = {
+					ROOT = {
+						original_tag = JAP
+						has_government = fascism
+						has_country_leader = {
+							name = "Hirohito"
+							ruling_only = yes
+						}						
+					}
+					FROM = {
+						original_tag = JAP
+						has_government = neutrality
+					}
+				}
+				ROOT = {
+					create_country_leader = {
+						name = "Hideki Tojo"
+						desc = "Hideki Tojo"
+						picture = "gfx/leaders/JAP/Portrait_Japan_Generic_land_2.dds"
+						expire = "1965.1.1"
+						ideology = fascism_ideology
+						traits = {
+							army_connections
+							
+						}
+					}
+				}
+				FROM = {
+					create_country_leader = {
+						name = "Hirohito"
+						desc = "POLITICS_Hirohito_DESC"
+						picture = "Portrait_Japan_Hirohito.dds"
+						expire = "1989.1.1"
+						ideology = despotism
+						traits = {
+							warrior_code
+							emperor_showa
+						}
+						id = 700 #Hirohito
+					}				
+				}
+			}
+			if = {
+				limit = {
+					ROOT = {
+						original_tag = JAP
+						has_government = neutrality						
+					}
+					FROM = {
+						original_tag = JAP
+						has_government = fascism
+						has_country_leader = {
+							name = "Hirohito"
+							ruling_only = yes
+						}					
+					}
+				}
+				ROOT = {
+					create_country_leader = {
+						name = "Hirohito"
+						desc = "POLITICS_Hirohito_DESC"
+						picture = "Portrait_Japan_Hirohito.dds"
+						expire = "1989.1.1"
+						ideology = despotism
+						traits = {
+							warrior_code
+							emperor_showa
+						}
+						id = 700 #Hirohito
+					}
+					
+				}				
+				FROM = {
+					create_country_leader = {
+						name = "Hideki Tojo"
+						desc = "Hideki Tojo"
+						picture = "gfx/leaders/JAP/Portrait_Japan_Generic_land_2.dds"
+						expire = "1965.1.1"
+						ideology = fascism_ideology
+						traits = {
+							army_connections
+							
+						}
+					}	
+				}
+			}
+			#democratic civil war
+			if = {
+				limit = {
+					ROOT = {
+						original_tag = JAP
+						has_government = democratic						
+					}
+					FROM = {
+						original_tag = JAP
+						has_government = fascism
+						#has_country_leader = {
+						#	name = "Hirohito"
+						#	ruling_only = yes
+						#}					
+					}
+				}
+				ROOT = {
+					#add hirohito idea here if not added by showa consitution focus.
+					if = {
+						limit = {
+							NOT = {
+								has_completed_focus = JAP_strengthen_civilian_government
+							}
+						}
+						add_ideas = JAP_hirohito
+					}
+					
+				}				
+				FROM = {
+					create_country_leader = {
+						name = "Hideki Tojo"
+						desc = "Hideki Tojo"
+						picture = "gfx/leaders/JAP/Portrait_Japan_Generic_land_2.dds"
+						expire = "1965.1.1"
+						ideology = fascism_ideology
+						traits = {
+							army_connections
+						}
+					}
+					add_war_support = 0.8
+					set_cosmetic_tag = JAP2	
+				}
+			}
+			#Horthy-Horthy civil war				
+			if = {
+				limit = {
+					ROOT = {
+						original_tag = HUN
+						has_government = fascism
+						has_country_leader = {
+							name = "Miklós Horthy"
+							ruling_only = yes
+						}						
+					}
+					FROM = {
+						original_tag = HUN
+						has_government = neutrality
+					}
+				}
+				ROOT = {
+					create_country_leader = {
+						name = "Ferenc Szalasi"
+						desc = "POLITICS_FERENC_SZALASI_DESC"
+						picture = "gfx/leaders/HUN/r56_portrait_HUN_Ferenc_Szalasi.dds"
+						expire = "1965.1.1"
+						ideology = nazism
+						traits = {
+							anti_communist
+							fascist_militia_leader
+						}
+					}
+					set_party_name = { ideology = fascism long_name = HUN_arrow_cross_party_long name = HUN_arrow_cross_party }					
+				}
+			}
+			if = {
+				limit = {
+					ROOT = {
+						original_tag = HUN
+						has_government = neutrality						
+					}
+					FROM = {
+						original_tag = HUN
+						has_government = fascism
+						NOT = {
+							has_country_leader = {
+								name = "Ferenc Szalasi"
+								ruling_only = yes
+							}							
+						}
+					}
+				}
+				FROM = {
+					create_country_leader = {
+						name = "Ferenc Szalasi"
+						desc = "POLITICS_FERENC_SZALASI_DESC"
+						picture = "gfx/leaders/HUN/r56_portrait_HUN_Ferenc_Szalasi.dds"
+						expire = "1965.1.1"
+						ideology = nazism
+						traits = {
+							anti_communist
+							fascist_militia_leader
+						}
+					}
+					set_party_name = { ideology = fascism long_name = HUN_arrow_cross_party_long name = HUN_arrow_cross_party }					
+				}
+			}
+			#Italian civil war			
+			if = {
+				limit = {
+					ROOT = {
+						original_tag = ITA
+						has_government = fascism
+						has_idea = victor_emmanuel						
+					}
+					FROM = {
+						original_tag = ITA
+						has_government = neutrality
+					}
+				}
+				ROOT = {
+					remove_ideas = victor_emmanuel
+					set_cosmetic_tag = ITA_RSI
+				}
+			}
+			if = {
+				limit = {
+					ROOT = {
+						original_tag = ITA
+						has_government = neutrality						
+					}
+					FROM = {
+						original_tag = ITA
+						has_government = fascism
+						has_idea = victor_emmanuel							
+					}
+				}
+				
+				FROM = {
+					remove_ideas = victor_emmanuel
+					set_cosmetic_tag = ITA_RSI
+				}
+			}								
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							tag = GER
+							FROM = { tag = SOV }
+						}
+						AND = {
+							tag = SOV
+							FROM = { tag = GER }
+						}
+					}
+					GER = { has_completed_focus = GER_soviet_invasion }
+				}
+				hidden_effect = {
+					GER = { 
+						add_timed_idea = { idea = GER_barbarossa days = 180 }
+						activate_mission = GER_barbarossa_mission
+					}
+				}
+			}
+			
+			if = {
+				limit = {
+					ROOT = {
+						TAG = GER
+					}
+					FROM = {
+						TAG = SOV
+					}
+				}
+				POL = { remove_ideas = POL_Ribbentrop_Beck_Pact }
+			}
+			
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							FROM = {
+								tag = JAP
+							}
+							tag = USA
+						}
+						AND = {
+							FROM = {
+								tag = USA
+							}
+							tag = JAP
+						}
+					}
+					has_global_flag = MAN_will_join_usa
+					MAN = {
+						is_puppet_of = JAP
+					}
+				}
+				MAN = {
+					overlord = {
+						set_autonomy = {
+							target = MAN
+							autonomy_state = autonomy_free
+						}
+					}
+				}
+				USA = {
+					set_autonomy = {
+						target = MAN
+						autonomy_state = autonomy_puppet
+					}
+					set_autonomy = {
+						target = MAN
+						autonomy_state = autonomy_free
+					}
+					if = {
+						limit = {
+							is_in_faction = no
+						}
+						create_faction = mck_liberate
+						add_to_faction = MAN
+						else = {
+							random_country = {
+								limit = {
+									OR = {
+										is_in_faction_with = USA
+										tag = USA
+									}
+									is_faction_leader = yes
+								}
+								add_to_faction = MAN
+							}
+						}
+					}
+				}
+				MAN = {
+					declare_war_on = {
+						target = JAP
+						type = annex_everything
+					}
+					hidden_effect = {
+						country_event = { id = jap.22 }
+						set_politics = {
+							ruling_party = democratic
+							elections_allowed = no
+						}
+						set_political_party = {
+							ideology = communism
+							popularity = 0
+						}
+						set_political_party = {
+							ideology = fascism
+							popularity = 5
+						}
+						set_political_party = {
+							ideology = neutrality
+							popularity = 20
+						}
+						set_political_party = {
+							ideology = democratic
+							popularity = 80
+						}
+					}
+					add_to_war = {
+						targeted_alliance = USA
+						enemy = JAP
+					}
+					if = {
+						limit = {
+							has_idea = MAN_dongbei_partisan
+						}
+						remove_ideas = MAN_dongbei_partisan
+					}
+					if = {
+						limit = {
+							has_idea = MAN_dongbei_partisan_pacified
+						}
+						remove_ideas = MAN_dongbei_partisan_pacified
+					}
+				}
+			}
+		
+			#remove chi ger opinion
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							FROM = {
+								tag = CHI
+							}
+							ROOT = {
+								tag = GER
+							}
+						}
+						AND = {
+							ROOT = {
+								tag = CHI
+							}
+							FROM = {
+								tag = GER
+							}
+						}
+					}
+					CHI = {
+						has_opinion_modifier = sino_german_cooperation
+					}
+					GER = {
+						has_opinion_modifier = sino_german_cooperation
+					}
+				}
+				CHI = {
+					remove_opinion_modifier = {
+						target = GER
+						modifier = sino_german_cooperation
+					}
+					remove_opinion_modifier = {
+						target = GER
+						modifier = more_sino_german_coop
+					}
+				}
+				GER = {
+					remove_opinion_modifier = {
+						target = CHI
+						modifier = sino_german_cooperation
+					}
+					remove_opinion_modifier = {
+						target = CHI
+						modifier = more_sino_german_coop
+					}
+				}
+			}
+			
+			#gain buff when against commie - f
+			if = {
+				limit = {
+					FROM = {
+						has_idea = KMT_resist_the_reds
+						NOT = {
+							has_idea = KMT_anti_communism_sentiment
+						}
+					}
+					ROOT = {
+						has_government = communism
+					}
+				}
+				FROM = {
+					add_ideas = KMT_anti_communism_sentiment
+				}
+			}
+			
+			#gain buff when against commie - r
+			if = {
+				limit = {
+					ROOT = {
+						has_idea = KMT_resist_the_reds
+						NOT = {
+							has_idea = KMT_anti_communism_sentiment
+						}
+					}
+					FROM = {
+						has_government = communism
+					}
+				}
+				ROOT = {
+					add_ideas = KMT_anti_communism_sentiment
+				}
+			}
+			
+			#russian civil war
+			if = {
+				limit = {
+					ROOT = {
+						original_tag = MAN
+						has_country_flag = RFP_wins
+					}
+					FROM = {
+						tag = SOV
+					}
+				}
+				SOV = {
+					start_civil_war = {
+						ideology = fascism
+						capital = 408
+						states = { 408 409 560 657 655 537 561 563 }
+					}
+				}
+				random_country = {
+					limit = {
+						original_tag = SOV
+						has_government = fascism
+					}
+					create_faction = rfp_white_movement
+					add_timed_idea = {
+						idea = MAN_RFP_white_movement
+						days = 1700
+					}
+					hidden_effect = {
+						load_oob = "RFP_anti_bolshelvik"
+					}
+					annex_country = {
+						target = ROOT
+						transfer_troops = yes
+					}
+				}
+			}
+			
+			#set flag for warred with jap
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							ROOT = { tag = CHI }
+							FROM = { tag = JAP }
+						}
+						AND = {
+							ROOT = { tag = JAP }
+							FROM = { tag = CHI }
+						}
+					}
+				}
+				set_global_flag = CHI_warred_with_JAP
+			}
+			
+			#change to wartime corruption
+			if = {
+				limit = {
+					OR = {
+						FROM = { tag = CHI }
+						ROOT = { tag = CHI }
+					}
+					CHI = {
+						OR = {
+							has_idea = KMT_corrupted_government
+							has_idea = KMT_corrupted_government_lesser
+						}
+					}
+				}
+				CHI = {
+					country_event = { id = kmt.272 }
+				}
+			}
+			
+			#set flag
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = west_expedition_started
+					}
+					FROM = { tag = XSM }
+					ROOT = {
+						tag = PRC
+						has_completed_focus = PRC_west_expedition
+					}
+				}
+				set_global_flag = west_expedition_started
+			}
+			
+			#strike prc when west-expedition-ing
+			if = {
+				limit = {
+					FROM = { tag = PRC }
+					tag = CHI
+					PRC = {
+						is_in_faction = no
+						has_war_with = XSM
+					}
+					has_global_flag = west_expedition_started
+				}
+				PRC = {
+					country_event = { id = prc.53 }
+				}
+			}
+			
+			#get revanchism when war with jap
+			if = {
+				limit = {
+					has_idea = PRC_anti_jap_sentiment
+					NOT = {
+						has_idea = PRC_revanchism
+					}
+					FROM = { tag = JAP }
+				}
+				country_event = { id = prc.107 }
+			}
+			
+			#pop tips for central government
+			## You cannot trigger this when join others' war against the central government, since it would not be legitimate
+			if = {
+				limit = {
+					OR = {
+						has_country_flag = KMT_central_government_flag
+						FROM = {
+							has_country_flag = KMT_central_government_flag
+						}
+					}
+				}
+				country_event = { id = prc.107 }
+			}
+			
+			if = {
+				limit = {
+					OR = {
+						has_country_flag = KMT_central_government_flag
+						FROM = {
+							has_country_flag = KMT_central_government_flag
+						}
+					}
+				}
+				country_event = { id = prc.107 }
+			}
+			
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							tag = CHI
+							FROM = { tag = JAP }
+						}
+						AND = {
+							tag = JAP
+							FROM = { tag = CHI }
+						}
+					}
+					country_exists = MEN
+				}
+				set_global_flag = KMT_MEN_trigger_by_on_action
+				MEN = {
+					country_event = { id = jap.74 }
+				}
+			}	
+			
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = PRC_restart_chinese_civil_war
+					}
+					OR = {
+						AND = {
+							tag = PRC
+							FROM = {
+								tag = CHI
+							}
+						}
+						AND = {
+							tag = CHI
+							FROM = {
+								tag = PRC
+							}
+						}
+					}
+				}
+				PRC = {
+					country_event = { id = china.108 }
+					if = {
+						limit = {
+							NOT = {
+								has_completed_focus = PRC_found_our_nation
+							}
+						}
+						drop_cosmetic_tag = yes
+						set_cosmetic_tag = GCDcivilwar
+						set_global_flag = PRC_civil_war_started
+					}
+				}
+			}
+		}
+	}
+	
+###---> On Government Change <><> <><> <><>
+	on_government_change = {
+		effect = {
+			#ensure that concessions are removed in Albania if fascist regime collapse
+			if = {
+				limit = {
+					tag = ITA
+					country_exists = ALB
+				}
+				ITA = {
+					remove_resource_rights = 44
+					remove_resource_rights = 797
+				}
+				ALB = {
+					clr_country_flag = ALB_italian_resource_concessions
+				}				
+			}
+
+			if = {
+				limit = {
+					tag = MAN
+					has_government = neutrality
+					OR = {
+						country_exists = CHI
+						country_exists = PRC
+					}
+				}
+				if = {
+					limit = {
+						country_exists = CHI
+					}
+					CHI = { country_event = { id = kmt.275 }}
+					else = {
+						if = {
+							limit = {
+								country_exists = PRC
+							}
+							PRC = { country_event = { id = kmt.275 }}
+						}
+					}
+				}
+			}
+			
+			if = {
+				limit = {
+					tag = MAN
+					NOT = {
+						has_government = fascism
+						OR = {
+							has_global_flag = JAP_grant_MAN_independence
+							has_completed_focus = MAN_call_usa_to_act
+							has_completed_focus = MAN_coronation
+							has_completed_focus = MAN_independence_war
+						}
+					}
+					is_puppet_of = JAP
+				}
+				overlord = {
+					country_event = { id = jap.57 }
+				}
+			}
+			
+			if = {
+				limit = {
+					tag = CHI
+					has_government = democratic
+					NOT = {
+						has_country_flag = KMT_party_chosen
+					}
+				}
+				country_event = { id = kmt.279 }
+			}
+			
+			if = {
+				limit = {
+					tag = CHI
+					has_government = fascism
+					is_puppet = no
+					NOT = {
+						has_completed_focus = KMT_support_pro_japanese_faction
+					}
+				}
+				set_party_name = { ideology = fascism long_name = CKS_regime name = CKS_regime }
+				create_country_leader = {
+					name = "Chiang Kai-Shek"
+					desc = "POLITICS_CHIANG_KAI-SHEK_DESC"
+					picture = "Portrait_China_Chiang_Kai_Shek.dds"
+					expire = "1965.1.1"
+					ideology = fascism_ideology
+					traits = {
+						army_connections
+					}
+				}
+			}
+		}
+	}
+	
+###---> On Join Allies <><> <><> <><>
+	on_join_allies = {
+		effect = {
+			if = {
+				limit = {
+					ROOT = {
+						tag = USA
+					}
+					FROM = {
+						has_war_with = JAP
+					}
+					has_global_flag = MAN_will_join_usa
+					MAN = {
+						is_puppet_of = JAP
+					}
+				}
+				MAN = {
+					country_event = { id = jap.61 hours = 1 }
+				}
+			}
+			
+			#gain buff when against commie - f
+			if = {
+				limit = {
+					any_country = {
+						has_idea = KMT_resist_the_reds
+						has_war_with = ROOT
+						has_war_with = FROM
+					}
+					ROOT = {
+						has_government = communism
+					}
+				}
+				every_other_country = {
+					limit = {
+						has_idea = KMT_resist_the_reds
+						NOT = {
+							has_idea = KMT_anti_communism_sentiment
+						}
+						has_war_with = ROOT
+						has_war_with = FROM
+					}
+					country_event = { id = kmt.252 hours = 1 }
+				}
+			}
+			
+			#gain buff when against commie - r
+			if = {
+				limit = {
+					ROOT = {
+						has_idea = KMT_resist_the_reds
+						NOT = {
+							has_idea = KMT_anti_communism_sentiment
+						}
+					}
+					any_country = {
+						has_government = communism
+						has_war_with = ROOT
+						has_war_with = FROM
+					}
+				}
+				ROOT = {
+					country_event = { id = kmt.252 hours = 1 }
+				}
+			}
+			
+			#russian civil war
+			if = {
+				limit = {
+					ROOT = {
+						original_tag = MAN
+						has_country_flag = RFP_wins
+					}
+					FROM = {
+						has_war_with = SOV
+					}
+					SOV = {
+						has_civil_war = no
+					}
+				}
+				country_event = { id = jap.63 hours = 1 }
+			}
+			
+			#change to wartime corruption
+			if = {
+				limit = {
+					tag = CHI
+					OR = {
+						has_idea = KMT_corrupted_government
+						has_idea = KMT_corrupted_government_lesser
+					}
+				}
+				country_event = { id = kmt.272 hours = 1 }
+			}
+		}
+	}
+	
+###---> On New Term Election <><> <><> <><>
+	on_new_term_election = {
+		effect = {
+			if = {
+				limit = {
+					tag = CHI
+					has_government = neutrality
+					NOT = {
+						has_country_flag = KMT_party_chosen
+					}
+				}
+				country_event = { id = kmt.279 }
+			}
+			if = {
+				limit = {
+					original_tag = MEX
+					has_country_flag = election_1940
+				}
+				MEX = {
+					country_event = { id = mexico_1940.4 }
+				}
+			}
+		}
+	}
+	
+###---> On Puppet <><> <><> <><>
+	on_puppet = {
+		effect = {			
+			if = {
+				limit = {
+					TAG = POL
+				}
+				POL = { remove_ideas = POL_Sanacja_Government }
+				if = { 
+					limit = { has_unit_leader = 3180 }
+					remove_unit_leader = 3180
+				}
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = POL
+						SOV = { has_country_flag = SOV_purge_started }
+						NOT = { has_completed_focus = POL_Draw_Closer_To_The_USSR }
+						NOT = { has_completed_focus = POL_Seek_Autonomy }
+						NOT = { has_country_flag = PPS_Revolutionary_Path }
+					}
+				}
+				create_country_leader = {
+					name = "Tymczasowy Rząd Jedności Narodowej"
+					desc = "PROVISIONAL_GOVERNMENT_OF_NATIONAL_UNITY_DESC"
+					picture = "r56_portrait_POL_Provisional_Government_of_National_Unity.dds"
+					expire = "1965.1.1"
+					ideology = stalinism
+					traits = {
+					}
+				}
+			}
+			if = {
+				limit = {
+					AND = { 
+						TAG = POL
+						is_puppet_of = SOV
+						POL = { 
+							has_government = communism
+							NOT = { has_completed_focus = POL_The_Endecja_Movement }
+							NOT = { has_completed_focus = POL_The_Polish_Socialist_Party }
+						}
+					}
+				}
+				POL = { set_party_name = { ideology = democratic long_name = POL_PSL_long name = POL_PSL_party } }
+			}
+			if = {
+				limit = {
+					AND = { 
+						TAG = POL
+						is_subject_of = SOV
+						POL = { 
+							has_government = communism
+							NOT = { has_completed_focus = POL_Seek_Autonomy }
+							NOT = { has_completed_focus = POL_Draw_Closer_To_The_USSR }
+						}
+					}
+				}
+				POL = { set_party_name = { ideology = communism long_name = POL_ZPP_party_long name = POL_ZPP_party } }
+				drop_cosmetic_tag = yes
+				create_country_leader = {
+					name = "Tymczasowy Rząd Jedności Narodowej"
+					desc = "PROVISIONAL_GOVERNMENT_OF_NATIONAL_UNITY_DESC"
+					picture = "r56_portrait_POL_Provisional_Government_of_National_Unity.dds"
+					expire = "1965.1.1"
+					ideology = stalinism
+					traits = {
+					}
+				}
+				if = {
+					limit = {
+						NOT = { has_unit_leader = 3179 }
+						SOV = { NOT = { has_country_flag = purge_1_group_b } }
+					}
+					create_field_marshal = {
+						name = "Konstanty Rokossowski"
+						picture = "r56_portrait_POL_Konstanty_Rokossowski.dds"
+						traits = { politically_connected panzer_leader panzer_expert offensive_doctrine thorough_planner aggressive_assaulter }
+						id = 3179
+						skill = 5
+						attack_skill = 5
+						defense_skill = 2
+						planning_skill = 5
+						logistics_skill = 4
+					}
+				}
+				if = {
+					limit = { NOT = { has_unit_leader = 3156 } }
+					create_field_marshal = {
+						name = "Michał Rola-Żymierski"
+						picture = "r56_portrait_POL_r56_portrait_POL_Michal_Rola_Zymierski.dds"
+						traits = { politically_connected career_officer logistics_wizard aggressive_assaulter }
+						id = 3156
+						skill = 3
+						attack_skill = 3
+						defense_skill = 2
+						planning_skill = 3
+						logistics_skill = 2
+					}
+				}
+				if = {
+					limit = { NOT = { has_unit_leader = 3157 } }
+					create_field_marshal = {
+						name = "Zygmunt Berling"
+						picture = "r56_portrait_POL_Zygmunt_Berling.dds"
+						traits = { politically_connected career_officer infantry_officer inspirational_leader }
+						id = 3157
+						skill = 1
+						attack_skill = 2
+						defense_skill = 1
+						planning_skill = 1
+						logistics_skill = 1
+					}
+				}
+				if = {
+					limit = { NOT = { has_unit_leader = 3177 } }
+					create_corps_commander = {
+						name = "Stanisław Popławski"
+						picture = "r56_portriat_POL_Stanislav_Poplavsky.dds"
+						traits = { trait_reckless harsh_leader skilled_staffer }
+						id = 3177
+						skill = 3
+						attack_skill = 4
+						defense_skill = 2
+						planning_skill = 2
+						logistics_skill = 2
+					}
+				}
+				if = {
+					limit = { NOT = { has_unit_leader = 3178 } }
+					create_corps_commander = {
+						name = "Karol Świerczewski"
+						picture = "r56_portrait_POL_Karol_Swierczewski.dds"
+						traits = { substance_abuser harsh_leader }
+						id = 3178
+						skill = 1
+						attack_skill = 1
+						defense_skill = 1
+						planning_skill = 1
+						logistics_skill = 1
+					}
+				}
+				if = { limit = { has_unit_leader = 3129 }
+					remove_unit_leader = 3129 }
+				if = { limit = { has_unit_leader = 3155 }
+					remove_unit_leader = 3155 }
+				if = { limit = { has_unit_leader = 3154 }
+					remove_unit_leader = 3154 }
+				if = { limit = { has_unit_leader = 3131 }
+					remove_unit_leader = 3131 }
+				if = { limit = { has_unit_leader = 3132 }
+					remove_unit_leader = 3132 }
+				if = { limit = { has_unit_leader = 3134 }
+					remove_unit_leader = 3134 }
+				if = { limit = { has_unit_leader = 3133 }
+					remove_unit_leader = 3133 }
+				if = { limit = { has_unit_leader = 3135 }
+					remove_unit_leader = 3135 }
+				if = { limit = { has_unit_leader = 3136 }
+					remove_unit_leader = 3136 }
+				if = { limit = { has_unit_leader = 3151 }
+					remove_unit_leader = 3151 }
+				if = { limit = { has_unit_leader = 3152 }
+					remove_unit_leader = 3152 }
+				if = { limit = { has_unit_leader = 3153 }
+					remove_unit_leader = 3153 }
+				if = { limit = { has_unit_leader = 3128 }
+					remove_unit_leader = 3128 }
+				if = { limit = { has_unit_leader = 3130 }
+					remove_unit_leader = 3130 }
+			}
+			if = {
+				limit = { 
+					AND = { 
+						TAG = POL
+						is_puppet_of = GER
+					}
+				}
+				POL = { set_cosmetic_tag = POLG }
+				POL = { set_party_name = { ideology = fascism long_name = GER_fascism_party_long name = GER_fascism_party } }
+				create_country_leader = {
+					name = "Hans Frank"
+					desc = "HANS_FRANK_DESC"
+					picture = "r56_portrait_POL_Hans_Frank.dds"
+					expire = "1965.1.1"
+					ideology = nazism
+					traits = {
+						prince_of_terror
+						governor_general
+					}
+				}
+				create_country_leader = {
+					name = "Fryderyk Krystian Wettyn"
+					desc = "FRYDERYK_KRYSTIAN_WETTYN_DESC"
+					picture = "r56_portrait_POL_Fryderyk_Krystian_Wettyn.dds"
+					expire = "1965.1.1"
+					ideology = despotism
+					traits = {
+						POL_king_of_poland
+						POL_german_origins
+					}
+				}
+			}
+
+			if = {
+				limit = { 
+					ROOT = { tag = CHI }
+					FROM = { tag = JAP }
+					JAP = {
+						has_government = fascism
+					}
+				}
+				create_country_leader = {
+					name = "Wang Jingwei"
+					desc = "POLITICS_WANG_JINGWEI_DESC"
+					picture = "gfx/leaders/CHI/r56_portrait_CHI_Wang_Jingwei.dds"
+					expire = "1965.1.1"
+					ideology = fascism_ideology
+					traits = {
+						#
+					}
+				}
+				set_party_name = { ideology = fascism long_name = KMT_wjw name = KMT_wjw }														  
+			}
+
+			if = {
+				limit = { 
+					ROOT = { tag = CHI }
+					FROM = { tag = JAP }
+					JAP = {
+						has_government = neutrality
+					}
+				}
+				create_country_leader = {
+					name = "Wang Jingwei"
+					desc = "POLITICS_WANG_JINGWEI_DESC"
+					picture = "gfx/leaders/CHI/r56_portrait_CHI_Wang_Jingwei.dds"
+					expire = "1965.1.1"
+					ideology = despotism
+					traits = {
+						#
+					}
+				}
+				set_party_name = { ideology = neutrality long_name = KMT_wjw name = KMT_wjw }														  
+			}
+			if = {
+				limit = { 
+					ROOT = { tag = MAN }
+					FROM = { tag = JAP }
+					JAP = {
+						has_government = neutrality
+					}
+				}
+				create_country_leader = {
+					name = "Aisin Gioro Pujie"
+					desc = "POLITICS_PUJIE_DESC"
+					picture = "gfx/leaders/JAP/Portrait_Japan_Generic_3.dds"
+					expire = "1965.1.1"
+					ideology = despotism
+					traits = {
+						#
+					}
+				}
+				set_party_name = { ideology = neutrality long_name = KMT_wjw name = KMT_wjw }														  
+			}			
+
+			if = {
+				limit = { 
+					ROOT = { tag = HUN }
+				}
+				create_country_leader = {
+					name = "Ferenc Szalasi"
+					desc = "POLITICS_FERENC_SZALASI_DESC"
+					picture = "gfx/leaders/HUN/r56_portrait_HUN_Ferenc_Szalasi.dds"
+					expire = "1965.1.1"
+					ideology = nazism
+					traits = {
+						anti_communist
+						fascist_militia_leader
+					}
+				}
+				set_party_name = { ideology = fascism long_name = HUN_arrow_cross_party_long name = HUN_arrow_cross_party }												  
+			}
+			
+			if = {
+				limit = {
+					ROOT = {
+						tag = ZIM
+					}
+					FROM = {
+						NOT = {
+							tag = ENG
+						}
+					}
+				}
+				ZIM = {
+					drop_cosmetic_tag = yes #british colony flag
+				}
+			}
+			
+			if = {
+				limit = {
+					ROOT = {
+						tag = ZIM
+					}
+					FROM = {
+						tag = ENG
+					}
+				}
+				ZIM = {
+					set_cosmetic_tag = ZIM_ENG
+				}
+			}
+		}
+	}
+	
+###---> On Release As Puppet <><> <><> <><>
+	on_release_as_puppet = {
+		effect = {
+			if = {
+				limit = {
+					AND = {
+						TAG = POL
+						SOV = { has_country_flag = SOV_purge_started }
+						NOT = { has_completed_focus = POL_Draw_Closer_To_The_USSR }
+						NOT = { has_completed_focus = POL_Seek_Autonomy }
+						NOT = { has_country_flag = PPS_Revolutionary_Path }
+					}
+				}
+				create_country_leader = {
+					name = "Tymczasowy Rząd Jedności Narodowej"
+					desc = "PROVISIONAL_GOVERNMENT_OF_NATIONAL_UNITY_DESC"
+					picture = "r56_portrait_POL_Provisional_Government_of_National_Unity.dds"
+					expire = "1965.1.1"
+					ideology = stalinism
+					traits = {
+					}
+				}
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = POL
+						is_puppet_of = SOV
+						has_government = communism
+						NOT = { has_completed_focus = POL_Draw_Closer_To_The_USSR }
+						NOT = { has_completed_focus = POL_Seek_Autonomy }
+					}
+				}
+				POL = { set_party_name = { ideology = communism long_name = POL_ZPP_party_long name = POL_ZPP_party } }
+				drop_cosmetic_tag = yes
+				create_country_leader = {
+					name = "Tymczasowy Rząd Jedności Narodowej"
+					desc = "PROVISIONAL_GOVERNMENT_OF_NATIONAL_UNITY_DESC"
+					picture = "r56_portrait_POL_Provisional_Government_of_National_Unity.dds"
+					expire = "1965.1.1"
+					ideology = stalinism
+					traits = {
+					}
+				}
+				if = {
+					limit = {
+						NOT = { has_unit_leader = 3179 }
+						SOV = { NOT = { has_country_flag = purge_1_group_b } }
+					}
+					create_field_marshal = {
+						name = "Konstanty Rokossowski"
+						picture = "r56_portrait_POL_Konstanty_Rokossowski.dds"
+						traits = { politically_connected panzer_leader panzer_expert offensive_doctrine thorough_planner aggressive_assaulter }
+						id = 3179
+						skill = 5
+						attack_skill = 5
+						defense_skill = 2
+						planning_skill = 5
+						logistics_skill = 4
+					}
+				}
+				if = {
+					limit = { NOT = { has_unit_leader = 3156 } }
+					create_field_marshal = {
+						name = "Michał Rola-Żymierski"
+						picture = "r56_portrait_POL_Michal_Rola_Zymierski.dds"
+						traits = { politically_connected career_officer logistics_wizard aggressive_assaulter }
+						id = 3156
+						skill = 3
+						attack_skill = 3
+						defense_skill = 2
+						planning_skill = 3
+						logistics_skill = 2
+					}
+				}
+				if = {
+					limit = { NOT = { has_unit_leader = 3157 } }
+					create_field_marshal = {
+						name = "Zygmunt Berling"
+						picture = "r56_portrait_POL_Zygmunt_Berling.dds"
+						traits = { politically_connected career_officer infantry_officer inspirational_leader }
+						id = 3157
+						skill = 1
+						attack_skill = 2
+						defense_skill = 1
+						planning_skill = 1
+						logistics_skill = 1
+					}
+				}
+				if = {
+					limit = { NOT = { has_unit_leader = 3177 } }
+					create_corps_commander = {
+						name = "Stanisław Popławski"
+						picture = "r56_portriat_POL_Stanislav_Poplavsky.dds"
+						traits = { trait_reckless harsh_leader skilled_staffer }
+						id = 3177
+						skill = 3
+						attack_skill = 4
+						defense_skill = 2
+						planning_skill = 2
+						logistics_skill = 2
+					}
+				}
+				if = {
+					limit = { NOT = { has_unit_leader = 3178 } }
+					create_corps_commander = {
+						name = "Karol Świerczewski"
+						picture = "r56_portrait_POL_Karol_Swierczewski.dds"
+						traits = { substance_abuser harsh_leader }
+						id = 3178
+						skill = 1
+						attack_skill = 1
+						defense_skill = 1
+						planning_skill = 1
+						logistics_skill = 1
+					}
+				}
+				if = { limit = { has_unit_leader = 3129 }
+					remove_unit_leader = 3129 }
+				if = { limit = { has_unit_leader = 3155 }
+					remove_unit_leader = 3155 }
+				if = { limit = { has_unit_leader = 3154 }
+					remove_unit_leader = 3154 }
+				if = { limit = { has_unit_leader = 3131 }
+					remove_unit_leader = 3131 }
+				if = { limit = { has_unit_leader = 3132 }
+					remove_unit_leader = 3132 }
+				if = { limit = { has_unit_leader = 3134 }
+					remove_unit_leader = 3134 }
+				if = { limit = { has_unit_leader = 3133 }
+					remove_unit_leader = 3133 }
+				if = { limit = { has_unit_leader = 3135 }
+					remove_unit_leader = 3135 }
+				if = { limit = { has_unit_leader = 3136 }
+					remove_unit_leader = 3136 }
+				if = { limit = { has_unit_leader = 3151 }
+					remove_unit_leader = 3151 }
+				if = { limit = { has_unit_leader = 3152 }
+					remove_unit_leader = 3152 }
+				if = { limit = { has_unit_leader = 3153 }
+					remove_unit_leader = 3153 }
+				if = { limit = { has_unit_leader = 3128 }
+					remove_unit_leader = 3128 }
+				if = { limit = { has_unit_leader = 3130 }
+					remove_unit_leader = 3130 }
+			}
+			if = {
+				limit = { 
+					AND = { 
+						TAG = POL
+						is_puppet_of = GER
+					}
+				}
+				POL = { set_cosmetic_tag = POLG }
+				POL = { set_party_name = { ideology = fascism long_name = GER_fascism_party_long name = GER_fascism_party } }
+				create_country_leader = {
+					name = "Hans Frank"
+					desc = "HANS_FRANK_DESC"
+					picture = "r56_portrait_POL_Hans_Frank.dds"
+					expire = "1965.1.1"
+					ideology = nazism
+					traits = {
+						prince_of_terror
+						governor_general
+					}
+				}
+				POL = { set_party_name = { ideology = neutrality long_name = POL_monarchy_party_long name = POL_monarchy_party } }
+				create_country_leader = {
+					name = "Fryderyk Krystian Wettyn"
+					desc = "FRYDERYK_KRYSTIAN_WETTYN_DESC"
+					picture = "r56_portrait_POL_Fryderyk_Krystian_Wettyn.dds"
+					expire = "1965.1.1"
+					ideology = despotism
+					traits = {
+						POL_king_of_poland
+						POL_german_origins
+					}
+				}
+			}
+			
+			if = {
+				limit = {
+					ROOT = {
+						tag = ZIM
+					}
+					FROM = {
+						NOT = {
+							tag = ENG
+						}
+					}
+				}
+				ZIM = {
+					drop_cosmetic_tag = yes #british colony flag
+				}
+			}
+		}
+	}
+	
+###---> On Release As Puppet <><> <><> <><>
+	on_release_as_free = {
+		effect = {
+			if = {
+				limit = {
+					ROOT = {
+						tag = ZIM
+					}
+				}
+				ZIM = {
+					drop_cosmetic_tag = yes #british colony flag
+				}
+			}
+		}
+	}
+	
+###---> On Startup <><> <><> <><>
+	on_startup = {
+	
+		effect = {
+			#Anglo Persian oil concessions (limited for Khuzestan for now for balance reason)
+			PER = {
+				give_resource_rights = { receiver = ENG state = 413 }
+			}
+			#Soviet-Japanese agreement over North Sakhalin oil (lasted roughtly until lake Kassan)
+			SOV = {
+				give_resource_rights = { receiver = JAP state = 655 }
+			}						
+			#Italian control over Albanian underground
+			ALB = {
+				give_resource_rights = { receiver = ITA state = 797 }
+				give_resource_rights = { receiver = ITA state = 44 }
+			}
+			85 = {
+				add_building_construction = {
+					type = naval_base
+					province = 9263
+					level = 1
+					instant_build = yes
+				}
+			}
+			POL = {
+				#if = {
+				#	limit = { has_dlc = "Death or Dishonor" }
+					create_production_license = {
+						target = ROM 
+						equipment = {
+							type = fighter_equipment_0	
+						}
+						cost_factor = 0
+					}
+				#}
+			}
+			ITA = {
+				#if = {
+				#	limit = { has_dlc = "Death or Dishonor" }
+					create_production_license = {
+						target = POL 
+						equipment = {
+							type = motorized_equipment_1	
+						}
+						cost_factor = 0
+					}
+				#}
+			}
+			POL = { country_event = poland.69 }
+			
+			###Give Sweden anti-tank tech
+			SWE = {
+				#set_technology = {
+				#	interwar_antitank = 1
+				#}
+				#if = {
+				#	limit = { has_dlc = "Death or Dishonor" }
+					create_production_license = {
+						target = POL 
+						equipment = {
+							type = anti_tank_equipment_1	
+						}
+						cost_factor = 0
+					}
+				#}
+			}
+			
+			#Ukraine
+			if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_game_rule = {
+								rule = pol_fragmentation_status
+								option = POL_FRAGMENTED
+							}
+							has_game_rule = {
+								rule = pol_fragmentation_status
+								option = POL_DECENTRALIZED
+							}
+						}
+					}
+				}			
+				UKR = {
+					remove_state_core = 93
+					remove_state_core = 91
+					remove_state_core = 89
+					
+					
+					add_state_claim = 93
+					add_state_claim = 91
+					add_state_claim = 89
+				}
+			}
+			
+			WHY = {
+				set_variable = { global.r56_var_multiplayer = 0 }
+			}
+			
+			AUS = {
+				set_country_flag = GP_AUS_ENABLED
+			}
+			
+			GXC = {
+				set_country_flag = KMT_lzr_tt
+			}
+			
+			every_country = {
+				limit = {
+					is_independent_warlords = yes
+				}
+				add_country_leader_trait = warlords
+			}
+			
+			every_country = {
+				country_event = { id = r56.startup.event.01 }
+			}
+			# Game Rules - Fragmentation
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = BEL_fragmentation_status
+						option = BEL_FRAGMENTED
+					}
+				}
+				BEL = {
+					every_unit_leader = {
+						limit = { has_trait = flemish }
+						set_nationality = VLA
+					}
+					every_unit_leader = {
+						limit = { has_trait = walloon }
+						set_nationality = WLL
+					}				
+				}
+				FAK = {
+					annex_country = {
+					    target = BEL
+					    transfer_troops = no
+					}
+					release = VLA
+					release = WLL	
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_game_rule = {
+								rule = africa_colonization_status
+								option = AFRICA_DECOLONIZED
+							}
+						}
+					}				
+					VLA = {
+						puppet = COG
+					}
+					COG = {
+						set_politics = {							
+							ruling_party = neutrality
+							last_election = "1936.1.1"
+							election_frequency = 48
+							elections_allowed = no
+						}
+						set_popularities = {
+							democratic = 10
+							fascism = 5
+							communism = 2
+							neutrality = 83
+						}
+
+						create_country_leader = {
+							name = "Pierre Ryckmans"
+							desc = "Pierre Ryckmans, Governor General of the Belgian Congo"
+							picture = "gfx/leaders/COG/Pierre_Ryckmans.dds"
+							expire = "1965.1.1"
+							ideology = despotism
+							traits = {
+							}
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = BEL_fragmentation_status
+						option = BEL_FRAGMENTED_GREATER_FLANDERS
+					}
+				}
+				BEL = {
+					every_unit_leader = {
+						limit = { has_trait = flemish }
+						set_nationality = VLA
+					}
+					every_unit_leader = {
+						limit = { has_trait = walloon }
+						set_nationality = WLL
+					}				
+				}				
+				FAK = {
+					annex_country = {
+					    target = BEL
+					    transfer_troops = no
+					}
+					release = VLA
+					release = WLL	
+				}
+				VLA = {
+					transfer_state = 29
+					change_tag_from = BEL
+				}
+				set_province_name = { id = 575 name = "Duinkerke"}
+				set_province_name = { id = 11483 name = "Rijsel"}
+				set_province_name = { id = 11548 name = "Kales"}
+				set_global_flag = BEL_french_cities_renamed_flemish				
+				if = {
+					limit = {
+						NOT = {
+							has_game_rule = {
+								rule = africa_colonization_status
+								option = AFRICA_DECOLONIZED
+							}
+						}
+					}				
+					VLA = {
+						puppet = COG
+					}
+					COG = {
+						set_politics = {							
+							ruling_party = neutrality
+							last_election = "1936.1.1"
+							election_frequency = 48
+							elections_allowed = no
+						}
+						set_popularities = {
+							democratic = 10
+							fascism = 5
+							communism = 2
+							neutrality = 83
+						}
+
+						create_country_leader = {
+							name = "Pierre Ryckmans"
+							desc = "Pierre Ryckmans, Governor General of the Belgian Congo"
+							picture = "gfx/leaders/COG/Pierre_Ryckmans.dds"
+							expire = "1965.1.1"
+							ideology = despotism
+							traits = {
+							}
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = ger_fragmentation_status
+						option = GER_DECENTRALIZED
+					}
+				}
+				GER = {
+					release_puppet = BAV
+				}
+				52 = {	add_core_of = GER }
+				53 = {	add_core_of = GER }
+				54 = {	add_core_of = GER }					
+				BAV = {
+					hidden_effect = {
+						load_oob = "BAV_1936"
+					}
+				}				
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = ger_fragmentation_status
+						option = GER_FRAGMENTED
+					}
+				}
+				GER = {
+					release = BAV
+				}
+				52 = {	add_core_of = GER }
+				53 = {	add_core_of = GER }
+				54 = {	add_core_of = GER }					
+				BAV = {
+					hidden_effect = {
+						load_oob = "BAV_1936"
+					}
+				}
+			}						
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = ger_fragmentation_status
+						option = GER_EAST_VS_WEST
+					}
+				}
+				set_global_flag = game_rule_flag_germany_fragmented
+				WGR = {
+					add_state_core = 42
+					add_state_core = 50
+					add_state_core = 51
+					add_state_core = 52
+					add_state_core = 53
+					add_state_core = 54
+					add_state_core = 55
+					add_state_core = 56
+					add_state_core = 57
+					add_state_core = 58
+					add_state_core = 59
+					change_tag_from = GER
+					
+															
+				}
+				DDR = {
+					add_state_core = 5
+					add_state_core = 60
+					add_state_core = 61
+					add_state_core = 62
+					add_state_core = 63
+					add_state_core = 64
+					add_state_core = 65
+					add_state_core = 66
+					add_state_core = 67						
+					add_state_core = 68
+					add_state_core = 763
+				}
+				POL = {
+					annex_country = {
+					    target = DNZ
+					    transfer_troops = no
+					}				
+				}					
+				FAK = {
+					annex_country = {
+					    target = GER
+					    transfer_troops = no
+					}
+					
+					release = WGR
+					release = DDR
+					#should do nothing in 36, fix 39.
+					release = CZE
+					release = AUS
+					##give them cores over the other side.
+					DDR = {
+						add_state_core = 42
+						add_state_core = 50
+						add_state_core = 51
+						add_state_core = 52
+						add_state_core = 53
+						add_state_core = 54
+						add_state_core = 55
+						add_state_core = 56
+						add_state_core = 57
+						add_state_core = 58
+						add_state_core = 59
+						load_oob = "DDR_1936"
+					}
+					WGR = {
+						add_state_core = 5
+						add_state_core = 60
+						add_state_core = 61
+						add_state_core = 62
+						add_state_core = 63
+						add_state_core = 64
+						add_state_core = 65
+						add_state_core = 66
+						add_state_core = 67						
+						add_state_core = 68
+						add_state_core = 763
+						load_oob = "WGR_1936"
+					}													
+				}												
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = ger_fragmentation_status
+						option = GER_EAST_VS_WEST_COM
+					}
+				}
+				set_global_flag = game_rule_flag_germany_fragmented
+				WGR = {
+					add_state_core = 42
+					add_state_core = 50
+					add_state_core = 51
+					add_state_core = 52
+					add_state_core = 53
+					add_state_core = 54
+					add_state_core = 55
+					add_state_core = 56
+					add_state_core = 57
+					add_state_core = 58
+					add_state_core = 59
+					change_tag_from = WGR
+				}
+				DDR = {
+					add_state_core = 5
+					add_state_core = 60
+					add_state_core = 61
+					add_state_core = 62
+					add_state_core = 63
+					add_state_core = 64
+					add_state_core = 65
+					add_state_core = 66
+					add_state_core = 67						
+					add_state_core = 68
+					add_state_core = 763
+				}
+				POL = {
+					annex_country = {
+					    target = DNZ
+					    transfer_troops = no
+					}				
+				}					
+				FAK = {
+					annex_country = {
+					    target = GER
+					    transfer_troops = no
+					}
+					
+					release = WGR
+					WGR = {
+						load_oob = "WGR_1936"
+					}					
+					release = DDR
+					DDR = {
+						load_oob = "DDR_1936"
+					}
+					#should do nothing in 36, fix 39.
+					release = CZE
+					release = AUS											
+					##give them cores over the other side.
+					DDR = {
+						add_state_core = 42
+						add_state_core = 50
+						add_state_core = 51
+						add_state_core = 52
+						add_state_core = 53
+						add_state_core = 54
+						add_state_core = 55
+						add_state_core = 56
+						add_state_core = 57
+						add_state_core = 58
+						add_state_core = 59
+						change_tag_from = GER
+					}
+					WGR = {
+						add_state_core = 5
+						add_state_core = 60
+						add_state_core = 61
+						add_state_core = 62
+						add_state_core = 63
+						add_state_core = 64
+						add_state_core = 65
+						add_state_core = 66
+						add_state_core = 67						
+						add_state_core = 68
+						add_state_core = 763
+					}													
+				}												
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = ger_fragmentation_status
+						option = GER_EAST_VS_WEST_VS_BAVARIA
+					}
+				}
+				set_global_flag = game_rule_flag_germany_fragmented
+				change_tag_from = GER				
+				WGR = {
+					add_state_core = 42
+					add_state_core = 50
+					add_state_core = 51
+					add_state_core = 52
+					add_state_core = 53
+					add_state_core = 54
+					add_state_core = 55
+					add_state_core = 56
+					add_state_core = 57
+					add_state_core = 58
+					add_state_core = 59
+					
+				}
+				DDR = {
+					add_state_core = 5
+					add_state_core = 60
+					add_state_core = 61
+					add_state_core = 62
+					add_state_core = 63
+					add_state_core = 64
+					add_state_core = 65
+					add_state_core = 66
+					add_state_core = 67						
+					add_state_core = 68
+					add_state_core = 763
+				}
+				POL = {
+					annex_country = {
+					    target = DNZ
+					    transfer_troops = no
+					}				
+				}					
+				FAK = {
+					annex_country = {
+					    target = GER
+					    transfer_troops = no
+					}
+					release = BAV
+					BAV = {
+						change_tag_from = GER
+						
+					}
+					release = WGR
+					WGR = {
+						load_oob = "WGR_1936"
+					}					
+					release = DDR
+					DDR = {
+						load_oob = "DDR_1936"
+					}
+					BAV = {
+						load_oob = "BAV_1936"
+					}
+					#should do nothing in 36, fix 39.
+					release = CZE
+					release = AUS										
+					##give them cores over the other side.
+					DDR = {
+						add_state_core = 42
+						add_state_core = 50
+						add_state_core = 51
+						add_state_core = 52
+						add_state_core = 53
+						add_state_core = 54
+						add_state_core = 55
+						add_state_core = 56
+						add_state_core = 57
+						add_state_core = 58
+						add_state_core = 59
+					}
+					WGR = {
+						add_state_core = 5
+						add_state_core = 52
+						add_state_core = 53
+						add_state_core = 54						
+						add_state_core = 60
+						add_state_core = 61
+						add_state_core = 62
+						add_state_core = 63
+						add_state_core = 64
+						add_state_core = 65
+						add_state_core = 66
+						add_state_core = 67						
+						add_state_core = 68
+						add_state_core = 763
+					}
+					if = {
+						limit = {
+							has_game_rule = {
+								rule = pol_fragmentation_status
+								option = POL_COMMONWEALTH
+							}
+						}
+						LIT = { transfer_state = 188 }
+					}													
+				}												
+			}											
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = africa_colonization_status
+						option = AFRICA_DECOLONIZED
+					}
+				}
+				FRA = {
+					release = MOR
+					release = ALG
+					release = TUN
+					release = DJI
+					release = MAD
+					release = GAB
+					release = RCG
+					release = CMR
+					release = CAR
+					release = CHA
+					release = DAH
+					release = TOG
+					release = IVO
+					release = VOL
+					release = MLI
+					release = GNA
+					release = SEN
+					release = NGR
+					release = MRT
+				}
+				ITA = {
+					release = LBA
+					release = ERI
+					release = SOM
+				}
+				SOM = {
+					transfer_state = 269
+				}
+				ENG = {
+					release = EGY
+					release = SUD
+					release = UGA
+					release = TZN
+					release = ZAM
+					release = MLW
+					release = KEN
+					release = ZIM
+					release = BOT
+					release = NGA
+					release = GHA
+					release = SIE
+					release = GAM
+				}
+				BEL = {
+					end_puppet = COG
+				}
+				COG = {
+					release = RWA
+					release = BRD
+					retire_country_leader = yes
+					drop_cosmetic_tag = yes
+				}		
+				SAF = {
+					release = NMB
+				}
+				POR = {
+					release = MZB
+					release = ANG
+					release = GNB
+				}
+				SPR = {
+					release = WES
+					release = EQG
+				}
+				ITA = {
+					white_peace = {
+						tag = ETH
+					}
+				}
+				MOR = {
+					transfer_state = 290
+					transfer_state = 783
+				}
+				ENG = {
+					set_autonomy = { target = SAF autonomy_state = autonomy_free }
+				}
+				ZIM = {
+					drop_cosmetic_tag = yes
+				}
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = fra_fragmentation_status
+						option = FRA_FRAGMENTED
+					}
+				}
+				FRA = {
+					release = BRI
+					release = COR
+				}
+				1 = { add_core_of = FRA }
+				14 = { add_core_of = FRA }				
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = fra_fragmentation_status
+						option = FRA_DECENTRALIZED
+					}
+				}
+				FRA = {
+					release_puppet = BRI
+					release_puppet = COR
+				}
+			}						
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = cze_fragmentation_status
+						option = CZE_FRAGMENTED
+					}
+				}
+				CZE = {
+					release = SLO
+					release = RUT
+					set_cosmetic_tag = CZE_ONLY
+				}
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = cze_fragmentation_status
+						option = CZE_DECENTRALIZED
+					}
+				}
+				CZE = {
+					release_puppet = SLO
+					release_puppet = RUT
+				}
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = den_fragmentation_status
+						option = DEN_FRAGMENTED
+					}
+				}
+				DEN = {
+					release = GRL
+					set_autonomy = { target = GRL autonomy_state = autonomy_free }
+					release = ICE
+					set_autonomy = { target = ICE autonomy_state = autonomy_free }
+				}
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = den_fragmentation_status
+						option = DEN_DECENTRALIZED
+					}
+				}
+				DEN = {
+					release_puppet = GRL
+				}
+				GRL = {
+					set_cosmetic_tag = GRL2
+				}
+			}			
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = spr_fragmentation_status
+						option = SPR_FRAGMENTED
+					}
+				}
+				SPR = {
+					release = CAT
+					release = EUS
+					release = GLC
+				}
+				165 = {	add_core_of = SPR }
+				171 = {	add_core_of = SPR }
+				172 = {	add_core_of = SPR }					
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = spr_fragmentation_status
+						option = SPR_DECENTRALIZED
+					}
+				}
+				SPR = {
+					release_puppet = CAT
+					release_puppet = GLC
+					release_puppet = EUS
+				}
+				165 = {	add_core_of = SPR }
+				171 = {	add_core_of = SPR }
+				172 = {	add_core_of = SPR }					
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = spr_fragmentation_status
+						option = SPR_15TH_CENTURY_ARAGON
+					}
+				}
+				set_global_flag = XVth_century_aragon_flag
+				SPR = {
+					release = CAT
+					release = EUS
+					release = GLC
+				}
+				CAT = {
+					transfer_state = 114
+					transfer_state = 115
+					transfer_state = 117
+					transfer_state = 156
+					transfer_state = 166
+					transfer_state = 167
+					transfer_state = 177
+					115 = {	add_core_of = CAT }
+					114 = {	add_core_of = CAT }
+					117 = {	add_core_of = CAT }
+					156 = {	add_core_of = CAT }
+					166 = {	add_core_of = CAT }
+					167 = {	add_core_of = CAT }
+					177 = {	add_core_of = CAT }
+					change_tag_from = SPR
+				}
+			#	if = {
+			#		limit = { has_dlc = "Man the Guns" }
+			#			load_oob = "CAT_ARAGON_1936_naval_mtg"
+			#		else = {
+			#			load_oob = "CAT_ARAGON_1936_naval_legacy"
+			#		}
+			#	}		
+			}			
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = can_fragmentation_status
+						option = CAN_FRAGMENTED
+					}
+				}
+				CAN = {
+					release = QBC
+					if = {
+						limit = { has_dlc = "Together for Victory" }
+						remove_ideas = CAN_conscription_crisis
+
+					}					
+				}
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = can_fragmentation_status
+						option = CAN_DECENTRALIZED
+					}
+				}
+				CAN = {
+					release_puppet = QBC
+					if = {
+						limit = { has_dlc = "Together for Victory" }
+						remove_ideas = CAN_conscription_crisis
+
+					}					
+				}
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = pol_fragmentation_status
+						option = POL_FRAGMENTED
+					}
+				}
+				GER = {
+					annex_country = {
+					    target = DNZ
+					    transfer_troops = yes
+					}				
+				}
+
+				713 = {	add_core_of = GER }	
+				POL = {
+					release = UKR
+					release = BLR
+				}
+				LIT = { transfer_state = 784 }				
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = pol_fragmentation_status
+						option = POL_DECENTRALIZED
+					}
+				}
+				POL = {
+					release_puppet = UKR
+					release_puppet = BLR					
+				}
+				LIT = { transfer_state = 784 }	
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = pol_fragmentation_status
+						option = POL_COMMONWEALTH
+					}
+				}
+				LAT = {
+					every_owned_state = {
+						add_core_of = POL	
+					}					
+				}				
+				LIT = {
+					every_unit_leader = {
+						set_nationality = POL
+					}
+					every_owned_state = {
+						add_core_of = POL	
+					}					
+				}
+				POL = {
+					annex_country = {
+						target = LIT
+						transfer_troops = yes
+					}					
+					annex_country = {
+						target = LAT
+						transfer_troops = no
+					}
+					annex_country = {
+					    target = DNZ
+					    transfer_troops = no
+					}
+					set_global_flag = form_commonwealth_flag
+					set_cosmetic_tag = PLC_UNIFIED					
+				}				
+				#prussia
+				763 = { add_core_of = POL }
+				POL = { transfer_state = 763 }
+				5 = { add_core_of = POL }
+				POL = { transfer_state = 5 }
+
+				207 = { add_core_of = POL }
+				POL = { transfer_state = 207 }
+				206 = { add_core_of = POL }
+				POL = { transfer_state = 206 }
+				204 = { add_core_of = POL }
+				POL = { transfer_state = 204 }
+				241 = { add_core_of = POL }
+				POL = { transfer_state = 241 }
+				194 = { add_core_of = POL }
+				POL = { transfer_state = 194 }
+				193 = { add_core_of = POL }
+				POL = { transfer_state = 193 }
+				203 = { add_core_of = POL }
+				POL = { transfer_state = 203 }				
+				202 = { add_core_of = POL }
+				POL = { transfer_state = 202 }
+				201 = { add_core_of = POL }
+				POL = { transfer_state = 201 }
+				199 = { add_core_of = POL }
+				POL = { transfer_state = 199 }
+				198 = { add_core_of = POL }
+				POL = { transfer_state = 198 }
+				259 = { add_core_of = POL }
+				POL = { transfer_state = 259 }								
+				
+				188 = { add_core_of = POL }
+				POL = { transfer_state = 188 }	
+
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = sam_liberation_status
+						option = SAM_LIBERATED
+					}
+				}
+				NOR = {
+					release = SAM
+								
+				}
+				SAM = {
+					transfer_state = 144
+					transfer_state = 148
+					transfer_state = 147
+					transfer_state = 666
+					transfer_state = 722
+					set_capital = 144
+				}
+				144 = {	add_core_of = NOR }		
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = sam_liberation_status
+						option = SAM_LIBERATED_NOR_SWITCH
+					}
+				}
+				NOR = {
+					release = SAM					
+				}
+				SAM = {
+					transfer_state = 144
+					transfer_state = 148
+					transfer_state = 147
+					transfer_state = 666
+					transfer_state = 722
+					set_capital = 144
+					change_tag_from = NOR
+				}
+				144 = {	add_core_of = NOR }	
+			}								
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = kur_liberation_status
+						option = KUR_LIBERATED
+					}
+				}
+				IRQ = {
+					release = KUR
+					676 = {	add_core_of = IRQ }					
+				}
+				KUR = {
+					transfer_state = 352
+					transfer_state = 353
+					transfer_state = 350
+					transfer_state = 419
+					transfer_state = 421
+					set_capital = 676
+				}
+				676 = {	add_core_of = IRQ }			
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = kur_liberation_status
+						option = KUR_LIBERATED_IRQ_SWITCH
+					}
+				}
+				IRQ = {
+					release = KUR					
+				}
+				KUR = {
+					transfer_state = 352
+					transfer_state = 353
+					transfer_state = 350
+					transfer_state = 419
+					transfer_state = 421
+					set_capital = 676
+					change_tag_from = IRQ
+				}
+				676 = {	add_core_of = IRQ }	
+			}						
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = central_american_unification_status
+						option = HON_CENTRAL_AMERICA_UNIFIED
+					}
+				}
+				HON = {
+					annex_country = {
+						target = GUA
+						transfer_troops = yes
+					}
+					annex_country = {
+						target = NIC
+						transfer_troops = yes
+					}
+					annex_country = {
+						target = COS
+						transfer_troops = yes
+					}
+					annex_country = {
+						target = ELS
+						transfer_troops = yes
+					}
+					GUA = {
+						every_unit_leader = {
+							set_nationality = ROOT
+						}					
+					}
+					ELS = {
+						every_unit_leader = {
+							set_nationality = ROOT
+						}					
+					}
+					NIC = {
+						every_unit_leader = {
+							set_nationality = ROOT
+						}					
+					}
+					COS = {
+						every_unit_leader = {
+							set_nationality = ROOT
+						}					
+					}															
+					304 = {	add_core_of = HON }
+					311 = {	add_core_of = HON }
+					313 = {	add_core_of = HON }
+					314 = {	add_core_of = HON }
+					316 = {	add_core_of = HON }
+					317 = {	add_core_of = HON }
+					set_cosmetic_tag = USC_UNIFIED
+					set_global_flag = form_united_central_america_flag																								
+				}
+			}				
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = HOL_focus_tree_selection
+						option = STANDARD_TREE
+					}
+				}
+				set_global_flag = hol_mtg_focus_tree
+				HOL = {
+					load_focus_tree = netherlands_focus 
+					remove_ideas = HOL_reliance_on_the_gold_standard
+					remove_ideas =	tblra_pillarized_society
+					remove_ideas =	tblra_peacetime_national_union
+					remove_ideas =	tblra_recovery_from_the_great_depression1
+					remove_ideas =	HOL_dutch_plane_requirements_list
+					add_country_leader_trait = strict_austerity_adherent
+					add_ideas = {
+						HOL_aloof_neutrality
+						HOL_shell_shocked_spectator_5
+						HOL_de_crisisjaren_5
+						HOL_weak_government
+					}
+					set_variable = { var = gateway_to_europe_influence_pp_total value = 0 }					
+				}				
+			}
+			#Game Rules Focus Trees
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = SAF_focus_tree_selection
+						option = STANDARD_TREE
+					}
+				}
+				set_global_flag = saf_tfv_focus_tree
+				SAF = {
+					load_focus_tree = south_african_focus 
+					remove_ideas =	SAF_pierre_van_ryneveld
+					remove_ideas =	SAF_pierre_van_ryneveld2
+					remove_ideas =	SAF_untrained_staff_officers
+					add_ideas = {
+						SAF_ossewabrandwag
+						SAF_history_of_segregation
+					}
+					add_opinion_modifier = { target = ENG modifier = SAF_anti_british_sentiment }
+					add_to_tech_sharing_group = commonwealth_research			
+				}				
+			}																							
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = MEX_focus_tree_selection
+						option = STANDARD_TREE
+					}
+				}
+				set_global_flag = mex_mtg_focus_tree
+				MEX = {
+					load_focus_tree = mexico_focus_tree
+					load_mtg_mexico = yes
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						has_game_rule = {
+							rule = MEX_focus_tree_selection
+							option = R56_TREE
+						}
+						NOT = {
+							has_dlc = "Man the Guns"
+						}
+					}
+				}
+				MEX = {
+					set_technology = {
+						support_weapons = 1
+						tech_support = 1
+						tech_recon = 1
+						tech_engineers = 1
+						tech_military_police = 1
+						tech_mountaineers = 1
+						marines  = 1
+						transport = 1
+						trench_warfare = 1
+					}
+					
+				}
+			}
+			#doesn't work progessively integrated into the fragmenation rules
+			#if = {
+			#	limit = {
+			#		has_game_rule = {
+			#			rule = ADD_CORES_AND_CLAIMS_OF_RELEASING_COUNTRIES
+			#			option = yes
+			#		}
+			#	}
+			#	if = {
+			#		limit = {
+			#			OR = {
+			#				has_game_rule = {
+			#					rule = pol_fragmentation_status
+			#					option = POL_DECENTRALIZED
+			#				}
+			#				has_game_rule = {
+			#					rule = pol_fragmentation_status
+			#					option = POL_FRAGMENTED
+			#				}							
+			#			}
+			#		}
+			#		96 = {	add_core_of = POL }
+			#		95 = {	add_core_of = POL }
+			#		94 = {	add_core_of = POL }
+			#		93 = {	add_core_of = POL }
+			#		91 = {	add_core_of = POL }
+			#		89 = {	add_core_of = POL }						
+			#	}								
+			#	if = {
+			#		limit = {
+			#			OR = {
+			#				has_game_rule = {
+			#					rule = can_fragmentation_status
+			#					option = CAN_DECENTRALIZED
+			#				}
+			#				has_game_rule = {
+			#					rule = can_fragmentation_status
+			#					option = CAN_FRAGMENTED
+			#				}							
+			#			}														
+			#		}
+			#		466 = {	add_core_of = CAN }
+			#		468 = {	add_core_of = CAN }						
+			#	}			
+			#	if = {
+			#		limit = {
+			#			has_game_rule = {
+			#				rule = SOV_FRAGMENTATION_STATUS
+			#				option = SOV_FRAGMENTED
+			#			}													
+			#		}
+			#		SOV = {
+			#			#ukr
+			#			remove_state_core = 73
+			#			add_state_claim = 73
+			#			add_state_claim = 89
+			#			add_state_claim = 91
+			#			add_state_claim = 93
+			#			add_state_claim = 199
+			#			add_state_claim = 198
+			#			add_state_claim = 201
+			#			add_state_claim = 202
+			#			add_state_claim = 203
+			#			add_state_claim = 192
+			#			add_state_claim = 197
+			#			add_state_claim = 193
+			#			add_state_claim = 259
+			#			add_state_claim = 225
+			#			add_state_claim = 226
+			#			add_state_claim = 196
+			#			add_state_claim = 200
+			#			add_state_claim = 221
+			#			add_state_claim = 227
+			#			add_state_claim = 228
+			#			#blr
+			#			add_state_claim = 241
+			#			add_state_claim = 194
+			#			add_state_claim = 204
+			#			add_state_claim = 206	
+			#			add_state_claim = 207				
+			#		}					
+			#	}					
+			#}			
+			#R56 Custom gameplay rules
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = allow_national_characters
+						option = no
+					}
+				}
+				set_global_flag = NATIONAL_CHARACTERS_BLOCKED
+			}
+		}
+	}
+###---> On State Control Changed <><> <><> <><>
+	on_state_control_changed = {
+		effect = {
+		
+			if = {
+				limit = {
+					original_tag = JAP
+					has_government = communism
+
+					282 = { is_controlled_by = ROOT }
+					FROM = {
+						original_tag = JAP
+						has_government = fascism
+					}
+				}
+				FROM = { save_event_target_as = jap_civ_loser }
+				MAN = { country_event = { id = wtt_japan.121 days = 1 } }
+			}
+			
+			#Ukrainian Army Grows with recaptured core territory
+			if = {
+				limit = {
+					NOT = { FROM.FROM = { has_state_flag = UKR_recaptured_territory_flag } }
+					OR = {
+						AND = {
+							DOU = { is_in_faction_with = ROOT }
+							FROM.FROM = { is_core_of = DOU }
+						}
+						AND = {
+							DOU = { is_subject_of = ROOT }
+							FROM.FROM = { is_core_of = DOU }
+						}
+						AND = {
+							ROOT = { original_tag = DOU }
+							FROM.FROM = { is_core_of = ROOT }
+						}
+					}
+				}
+				FROM.FROM = { set_state_flag = UKR_recaptured_territory_flag }
+				DOU = {
+					add_equipment_to_stockpile = {
+						type = infantry_equipment_1
+						amount = 1775
+						producer = DOU
+					}
+					add_equipment_to_stockpile = {
+						type = support_equipment_1
+						amount = 10
+						producer = DOU
+					}
+					add_equipment_to_stockpile = {
+						type = artillery_equipment_1
+						amount = 2
+						producer = DOU
+					}
+				}
+			}
+		
+			#Danzig auto-annex workaround
+			if = {
+				limit = { 
+					POL = { controls_state = 788 }
+					GER = { controls_state = 85 }
+				}
+				GER = { transfer_state = 788 }
+				788 = {	add_core_of = GER }
+			}
+			if = {
+				limit = {
+					country_exists = DNZ
+					DNZ = { is_subject_of = POL }
+					GER = { controls_state = 85 }
+				}
+				DNZ = { country_event = poland.58 }
+			}
+		}
+	}
+	
+	###---> On Subject Autonomy Level Change <><> <><> <><>
+	on_subject_autonomy_level_change = {
+		effect = {
+			#Achievement
+			if = {
+				limit = { tag = EGY }
+				if = {
+					limit = { has_autonomy_state = autonomy_colony }
+					set_country_flag = achievement_EGY_colony
+					log = EGY_colony
+				}
+				if = {
+					limit = { has_autonomy_state = autonomy_dominion }
+					set_country_flag = achievement_EGY_dominion
+					log = EGY_dominion
+				}
+			}
+
+			#Add to french tech group
+			if = {
+				limit = {
+					OR = {
+						has_autonomy_state = autonomy_colony
+						has_autonomy_state = autonomy_dominion
+					}
+					OVERLORD = { is_in_tech_sharing_group = commonwealth_research }
+				}
+				add_to_tech_sharing_group = commonwealth_research				
+			}
+
+			if = {
+				limit = {
+					tag = FRI
+					tag = MOR
+					tag = TUN
+					tag = SYR
+					tag = LEB
+					NOT = {						
+					    has_autonomy_state = autonomy_colony
+						has_autonomy_state = autonomy_dominion
+					}
+				}
+				
+				remove_from_tech_sharing_group = french_research
+			}
+		}
+	}
+	
+	###---> On Dismantle Faction <><> <><> <><>
+	on_dismantle_faction = {
+		effect = {
+			if = {
+				limit = { original_tag = POL }
+				remove_ideas = POL_Wanda_Wasilewska
+				remove_ideas = POL_Wladyslaw_Studnicki
+			}
+		}
+	}
+	
+	###---> On Uncapitulation <><> <><> <><>
+	on_uncapitulation = {
+		effect = {
+			if = {
+				limit = { original_tag = POL }
+				drop_cosmetic_tag = yes
+				POL = { set_party_name = { ideology = fascism long_name = POL_fascism_party_long name = POL_fascism_party } }
+				if = {
+					limit = { 
+						has_completed_focus = POL_The_Endecja_Movement
+					}
+					set_party_name = { ideology = democratic long_name = POL_ND_party_long name = POL_ND_party }
+				}
+				if = {
+					limit = {
+						has_completed_focus = POL_The_Polish_Socialist_Party
+					}
+					set_party_name = { ideology = democratic long_name = POL_PPS_party_long name = POL_PPS_party }
+				}
+				if = {
+					limit = {
+						NOT = { has_completed_focus = POL_The_Endecja_Movement }
+						NOT = { has_completed_focus = POL_The_Polish_Socialist_Party }
+						NOT = { is_puppet_of = SOV }
+						NOT = { has_government = communism }
+					}
+					set_party_name = { ideology = democratic long_name = POL_democratic_party_long name = POL_democratic_party }
+				}
+				if = {
+					limit = {
+						NOT = { has_completed_focus = POL_The_Endecja_Movement }
+						NOT = { has_completed_focus = POL_The_Polish_Socialist_Party }
+						is_puppet_of = SOV
+						has_government = communism
+					}
+					POL = { set_party_name = { ideology = democratic long_name = POL_PSL_long name = POL_PSL_party } }
+				}
+			}
+		}
+	}
+	
+	###---> On Liberate (ONLY during peace conference) <><> <><> <><>
+	on_liberate = {
+		effect = {
+			if = {
+				limit = {
+					TAG = ZIM
+				}
+				ZIM = {
+					drop_cosmetic_tag = yes #british colony flag
+				}
+			}
+		}
+	}
+}

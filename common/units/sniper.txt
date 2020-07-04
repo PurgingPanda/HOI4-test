@@ -1,0 +1,72 @@
+sub_units = {
+	sniper = {
+		sprite = infantry
+		map_icon_category = infantry
+		priority = 0
+		ai_priority = 0
+		active = no
+
+		type = {
+			infantry
+			support
+		}
+		
+		group = support
+		
+		categories = {
+			category_front_line
+			category_light_infantry
+			category_support_battalions
+			category_all_infantry
+			category_army
+		}
+	
+		combat_width = 0
+	
+		#Size Definitions
+		max_strength = 2
+		max_organisation = 20
+		default_morale = 0.2
+		manpower = 250
+		training_time = 180
+
+		#Misc Abilities
+		weight = 0.1
+		supply_consumption = 0.02
+		recon = 0.5
+		breakthrough = 0.1
+		can_be_parachuted = yes
+		
+		# Support nerfs to combat abilities
+		defense = -0.75
+		soft_attack = 0.1	
+
+		essential = {
+			infantry_equipment
+			support_equipment
+		}
+
+		need = {
+			infantry_equipment = 125
+			support_equipment = 25
+		}
+
+		urban = {
+			attack = 0.05
+			defence = -0.05
+		}
+		marsh = {
+			movement = -0.05
+			attack = 0.05
+		}
+		desert = {
+			attack = 0.05
+			defence = 0.05
+			movement = -0.05
+		}
+		forest = {
+			attack = 0.075
+			movement = 0.1
+		}
+	}
+}
